@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SilderController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DBconnect;
 
 /*
@@ -49,7 +50,12 @@ Route::group(['prefix' => $prefixAdmin], function () {
         //Delete method
         Route::get('/delete/{id}', [$controller, 'delete'])->where('id', '[0-9]+')->name('slider_delete');
     });
-    //================================ CATEGORY ========================================================//
+    //================================ DASHBOARD ========================================================//
 
-
+    $prefix = 'dashboard';
+    $controllerName='dashboard';
+    Route::group(['prefix' => $controllerName], function () use($prefix){
+        $controller = DashboardController::class;
+        Route::get('/', [$controller, 'view'])->name("dashboard_view");
+    });
 });
