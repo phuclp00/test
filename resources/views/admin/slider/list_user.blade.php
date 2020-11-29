@@ -15,54 +15,17 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="even pointer">
-            <td class="">1</td>
-            <td width="10%">admin</td>
-            <td>admin@gmail.com</td>
-            <td>admin</td>
-            <td width="5%"><img src="{{asset('admin/img/user.png')}}"
-                                alt="admin" class="zvn-thumb"></td>
-            <td><a href="/change-status-active/1"
-                   type="button" class="btn btn-round btn-success">Active</a></td>
-            <td width="10%">
-                <select name="select_change_attr" class="form-control"
-                        data-url="/change-level-value_new/1">
-                    <option value="admin" selected="selected">Admin</option>
-                    <option value="member">Member</option>
-                </select>
-            </td>
-            <td>
-                <p><i class="fa fa-user"></i> admin</p>
-                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-            </td>
-            <td>
-                <p><i class="fa fa-user"></i> hailan</p>
-                <p><i class="fa fa-clock-o"></i> 10/12/2014</p>
-            </td>
-            <td class="last">
-                <div class="zvn-box-btn-filter"><a
-                        href="/form/1"
-                        type="button" class="btn btn-icon btn-success" data-toggle="tooltip"
-                        data-placement="top" data-original-title="Edit">
-                    <i class="fa fa-pencil"></i>
-                </a><a href="/delete/1"
-                       type="button" class="btn btn-icon btn-danger btn-delete"
-                       data-toggle="tooltip" data-placement="top"
-                       data-original-title="Delete">
-                    <i class="fa fa-trash"></i>
-                </a>
-                </div>
-            </td>
-        </tr>
         <tr class="odd pointer">
-            <td class="">2</td>
-            <td width="10%">member</td>
+            @foreach ($list_book as $key =>$value)
+
+            <td class=""> {{$value['book_id']}}</td>
+            <td width="10%">{{$value['book_name']}}</td>
             <td>member@gmail.com</td>
             <td>member</td>
             <td width="5%"><img src="{{asset('admin/img/user.png')}}"
                                 alt="hailan" class="zvn-thumb"  ></td>
             <td><a href="/change-status-active/2"
-                   type="button" class="btn btn-round btn-success">Active</a></td>
+                type="button" class="btn btn-round btn-success">Active</a></td>
             <td width="10%">
                 <select name="select_change_attr" class="form-control"
                         data-url="/change-level-value_new/2">
@@ -85,14 +48,17 @@
                         data-placement="top" data-original-title="Edit">
                     <i class="fa fa-pencil"></i>
                 </a><a href="/delete/2"
-                       type="button" class="btn btn-icon btn-danger btn-delete"
-                       data-toggle="tooltip" data-placement="top"
-                       data-original-title="Delete">
+                    type="button" class="btn btn-icon btn-danger btn-delete"
+                    data-toggle="tooltip" data-placement="top"
+                    data-original-title="Delete">
                     <i class="fa fa-trash"></i>
                 </a>
                 </div>
             </td>
         </tr>
+        
+        @endforeach
         </tbody>
     </table>
+    
 </div>

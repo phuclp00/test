@@ -7,6 +7,8 @@ use App\Http\Controllers\SilderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DBconnect;
+use App\Http\Controllers\SigninController;
+use App\Http\Controllers\SignupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,21 @@ use App\Http\Controllers\DBconnect;
 $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 
 Route::get('/', [HomeController::class, 'view'])->name('admin_name');
-
+//===================================SIGN-IN =========================================================//
+   $prefix = 'sign-in';
+   $controllerName='sign-in';
+   Route::group(['prefix' => $controllerName], function () {
+       $controller = SigninController::class;
+       Route::get('/', [$controller, 'view'])->name("sign-in_view");
+   });
+//===================================SIGN-UP =========================================================//
+$prefix = 'login';
+   $controllerName='sign-up';
+   Route::group(['prefix' => $controllerName], function () {
+       $controller = SignupController::class;
+       Route::get('/', [$controller, 'view'])->name("sign-up_view");
+   });
+//===================================ADMIN =========================================================//
 Route::group(['prefix' => $prefixAdmin], function () {
 
     Route::get('user', function () {
@@ -58,4 +74,6 @@ Route::group(['prefix' => $prefixAdmin], function () {
         $controller = DashboardController::class;
         Route::get('/', [$controller, 'view'])->name("dashboard_view");
     });
+
+ 
 });
