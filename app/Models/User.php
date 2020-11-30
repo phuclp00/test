@@ -10,7 +10,12 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     use HasFactory, Notifiable;
-
+    //DEFINED DATABASE TABLE
+    protected $table = "user_account";
+    protected $primaryKey = "user_id";
+    const CREATED_AT = 'created';
+    const UPDATED_AT = 'modiffed';
+    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -40,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function user_detail()
+    {
+        return $this->hasOne('App\Models\UserDetail');
+
+    }
 }

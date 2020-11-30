@@ -15,3 +15,9 @@ mix.js('resources/js/app.js', 'public/js')
     .postCss('resources/css/app.css', 'public/css', [
         //
     ]);
+mix.sass('resources/sass/app.scss', 'public/css')
+    .options({
+        postCss: [
+            require('postcss-css-variables')()
+        ]
+    });

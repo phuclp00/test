@@ -12,14 +12,15 @@ class SilderController extends Controller
 
     public function __construct()
     {
-        view()->share('controller_name', $this->controller_name);
+        //view()->share('controller_name', $this->controller_name);
     }
-    public function view()
+    public function view_homepage()
     {
         $mainModel =  new MainModel();
-        $items = $mainModel->listItems(null,['task'=>"admin-list-items"]);
-        
-        return view($this->pathViewController . '.index');
+      
+        $items = $mainModel->listItems(null,['task'=>"frontend-list-items"]);
+         view()->share('items', $items);
+         return view('public.index');
     }
     public function form(Request $request)
     {

@@ -23,9 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        
         $db_book = DB::table('book')->select('*')->get();
         $users = DB::table('book')->paginate(10);
         $list_book=json_decode($db_book,true);
         view()->share('list_book', $list_book);
+        
     }
 }

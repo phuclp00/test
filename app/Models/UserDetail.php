@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class UserDetail extends Model
+{
+    use HasFactory;
+        //DEFINED DATABASE TABLE
+        protected $table = "user_detail";
+        protected $primaryKey = "user_id";
+        const CREATED_AT = 'created';
+        const UPDATED_AT = 'modiffed';
+        public $timestamps = false;
+
+        public function user_account()
+        {
+            return $this->belongsTo('App\Models\User','user_id','user_id');
+
+        }
+        public function order_detail()
+        {
+            return $this->hasMany('App\Models\OrderDetail','order_id','order_id');
+        }
+}
