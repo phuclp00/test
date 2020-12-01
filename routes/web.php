@@ -27,8 +27,6 @@ use App\Models\SlideModel;
 
 
 
-
-
 $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 
 //Route::get('/', [HomeController::class, 'view'])->name('home_view');
@@ -156,21 +154,19 @@ Route::group(['prefix' => $controllerName], function () {
     //KHI KHONG TRUYEN ID THI TRA VE SHOP VIEW 
     Route::get('/', [HomeController::class, 'shop_view']);
     //LAY ID  SAN PHAM KHI DUOC TRUYEN GIA TRI VAO 
-    Route::get('/{id}',[$controller,'product_view'])->name("product_view");
+    Route::get('/book_id={id}',[$controller,'get_items'])->name("product_view");
+   
 });
-//======================================HOME - LIST- PRODUCT ========================================================//
 
-$controllerName = 'list-products';
-Route::group(['prefix' => $controllerName], function () {
-    $controller = HomeController::class;
-    Route::get('/', [$controller, 'listproduct_view'])->name("listproduct_view");
-});
 //======================================HOME - SHOP ========================================================//
 
 $controllerName = 'shop';
 Route::group(['prefix' => $controllerName], function () {
-    $controller = HomeController::class;
-    Route::get('/', [$controller, 'shop_view'])->name("shop_view");
+    $controller = CategoryController::class;
+    Route::get('/', [HomeController::class, 'shop_view'])->name("shop_view");
+    //LAY ID CATEGORY KHI DUOC TRUYEN GIA TRI VAO TRA VE LIST THEO ID CATEGORY
+    Route::get('/cat_id={cat_id}',[HomeController::class,'get_category'])->name("category_view");
+
 });
 //======================================HOME - ACCOUNT ========================================================//
 

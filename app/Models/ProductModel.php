@@ -11,13 +11,17 @@ class ProductModel extends Model
     //DEFINED DATABASE TABLE
     protected $table = "book";
     protected $primaryKey = "book_id";
+
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modiffed';
     public $timestamps = false;
+    //DINH NGHIA KHOA TRONG TABBLE NAY KHONG PHAI LA KHOA TU TANG VA KIEU KHOA LA STRING 
+    public $incrementing = false;
+    protected $keyType = 'string';
 
     public function category()
     {
-        return $this->belongsTo("App\Models\Category","cat_id","cat_id");
+        return $this->belongsTo("App\Models\CategoryModel","cat_id","cat_id");
     }
     public function publisher()
     {

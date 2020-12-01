@@ -8,6 +8,7 @@ use App\Models\Detail;
 use App\Http\Controllers\SilderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 
 class HomeController extends Controller
@@ -21,7 +22,7 @@ class HomeController extends Controller
         $top_item_category=(new CategoryController)->top_list_category();
         $admin_list=(new UserController)->all_list_view();
         $pagi_list_product=(new ShopController  )->paginate_list_view();
-        //$get_items_id=(new ProductController)->get_items();
+        //$list_get_category=(new CategoryController)->get_category();
     }
     public function view()
     {     
@@ -50,6 +51,18 @@ class HomeController extends Controller
     public function shop_view()
     {
         return view($this->pathViewController.$this->subpatchViewController  .'.shop');
+    }
+    public function get_category(Request $request)
+    {
+        $id=$request->cat_id;
+        $mainModel= new CategoryModel();
+        //$items=$mainModel->listItems("cat_id",['task'=>"special-list-items"],$id,"===");
+        
+        $items= \App\Models\ProductModel::with('category')->where("cat_id","=",$id)->paginate(6);
+        
+       // view()->share('get_cat_items', $items);
+       
+        return view($this->pathViewController.$this->subpatchViewController  .'.shop',["get_cat_items"=>$items]);
     }
     public function product_view()
     {

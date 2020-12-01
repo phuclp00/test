@@ -14,16 +14,24 @@ class CategoryModel extends Model
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modiffed';
     public $timestamps = false;
-
+    //DINH NGHIA KHOA TRONG TABBLE NAY KHONG PHAI LA KHOA TU TANG VA KIEU KHOA LA STRING 
+    public $incrementing = false;
+    protected $keyType = 'string';
     public function book()
     {
-        return $this->hasMany("App\Models\Book", "book_id", "book_id");
+        return $this->hasMany("App\Models\ProductModel", "book_id", "book_id");
     }
+   
+
     public function listItems($params, $options,$stament=null,$number_stament=null)
     {
         //Tat debugbar
         //\Debugbar::disable();
         $result = null;
+        if ($options['task'] == "special-list-items") {
+           // $result          =   CategoryModel::paginate(6)->where($params,$stament,$number_stament);
+            //return $result->ends_with('haystack', 'needles');
+        }
         if ($options['task'] == "admin-list-items") {
             $result          =   CategoryModel::all();
             return $result;

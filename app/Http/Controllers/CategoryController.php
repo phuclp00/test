@@ -7,12 +7,12 @@ use App\Models\CategoryModel as MainModel;
 
 class CategoryController extends Controller
 {
-    private $pathViewController = 'public.home';
-    private $controller_name    = 'list-category';
+    private $subpatchViewController='.page';
+    private $pathViewController = 'public.';
 
     public function __construct()
     {
-        view()->share('controller_name', $this->controller_name);
+       
     }
     public function list_category()
     {
@@ -20,6 +20,7 @@ class CategoryController extends Controller
         $items = $mainModel->listItems(null,['task'=>"frontend-list-items"]);
        
           view()->share('list_category', $items);
+          
     }
     public function top_list_category()
     {
@@ -27,6 +28,18 @@ class CategoryController extends Controller
         $top_items = $mainModel->listItems(null,['task'=>"top-list-items"],null,5);
        
           view()->share('top_list_category', $top_items);
+    }
+    public function get_category(Request $request)
+    {
+        $id=$request->cat_id;
+        $mainModel= new MainModel();
+        //$items=$mainModel->listItems("cat_id",['task'=>"special-list-items"],$id,"===");
+        
+        $items= \App\Models\ProductModel::with('category')->where("cat_id","=",$id)->paginate(6);
+        
+        view()->share('get_cat_items', $items);
+       
+        return view($this->pathViewController.$this->subpatchViewController  .'.shop',["get_cat_items"=>$items]);
     }
     public function form(Request $request)
     {
