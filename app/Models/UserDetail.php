@@ -24,4 +24,17 @@ class UserDetail extends Model
         {
             return $this->hasMany('App\Models\OrderDetail','order_id','order_id');
         }
+        public function listItems($params, $options)
+        {
+            //Tat debugbar
+            //\Debugbar::disable();
+            $result = null;
+            if ($options['task'] == "admin-list-items") {
+                $result          =   UserDetail::where('');
+            }
+            if ($options['task'] == "frontend-list-items") {
+                $result          = UserDetail::all();
+            }
+            return $result;
+        }
 }

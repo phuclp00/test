@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class UserModel extends Authenticatable
 {
     use HasFactory, Notifiable;
     //DEFINED DATABASE TABLE
@@ -50,4 +50,17 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\UserDetail');
 
     }
+    public function listItems($params, $options,$stament=null,$number_stament=null)
+        {
+            //Tat debugbar
+            //\Debugbar::disable();
+            $result = null;
+            if ($options['task'] == "admin-list-items") {
+                $result          =   UserModel::where($params,$stament,$number_stament)->get();
+            }
+            if ($options['task'] == "frontend-list-items") {
+                $result          = UserModel::all();
+            }
+            return $result;
+        }
 }

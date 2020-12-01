@@ -29,17 +29,5 @@ class SlideModel extends Model
         }
         return $result;
     }
-    public function slide($params, $options)
-    {
-        //Tat debugbar
-        //\Debugbar::disable();
-        $result = null;
-        if ($options['task'] == "admin-list-items") {
-            $result          =   SlideModel::all();
-        }
-        if ($options['task'] == "frontend-list-items") {
-            $result          = SlideModel::all();
-        }
-        return $result;
-    }
+ 
 }

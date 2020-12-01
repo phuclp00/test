@@ -11,6 +11,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
+use App\Models\ProductModel;
 use App\Models\SlideModel;
 
 /*
@@ -35,8 +36,8 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
          //===================================SLIDER-HOMEPAGE =========================================================//
          $controllerName="/";
          Route::group(['prefix' => $controllerName], function () {
-            $controller = SilderController::class;
-            Route::get('/', [$controller, 'view_homepage'])->name("home_view");
+            $controller = HomeController::class;
+            Route::get('/', [$controller, 'view'])->name("home_view");
         });
 //===================================LOG-IN ========================================================================//
 
@@ -70,12 +71,12 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                 $controller = HomeController::class;
                 Route::get('/', [$controller, 'faq_view'])->name("faq_view");
             });
-            //======================================HOME - SHIPPING ====================================//
+            //======================================HOME - WISHLIST ====================================//
 
-            $controllerName = 'shipping';
+            $controllerName = 'wishlist';
             Route::group(['prefix' => $controllerName], function () {
                 $controller = HomeController::class;
-                Route::get('/', [$controller, 'shipping_view'])->name("shipping_view");
+                Route::get('/', [$controller, 'wishlist_view'])->name("wishlist_view");
             });
             //======================================HOME - PRIVACY-POLICY ====================================//
 
@@ -151,8 +152,11 @@ Route::group(['prefix' => $controllerName], function () {
 
 $controllerName = 'product';
 Route::group(['prefix' => $controllerName], function () {
-    $controller = HomeController::class;
-    Route::get('/', [$controller, 'product_view'])->name("product_view");
+    $controller = ProductController::class;
+    //KHI KHONG TRUYEN ID THI TRA VE SHOP VIEW 
+    Route::get('/', [HomeController::class, 'shop_view']);
+    //LAY ID  SAN PHAM KHI DUOC TRUYEN GIA TRI VAO 
+    Route::get('/{id}',[$controller,'product_view'])->name("product_view");
 });
 //======================================HOME - LIST- PRODUCT ========================================================//
 

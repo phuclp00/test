@@ -5,16 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Detail;
-use App\Models\SlideModel as Slide;
+use App\Http\Controllers\SilderController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
+use App\Models\ProductModel;
 
 class HomeController extends Controller
 {
     private $subpatchViewController='.page';
     private $pathViewController = 'public.';
-    
+    public function __construct() {
+        $slide_items=(new SilderController)->slide_homepage();
+        $list_items_product= (new ShopController)->all_list_view();
+        $list_items_categoy=(new CategoryController)->list_category();
+        $top_item_category=(new CategoryController)->top_list_category();
+        $admin_list=(new UserController)->all_list_view();
+        $pagi_list_product=(new ShopController  )->paginate_list_view();
+        //$get_items_id=(new ProductController)->get_items();
+    }
     public function view()
-    {  
-        return view($this->pathViewController.'index',);
+    {     
+       return view($this->pathViewController.'index');
     }
     public function about_view()
     {

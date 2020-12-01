@@ -3,29 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SlideModel as MainModel;
+use App\Models\ProductModel as MainModel;
 
 class ProductController extends Controller
 {
-    private $pathViewController = 'public.home';
-    private $controller_name    = 'list-products';
+    private $pathViewController = 'public';
+    private $controller_name    = '';
 
-    public function __construct()
-    {
-        view()->share('controller_name', $this->controller_name);
-    }
-    public function listproduct_view()
+    public function paginate_list_view()
     {
         $mainModel =  new MainModel();
-        $items = $mainModel->listItems(null,['task'=>"admin-list-items"]);
-        
-        return view($this->pathViewController .".". $this->controller_name);
+        $new_items = $mainModel->all_list_items(null,['task'=>"pagi-list-items"],null,6);
+      
+         view()->share('pagi_list_items',$new_items);    
     }
-    public function form(Request $request)
+
+    public function get_items(Request $request)
     {
         $id = $request->id;
-
-        return view($this->pathViewController . '.form', ['id' => $id,]);
+        $mainModel= new MainModel();
+        $new_items=$mainModel->all_list_items("book_id",['task'=>"special-list-items"],'===',$id);
+        
+        view()->share('new_items',$new_items); 
     }
     public function delete(Request $request)
     {

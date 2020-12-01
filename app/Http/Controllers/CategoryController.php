@@ -3,23 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\SlideModel as MainModel;
+use App\Models\CategoryModel as MainModel;
 
-class ListproductController extends Controller
+class CategoryController extends Controller
 {
     private $pathViewController = 'public.home';
-    private $controller_name    = 'list-product';
+    private $controller_name    = 'list-category';
 
     public function __construct()
     {
         view()->share('controller_name', $this->controller_name);
     }
-    public function product_view()
+    public function list_category()
     {
         $mainModel =  new MainModel();
-        $items = $mainModel->listItems(null,['task'=>"admin-list-items"]);
-        
-        return view($this->pathViewController .".". $this->controller_name);
+        $items = $mainModel->listItems(null,['task'=>"frontend-list-items"]);
+       
+          view()->share('list_category', $items);
+    }
+    public function top_list_category()
+    {
+        $mainModel =  new MainModel();
+        $top_items = $mainModel->listItems(null,['task'=>"top-list-items"],null,5);
+       
+          view()->share('top_list_category', $top_items);
     }
     public function form(Request $request)
     {

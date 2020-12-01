@@ -14,13 +14,13 @@ class SilderController extends Controller
     {
         //view()->share('controller_name', $this->controller_name);
     }
-    public function view_homepage()
+    public function slide_homepage()
     {
         $mainModel =  new MainModel();
-      
-        $items = $mainModel->listItems(null,['task'=>"frontend-list-items"]);
-         view()->share('items', $items);
-         return view('public.index');
+        $slide_items = $mainModel->listItems(null,['task'=>"frontend-list-items"]);
+        
+         view()->share('slide_items', $slide_items);
+        
     }
     public function form(Request $request)
     {

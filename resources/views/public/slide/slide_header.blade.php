@@ -1,10 +1,10 @@
      <!-- Header -->
-     <header id="wn__header" class="oth-page header__area header__absolute sticky__header">
+     <header id="wn__header" class="header__area header__absolute sticky__header">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4 col-sm-4 col-7 col-lg-2">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                     <div class="logo">
-                        <a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagessource_project/imagesindex.html">
+                        <a href="{{route('home_view')}}">
                             <img src="source_project/images/logo/logo.png" alt="logo images">
                         </a>
                     </div>
@@ -13,41 +13,34 @@
                     <nav class="mainmenu__nav">
                         <ul class="meninmenu d-flex justify-content-start">
                             <li class="drop with--one--item"><a href="{{route('home_view')}}">Home</a>
-                                
                             </li>
-                        <li class="drop"><a href="{{route('shop_view')}}">Shop</a>
+                            <li class="drop"><a href="{{route('shop_view')}}">Shop</a>
                                 
                             </li>
                             <li class="drop"><a href="{{route('shop_view')}}">Books</a>
-                                    <div class="megamenu mega03">
-                                        <ul class="item item03">
-                                            <li class="title">Categories</li>
-                                            <li><a href="shop-grid.html">Biography </a></li>
-											<li><a href="shop-grid.html">Business </a></li>
-											<li><a href="shop-grid.html">Cookbooks </a></li>
-											<li><a href="shop-grid.html">Health & Fitness </a></li>
-											<li><a href="shop-grid.html">History </a></li>
-                                            </ul>
-                                        <ul class="item item03">
-                                            <li class="title">Favourite</li>
-                                           
-											<li><a href="shop-grid.html">Mystery</a></li>
-											<li><a href="shop-grid.html">Religion & Inspiration</a></li>
-											<li><a href="shop-grid.html">Romance</a></li>
-											<li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-											<li><a href="shop-grid.html">Sleeveless</a></li>
-                                            </ul>
-                                        <ul class="item item03">
-                                            <li class="title">Collections</li>
-                                            <li><a href="shop-grid.html">Science </a></li>
-											<li><a href="shop-grid.html">Fiction/Fantasy</a></li>
-											<li><a href="shop-grid.html">Self-Improvemen</a></li>
-											<li><a href="shop-grid.html">Home & Garden</a></li>
-											<li><a href="shop-grid.html">Humor Books</a></li>   
-                                            </ul>
-                                    </div>
+                                <div class="megamenu mega03">
+                                    <ul class="item item03">
+                                        <li class="title">Categories</li>
+                                        @foreach($list_category as $cat_list)
+                                            <li><a href="shop-grid.html">{{$cat_list->cat_name}} </a></li>
+                                        @endforeach
+                                    </ul>	
+                                    <ul class="item item03">
+                                        <li class="title">Favourite</li>
+                                        @foreach($top_list_category as $top_cat_list)
+                                            <li><a href="shop-grid.html">{{$top_cat_list->cat_name}} </a></li>
+                                        @endforeach
+                                    </ul>
+                                    <ul class="item item03">
+                                        <li class="title">Collections</li>
+                                        
+                                        @foreach($top_list_category as $top_cat_list)
+                                            <li><a href="shop-grid.html">{{$top_cat_list->cat_name}} </a></li>
+                                        @endforeach
+                                    </ul>							
+                                </div>
                             </li>
-                            <li class="drop"><a href="shop-grid.html">Kids</a>
+                            <li class="drop"><a href="{{route('shop_view')}}">Kids</a>
                                 <div class="megamenu mega02">
                                     <ul class="item item02">
                                         <li class="title">Top Collections</li>
@@ -82,20 +75,16 @@
                                 </div>
                             </li>
                             <li class="drop"><a href="{{route('blog_view')}}">Blog</a>
-		
+    
                             </li>
                             <li><a href="{{route('contact_view')}}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
-                <div class="col-md-8 col-sm-8 col-5 col-lg-2">
+                <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                     <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
-                        <li class="shop_search">
-                            <a class="search__active" href="s#"></a>
-                        </li>
-                        <li class="wishlist">
-                            <a href="#"></a>
-                        </li>
+                        <li class="shop_search"><a class="search__active" href="#"></a></li>
+                        <li class="wishlist"><a href="#"></a></li>
                         <li class="shopcart"><a class="cartbox_active" href="#"><span class="product_qun">3</span></a>
                             <!-- Start Shopping Cart -->
                             <div class="block-minicart minicart__active">
@@ -111,54 +100,54 @@
                                         <span>$66.00</span>
                                     </div>
                                     <div class="mini_action checkout">
-                                        <a class="checkout__btn" href="source_project/imagessource_project/imagessource_project/imagessource_project/imagescart.html">Go to Checkout</a>
+                                        <a class="checkout__btn" href="{{route('cart_view')}}">Go to Checkout</a>
                                     </div>
                                     <div class="single__items">
                                         <div class="miniproduct">
                                             <div class="item01 d-flex">
                                                 <div class="thumb">
-                                                    <a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html"><img src="source_project/images/product/sm-img/1.jpg" alt="product images"></a>
+                                                    <a href="product-details.html"><img src="source_project/images/product/sm-img/1.jpg" alt="product images"></a>
                                                 </div>
                                                 <div class="content">
-                                                    <h6><a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html">Voyage Yoga Bag</a></h6>
+                                                    <h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
                                                     <span class="prize">$30.00</span>
                                                     <div class="product_prize d-flex justify-content-between">
                                                         <span class="qun">Qty: 01</span>
                                                         <ul class="d-flex justify-content-end">
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-settings"></i></a></li>
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-delete"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item01 d-flex mt--20">
                                                 <div class="thumb">
-                                                    <a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html"><img src="source_project/images/product/sm-img/3.jpg" alt="product images"></a>
+                                                    <a href="product-details.html"><img src="source_project/images/product/sm-img/3.jpg" alt="product images"></a>
                                                 </div>
                                                 <div class="content">
-                                                    <h6><a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html">Impulse Duffle</a></h6>
+                                                    <h6><a href="product-details.html">Impulse Duffle</a></h6>
                                                     <span class="prize">$40.00</span>
                                                     <div class="product_prize d-flex justify-content-between">
                                                         <span class="qun">Qty: 03</span>
                                                         <ul class="d-flex justify-content-end">
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-settings"></i></a></li>
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-delete"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="item01 d-flex mt--20">
                                                 <div class="thumb">
-                                                    <a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html"><img src="source_project/images/product/sm-img/2.jpg" alt="product images"></a>
+                                                    <a href="product-details.html"><img src="source_project/images/product/sm-img/2.jpg" alt="product images"></a>
                                                 </div>
                                                 <div class="content">
-                                                    <h6><a href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesproduct-details.html">Compete Track Tote</a></h6>
+                                                    <h6><a href="product-details.html">Compete Track Tote</a></h6>
                                                     <span class="prize">$40.00</span>
                                                     <div class="product_prize d-flex justify-content-between">
                                                         <span class="qun">Qty: 03</span>
                                                         <ul class="d-flex justify-content-end">
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-settings"></i></a></li>
-                                                            <li><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i class="zmdi zmdi-delete"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
+                                                            <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -166,14 +155,13 @@
                                         </div>
                                     </div>
                                     <div class="mini_action cart">
-                                        <a class="cart__btn" href="source_project/imagessource_project/imagessource_project/imagessource_project/imagescart.html">View and edit cart</a>
+                                        <a class="cart__btn" href="{{route('cart_view')}}">View and edit cart</a>
                                     </div>
                                 </div>
                             </div>
                             <!-- End Shopping Cart -->
                         </li>
-                        <li class="setting__bar__icon">
-                            <a class="setting__active" href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"></a>
+                        <li class="setting__bar__icon"><a class="setting__active" href="#"></a>
                             <div class="searchbar__content setting__block">
                                 <div class="content-inner">
                                     <div class="switcher-currency">
@@ -229,11 +217,11 @@
                                         <div class="switcher-options">
                                             <div class="switcher-currency-trigger">
                                                 <div class="setting__menu">
-                                                    <span><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#">Compare Product</a></span>
-                                                    <span><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#">My Account</a></span>
-                                                    <span><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#">My Wishlist</a></span>
-                                                    <span><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#">Sign In</a></span>
-                                                    <span><a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#">Create An Account</a></span>
+                                                    <span><a href="#">Compare Product</a></span>
+                                                    <span><a href="#">My Account</a></span>
+                                                    <span><a href="#">My Wishlist</a></span>
+                                                    <span><a href="#">Sign In</a></span>
+                                                    <span><a href="#">Create An Account</a></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -279,8 +267,8 @@
             <!-- End Mobile Menu -->
             <div class="mobile-menu d-block d-lg-none">
             </div>
-            <!-- Mobile Menu -->
-        </div>
+            <!-- Mobile Menu -->	
+        </div>		
     </header>
     <!-- //Header -->
     <!-- Start Search Popup -->
