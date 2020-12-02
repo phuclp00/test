@@ -69,13 +69,14 @@
                             <div class="shop__list nav justify-content-center" role="tablist">
                                 <a class="nav-item nav-link" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
                                 <a class="nav-item nav-link active" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
-                            </div>
-                            @if(isset($get_cat_items))
-                            <p>Showing {{$get_cat_items->currentPage()." - ".$get_cat_items->count()." of ".$get_cat_items->total()."  results"}}</p>
-                           @else
-                           <p>Showing {{$pagi_list_items->currentPage()." - ".$pagi_list_items->count()." of ".$pagi_list_items->total()."  results"}}</p>
-                            @endif
-                            <div class="orderby__wrapper">
+                            </div>              
+                                @if($get_cat_items!=null)
+                                    <p>Current Page: {{$get_cat_items->currentPage()." || ".$get_cat_items->count()." of ".$get_cat_items->total()."  Results"}}</p>
+                                @else                  
+                                    <p>Current Page {{$pagi_list_items->currentPage()." || ".$pagi_list_items->count()." of ".$pagi_list_items->total()."  Results"}}</p>
+                                @endif                         
+         
+                                <div class="orderby__wrapper">
                                 <span>Sort By</span>
                                 <select class="shot__byselect">
                                     <option>Default sorting</option>
@@ -94,14 +95,13 @@
                         <div class="row">
                             <!-- Start Single Product -->
                             {{-- Neu  chon theo catagory--}}
-                            @if(isset($get_cat_items)) 
+                            @if(isset($get_cat_items)==true) 
                                 @foreach ($get_cat_items as $list_product)
                                 <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                     <div class="product">
                                         <div class="product__thumb">
-                                            
-                                            <a class="first__img" href="single-product.html"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
+                                              <a class="first__img" href="{{ route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id]) }}"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
                                             {{-- This comment will not be present in the rendered HTML 
                                             // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                             // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -136,7 +136,7 @@
                                             </div>
                                         </div>
                                         <div class="product__content">
-                                            <h4><a href="single-product.html">Strive Shoulder Pack</a></h4>
+                                            <h4><a href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}">Strive Shoulder Pack</a></h4>
                                             <ul class="rating d-flex">
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
@@ -155,8 +155,8 @@
                                 <div class="product">
                                     <div class="product__thumb">
                                         
-                                        <a class="first__img" href="single-product.html"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
-                                        <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
+                                        <a class="first__img" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
+                                        <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
                                         {{-- This comment will not be present in the rendered HTML 
                                         // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                         // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -191,7 +191,7 @@
                                         </div>
                                     </div>
                                     <div class="product__content">
-                                        <h4><a href="single-product.html">Strive Shoulder Pack</a></h4>
+                                        <h4><a href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}">Strive Shoulder Pack</a></h4>
                                         <ul class="rating d-flex">
                                             <li class="on"><i class="fa fa-star-o"></i></li>
                                             <li class="on"><i class="fa fa-star-o"></i></li>
@@ -217,11 +217,11 @@
                                 @foreach ($get_cat_items as $item)                                                    
                                     <div class="list__view mt--40">
                                         <div class="thumb">
-                                            <a class="first__img " href="single-product.html"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
-                                            <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
+                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
                                         </div>
                                         <div class="content">
-                                            <h2><a href="single-product.html">{{$item->book_name}}</a></h2>
+                                            <h2><a href="{{route('product_view',$item->book_id)}}">{{$item->book_name}}</a></h2>
                                             <ul class="rating d-flex">
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
                                                 <li class="on"><i class="fa fa-star-o"></i></li>
@@ -246,14 +246,15 @@
                                 @endforeach
                             @else
                              {{-- Neu khong chon theo catagory--}}
+                             
                             @foreach ($pagi_list_items as $item)                                             
                                 <div class="list__view mt--40">
                                     <div class="thumb">
-                                        <a class="first__img " href="single-product.html"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
-                                        <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
+                                        <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
+                                        <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
                                     </div>
                                     <div class="content">
-                                        <h2><a href="single-product.html">{{$item->book_name}}</a></h2>
+                                        <h2><a href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}">{{$item->book_name}}</a></h2>
                                         <ul class="rating d-flex">
                                             <li class="on"><i class="fa fa-star-o"></i></li>
                                             <li class="on"><i class="fa fa-star-o"></i></li>
@@ -280,9 +281,16 @@
                             <!-- End Single Product -->                     
                         </div>
                     </div>
-                    <ul class="wn__pagination">
-                        {{ $pagi_list_items->links('vendor.pagination.tailwind'),["paginator"=>$pagi_list_items]}}
-                    </ul>
+                    @if($get_cat_items!=null) 
+                        <ul class="wn__pagination">
+                            {{ $get_cat_items->links('vendor.pagination.tailwind'),["paginator"=>$get_cat_items]}}
+                        </ul>
+                    @else
+                        <ul class="wn__pagination">
+                            {{ $pagi_list_items->links('vendor.pagination.tailwind'),["paginator"=>$pagi_list_items]}}
+                        </ul>
+                    @endif
+                  
                 </div>
             </div>
         </div>

@@ -34,11 +34,11 @@ class CategoryController extends Controller
         $id=$request->cat_id;
         $mainModel= new MainModel();
         //$items=$mainModel->listItems("cat_id",['task'=>"special-list-items"],$id,"===");
-        
+
         $items= \App\Models\ProductModel::with('category')->where("cat_id","=",$id)->paginate(6);
-        
-        view()->share('get_cat_items', $items);
-       
+
+        //view()->share('get_cat_items', $items);
+
         return view($this->pathViewController.$this->subpatchViewController  .'.shop',["get_cat_items"=>$items]);
     }
     public function form(Request $request)

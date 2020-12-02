@@ -36,6 +36,12 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
          Route::group(['prefix' => $controllerName], function () {
             $controller = HomeController::class;
             Route::get('/', [$controller, 'view'])->name("home_view");
+            //Khong dung
+            Route::get('get_list={id}', [HomeController::class,'get_list_id'],function(){      
+                return redirect('public.index');
+            })->name('get_list');
+            Route::get('ajax-request', 'AjaxController@create');
+            Route::post('ajax-request', 'AjaxController@store');
         });
 //===================================LOG-IN ========================================================================//
 
@@ -118,47 +124,47 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                    $controller = HomeController::class;
                    Route::get('/', [$controller, 'wishlist_view'])->name("wishlist_view");
                });
-//======================================HOME - CHECKOUT ====================================//
+                //======================================HOME - CHECKOUT ====================================//
 
-               $controllerName = 'checkout';
-               Route::group(['prefix' => $controllerName], function () {
-                   $controller = HomeController::class;
-                   Route::get('/', [$controller, 'checkout_view'])->name("checkout_view");
-               });
-//======================================HOME - CART ====================================//
+                            $controllerName = 'checkout';
+                            Route::group(['prefix' => $controllerName], function () {
+                                $controller = HomeController::class;
+                                Route::get('/', [$controller, 'checkout_view'])->name("checkout_view");
+                            });
+                //======================================HOME - CART ====================================//
 
-                $controllerName = 'cart';
+                                $controllerName = 'cart';
+                                Route::group(['prefix' => $controllerName], function () {
+                                    $controller = HomeController::class;
+                                    Route::get('/', [$controller, 'cart_view'])->name("cart_view");
+                                });
+                //======================================HOME - BLOG ====================================//
+
+                $controllerName = 'blog';
                 Route::group(['prefix' => $controllerName], function () {
                     $controller = HomeController::class;
-                    Route::get('/', [$controller, 'cart_view'])->name("cart_view");
+                    Route::get('/', [$controller, 'blog_view'])->name("blog_view");
                 });
-//======================================HOME - BLOG ====================================//
+                //======================================HOME - BLOG DETAIL ====================================//
 
-$controllerName = 'blog';
-Route::group(['prefix' => $controllerName], function () {
-    $controller = HomeController::class;
-    Route::get('/', [$controller, 'blog_view'])->name("blog_view");
-});
-//======================================HOME - BLOG DETAIL ====================================//
-
-$controllerName = 'blogdetail';
-Route::group(['prefix' => $controllerName], function () {
-    $controller = HomeController::class;
-    Route::get('/', [$controller, 'blogdetail_view'])->name("blogdetail_view");
-});
-//======================================HOME - PRODUCT ========================================================//
+                $controllerName = 'blogdetail';
+                Route::group(['prefix' => $controllerName], function () {
+                    $controller = HomeController::class;
+                    Route::get('/', [$controller, 'blogdetail_view'])->name("blogdetail_view");
+                });
+//====================================== - PRODUCT ========================================================//
 
 $controllerName = 'product';
 Route::group(['prefix' => $controllerName], function () {
     $controller = ProductController::class;
     //KHI KHONG TRUYEN ID THI TRA VE SHOP VIEW 
     Route::get('/', [HomeController::class, 'shop_view']);
-    //LAY ID  SAN PHAM KHI DUOC TRUYEN GIA TRI VAO 
-    Route::get('/book_id={id}',[$controller,'get_items'])->name("product_view");
+    //LAY ID VA CAT_ID SAN PHAM KHI DUOC TRUYEN GIA TRI VAO 
+   Route::get('/book_id={id} && cat_id={cat_id?}',[HomeController::class,'get_items'])->name("product_view");
    
 });
 
-//======================================HOME - SHOP ========================================================//
+//====================================== - SHOP ========================================================//
 
 $controllerName = 'shop';
 Route::group(['prefix' => $controllerName], function () {
@@ -168,7 +174,7 @@ Route::group(['prefix' => $controllerName], function () {
     Route::get('/cat_id={cat_id}',[HomeController::class,'get_category'])->name("category_view");
 
 });
-//======================================HOME - ACCOUNT ========================================================//
+//====================================== - ACCOUNT ========================================================//
 
 $controllerName = 'my-account';
 Route::group(['prefix' => $controllerName], function () {

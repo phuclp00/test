@@ -23,7 +23,7 @@ class ShopController extends Controller
         $mainModel =  new MainModel();
         $new_items = $mainModel->all_list_items(null,['task'=>"pagi-list-items"],null,6);
       
-         view()->share('pagi_list_items',$new_items);    
+         view()->share(['pagi_list_items'=>$new_items,'get_cat_items'=>null]);    
     }
     public function all_list_view()
     {

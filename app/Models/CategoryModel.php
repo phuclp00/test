@@ -19,7 +19,7 @@ class CategoryModel extends Model
     protected $keyType = 'string';
     public function book()
     {
-        return $this->hasMany("App\Models\ProductModel", "book_id", "book_id");
+        return $this->hasMany("App\Models\ProductModel", "cat_id", "cat_id");
     }
    
 
@@ -28,9 +28,9 @@ class CategoryModel extends Model
         //Tat debugbar
         //\Debugbar::disable();
         $result = null;
-        if ($options['task'] == "special-list-items") {
-           // $result          =   CategoryModel::paginate(6)->where($params,$stament,$number_stament);
-            //return $result->ends_with('haystack', 'needles');
+        if ($options['task'] == "special-list-items-total") {
+            $result          =   ProductModel::where($params,$stament,$number_stament)->get("total");
+            return $result;
         }
         if ($options['task'] == "admin-list-items") {
             $result          =   CategoryModel::all();

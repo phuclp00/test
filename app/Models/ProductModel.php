@@ -36,6 +36,10 @@ class ProductModel extends Model
             $result          =   ProductModel::where($params,$stament,$number_stament)->get();
             return $result;
         }
+        if ($options['task'] == "special-list-items-1") {
+            $result          =   ProductModel::where($params,$stament,$number_stament)->get("book_name");
+            return $result;
+        }
         if ($options['task'] == "admin-list-items") {
             //$result          = ProductModel::all();
             return $result;

@@ -2,18 +2,18 @@
 
 @section('content')
 @include('public.slide.slide_header')
-
         <!-- Start main Content -->
         <div class="maincontent bg--white pt--80 pb--55">
         	<div class="container">
         		<div class="row">
         			<div class="col-lg-9 col-12">
         				<div class="wn__single__product">
+							@foreach ($get_singel_product as $data)
         					<div class="row">
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-		        							  <a href="1.jpg"><img src="/source_project/images/product/1.jpg" alt=""></a>
+		        							  <a href="1.jpg"><img src="/source_project/images/product/Hello_World.png" alt=""></a>
 		        							  <a href="2.jpg"><img src="/source_project/images/product/2.jpg" alt=""></a>
 		        							  <a href="3.jpg"><img src="/source_project/images/product/3.jpg" alt=""></a>
 		        							  <a href="4.jpg"><img src="/source_project/images/product/4.jpg" alt=""></a>
@@ -26,10 +26,20 @@
         						</div>
         						<div class="col-lg-6 col-12">
         							<div class="product__info__main">
-        								<h1>Chaz Kangeroo Hoodie</h1>
+										
+										<h1>{{$data["book_name"]}} </h1>
+																	
+        								
         								<div class="product-info-stock-sku d-flex">
-        									<p>Availability:<span> In stock</span></p>
-        									<p>SKU:<span> MH01</span></p>
+											<p>Availability:<span>  
+												@if($total_items >0)
+													<b> IN STOCK :{{$total_items}}</b>
+												
+												@else
+													<b class="warning">OUT STOCK!!</b>";
+												@endif																			
+												</span></p>
+        									<p>Serial code:<span> {{$data["book_id"]}}</span></p>
         								</div>
         								<div class="product-reviews-summary d-flex">
         									<ul class="rating-summary d-flex">
@@ -45,7 +55,7 @@
         									</div>
         								</div>
         								<div class="price-box">
-        									<span>$52.00</span>
+        									<span>{{$data["price"]."$"}}</span>
         								</div>
         								<div class="product-color-label">
         									<span>Color</span>
@@ -63,7 +73,7 @@
         								</div>
         								<div class="product-addto-links clearfix">
         									<a class="wishlist" href="#"></a>
-        									<a class="compare" href="#"></a>
+        									<a class="compare" href=""></a>
         									<a class="email" href="#"></a>
         								</div>
         								<div class="product__overview">
@@ -75,12 +85,13 @@
         									</ul>
         								</div>
         							</div>
-        						</div>
-        					</div>
+								</div>
+									
+        					</div>@endforeach	
         				</div>
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
+	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">{{$data["description"]}}</a>
 	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
 	                        </div>
 	                        <div class="tab__container">
@@ -669,22 +680,10 @@
         					<aside class="wedget__categories poroduct--cat">
         						<h3 class="wedget__title">Product Categories</h3>
         						<ul>
-        							<li><a href="#">Biography <span>(3)</span></a></li>
-        							<li><a href="#">Business <span>(4)</span></a></li>
-        							<li><a href="#">Cookbooks <span>(6)</span></a></li>
-        							<li><a href="#">Health & Fitness <span>(7)</span></a></li>
-        							<li><a href="#">History <span>(8)</span></a></li>
-        							<li><a href="#">Mystery <span>(9)</span></a></li>
-        							<li><a href="#">Inspiration <span>(13)</span></a></li>
-        							<li><a href="#">Romance <span>(20)</span></a></li>
-        							<li><a href="#">Fiction/Fantasy <span>(22)</span></a></li>
-        							<li><a href="#">Self-Improvement <span>(13)</span></a></li>
-        							<li><a href="#">Humor Books <span>(17)</span></a></li>
-        							<li><a href="#">Harry Potter <span>(20)</span></a></li>
-        							<li><a href="#">Land of Stories <span>(34)</span></a></li>
-        							<li><a href="#">Kids' Music <span>(60)</span></a></li>
-        							<li><a href="#">Toys & Games <span>(3)</span></a></li>
-        							<li><a href="#">hoodies <span>(3)</span></a></li>
+									@foreach ($list_category as $cat_name) 
+                        			<li><a href="{{route('category_view',$cat_name->cat_id)}}" value={{$cat_name->cat_name}}>{{$cat_name->cat_name}} <span>({{$cat_name->total}})</span></a></li>
+                           			 @endforeach
+        							
         						</ul>
         					</aside>
         					<aside class="wedget__categories pro--range">
@@ -718,19 +717,11 @@
         					<aside class="wedget__categories poroduct--tag">
         						<h3 class="wedget__title">Product Tags</h3>
         						<ul>
-        							<li><a href="#">Biography</a></li>
-        							<li><a href="#">Business</a></li>
-        							<li><a href="#">Cookbooks</a></li>
-        							<li><a href="#">Health & Fitness</a></li>
-        							<li><a href="#">History</a></li>
-        							<li><a href="#">Mystery</a></li>
-        							<li><a href="#">Inspiration</a></li>
-        							<li><a href="#">Religion</a></li>
-        							<li><a href="#">Fiction</a></li>
-        							<li><a href="#">Fantasy</a></li>
-        							<li><a href="#">Music</a></li>
-        							<li><a href="#">Toys</a></li>
-        							<li><a href="#">Hoodies</a></li>
+        							<ul>
+										@foreach ($list_category as $cat_name) 
+										<li><a href="{{route('shop_view')}}" value={{$cat_name->cat_name}}>{{$cat_name->cat_name}} <span>({{$cat_name->total}})</span></a></li>
+											@endforeach
+									</ul>
         						</ul>
         					</aside>
         					<aside class="wedget__categories sidebar--banner">
