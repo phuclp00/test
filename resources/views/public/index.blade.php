@@ -80,7 +80,7 @@
                                     <div class="actions_inner">
                                         <ul class="add_to_links">
                                             <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                            <li><a class="wishlist" href="{{route('wishlist_view')}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                            <li><a class="wishlist" href=""><i class="bi bi-shopping-cart-full"></i></a></li>
                                             <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                             <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                         </ul>
@@ -202,8 +202,8 @@
                                     <div class="action">
                                         <div class="actions_inner">
                                             <ul class="add_to_links">
-                                                <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="{{route('wishlist_view')}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                <li><a class="cart" href="{{""}}"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                <li><a class="wishlist" href=""><i class="bi bi-shopping-cart-full"></i></a></li>
                                                 <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                 <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                             </ul>
@@ -260,8 +260,8 @@
                                     <div class="action">
                                         <div class="actions_inner">
                                             <ul class="add_to_links">
-                                                <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="{{route('wishlist_view')}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                <li><a class="cart" href=""><i class="bi bi-shopping-bag4"></i></a></li>
+                                                <li><a class="wishlist" href=""><i class="bi bi-shopping-cart-full"></i></a></li>
                                                 <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                 <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                             </ul>
@@ -385,7 +385,7 @@
                                 </div>
                                 
                                 <div class="product__content content--center content--center">
-                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product->img}}}}">{{$product_tag->book_name}}</a></h4>
+                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product_tag->img}}}}">{{$product_tag->book_name}}</a></h4>
                                     <ul class="prize d-flex">
                                         <li>{{$product_tag->promotion_price."$"}}</li>
                                         <li class="old_prize">{{$product_tag->price."$"}}</li>
@@ -504,63 +504,64 @@
         </div>
         <div class="slider center">
             <!-- Single product start -->
-            <div class="product product__style--3">
-                <div class="product__thumb">
-                    <a class="first__img" href=""><img src="source_project/images/best-sell-product/1.jpg" alt="product image"></a>
-                </div>
-                <div class="product__content content--center">
-                    <div class="action">
-                        <div class="actions_inner">
-                            <ul class="add_to_links">
-                                <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="product__hover--content">
-                        <ul class="rating d-flex">
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <!-- Single product end -->
-            <!-- Single product start -->
             @foreach ($list_product as $item_bestseller)
-                @if($item_bestseller->totall_sell>20 )
-            
-            <div class="product product__style--3">
-                <div class="product__thumb">
-                    <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="source_project/images/books/test_img/{{$item_bestseller->img}}" alt="product image"></a>
-                </div>
-                <div class="product__content content--center">
-                    <div class="action">
-                        <div class="actions_inner">
-                            <ul class="add_to_links">
-                                <li><a class="{{route('cart_view')}}" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
-                                <li><a class="{{route('wishlist_view')}}" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
-                                <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
-                                <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
-                            </ul>
+                @if($item_bestseller->totall_sell>20 && $item_bestseller->first())
+                    <div class="product product__style--3">
+                        <div class="product__thumb">
+                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="source_project/images/books/test_img/{{$item_bestseller->img}}" alt="product image"></a>
+                        </div>
+                        <div class="product__content content--center">
+                            <div class="action">
+                                <div class="actions_inner">
+                                    <ul class="add_to_links">
+                                        <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                                        <li><a class="wishlist" href="wishlist.html"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                                        <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product__hover--content">
+                                <ul class="rating d-flex">
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li><i class="fa fa-star-o"></i></li>
+                                    <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                    <div class="product__hover--content">
-                        <ul class="rating d-flex">
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li class="on"><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                            <li><i class="fa fa-star-o"></i></li>
-                        </ul>
+                @elseif($item_bestseller->totall_sell>20)
+           
+            <!-- Single product end -->
+            <!-- Single product start -->    
+                    <div class="product product__style--3">
+                        <div class="product__thumb">
+                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="source_project/images/books/test_img/{{$item_bestseller->img}}" alt="product image"></a>
+                        </div>
+                        <div class="product__content content--center">
+                            <div class="action">
+                                <div class="actions_inner">
+                                    <ul class="add_to_links">
+                                        <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
+                                        <li><a class="wishlist" href=""><i class="bi bi-shopping-cart-full"></i></a></li>
+                                        <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
+                                        <li><a id ="quick_search" data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="product__hover--content">
+                                <ul class="rating d-flex">
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li class="on"><i class="fa fa-star-o"></i></li>
+                                    <li><i class="fa fa-star-o"></i></li>
+                                    <li><i class="fa fa-star-o"></i></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
             @endif
             @endforeach
             <!-- Single product end -->
@@ -569,4 +570,89 @@
         </div>
     </section>
     <!-- Best Sale Area Area -->
+    <!-- QUICKVIEW PRODUCT -->
+		<div id="quickview-wrapper">
+		    <!-- Modal -->
+		    <div class="modal fade" id="productmodal" tabindex="-1" role="dialog">
+		        <div class="modal-dialog modal__container" role="document">
+		            <div class="modal-content">
+		                <div class="modal-header modal__header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		                </div>
+		                <div class="modal-body">
+                            
+                             <div class="modal-product">
+		                        <!-- Start product images -->
+		                        <div class="product-images">
+		                            <div class="main-image images">
+		                                <img alt="big images" src="source_project/images/product/big-img/1.jpg">
+		                            </div>
+		                        </div>
+		                        <!-- end product images -->
+		                        <div class="product-info">
+		                            <h1>Simple Fabric Bags</h1>
+		                            <div class="rating__and__review">
+		                                <ul class="rating">
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                    <li><span class="ti-star"></span></li>
+		                                </ul>
+		                                <div class="review">
+		                                    <a href="#">4 customer reviews</a>
+		                                </div>
+		                            </div>
+		                            <div class="price-box-3">
+		                                <div class="s-price-box">
+		                                    <span class="new-price">$17.20</span>
+		                                    <span class="old-price">$45.00</span>
+		                                </div>
+		                            </div>
+		                            <div class="quick-desc">
+		                                Designed for simplicity and made from high quality materials. Its sleek geometry and material combinations creates a modern look.
+		                            </div>
+		                            <div class="select__color">
+		                                <h2>Select color</h2>
+		                                <ul class="color__list">
+		                                    <li class="red"><a title="Red" href="#">Red</a></li>
+		                                    <li class="gold"><a title="Gold" href="#">Gold</a></li>
+		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
+		                                    <li class="orange"><a title="Orange" href="#">Orange</a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="select__size">
+		                                <h2>Select size</h2>
+		                                <ul class="color__list">
+		                                    <li class="l__size"><a title="L" href="#">L</a></li>
+		                                    <li class="m__size"><a title="M" href="#">M</a></li>
+		                                    <li class="s__size"><a title="S" href="#">S</a></li>
+		                                    <li class="xl__size"><a title="XL" href="#">XL</a></li>
+		                                    <li class="xxl__size"><a title="XXL" href="#">XXL</a></li>
+		                                </ul>
+		                            </div>
+		                            <div class="social-sharing">
+		                                <div class="widget widget_socialsharing_widget">
+		                                    <h3 class="widget-title-modal">Share this product</h3>
+		                                    <ul class="social__net social__net--2 d-flex justify-content-start">
+		                                        <li class="facebook"><a href="#" class="rss social-icon"><i class="zmdi zmdi-rss"></i></a></li>
+		                                        <li class="linkedin"><a href="#" class="linkedin social-icon"><i class="zmdi zmdi-linkedin"></i></a></li>
+		                                        <li class="pinterest"><a href="#" class="pinterest social-icon"><i class="zmdi zmdi-pinterest"></i></a></li>
+		                                        <li class="tumblr"><a href="#" class="tumblr social-icon"><i class="zmdi zmdi-tumblr"></i></a></li>
+		                                    </ul>
+		                                </div>
+		                            </div>
+		                            <div class="addtocart-btn">
+		                                <a href="#">Add to cart</a>
+		                            </div>
+		                        </div>
+                            </div>
+                            
+                        </div>
+                       
+		            </div>
+		        </div>
+		    </div>
+		</div>
+		<!-- END QUICKVIEW PRODUCT -->
     @endsection

@@ -6,40 +6,38 @@
         <div class="maincontent bg--white pt--80 pb--55">
         	<div class="container">
         		<div class="row">
+					
         			<div class="col-lg-9 col-12">
-        				<div class="wn__single__product">
-							@foreach ($get_singel_product as $data)
+						@foreach($get_singel_product as $key =>  $item)
+        				<div class="wn__single__product">			
         					<div class="row">
         						<div class="col-lg-6 col-12">
         							<div class="wn__fotorama__wrapper">
-	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-		        							  <a href="1.jpg"><img src="/source_project/images/product/Hello_World.png" alt=""></a>
-		        							  <a href="2.jpg"><img src="/source_project/images/product/2.jpg" alt=""></a>
-		        							  <a href="3.jpg"><img src="/source_project/images/product/3.jpg" alt=""></a>
-		        							  <a href="4.jpg"><img src="/source_project/images/product/4.jpg" alt=""></a>
-		        							  <a href="5.jpg"><img src="/source_project/images/product/5.jpg" alt=""></a>
-		        							  <a href="6.jpg"><img src="/source_project/images/product/6.jpg" alt=""></a>
-		        							  <a href="7.jpg"><img src="/source_project/images/product/7.jpg" alt=""></a>
-		        							  <a href="8.jpg"><img src="/source_project/images/product/8.jpg" alt=""></a>
+	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">											
+										@foreach($item_thumb as $key)									
+											@if($item_thumb ==0)
+												<a href="1.jpg"><img src="/source_project/images/product/Hello_World.PNG" alt=""></a>
+												@break
+											@else	
+												<a href="1.jpg"><img src="/source_project/images/product/{{$key}}" alt="Book-{{$item->book_name}}"></a>															
+											@endif
+										@endforeach	
 	        							</div>
         							</div>
         						</div>
         						<div class="col-lg-6 col-12">
         							<div class="product__info__main">
-										
-										<h1>{{$data["book_name"]}} </h1>
-																	
-        								
+										<h1>{{$item->book_name}} </h1>																     								
         								<div class="product-info-stock-sku d-flex">
 											<p>Availability:<span>  
 												@if($total_items >0)
-													<b> IN STOCK :{{$total_items}}</b>
+													<b> IN STOCK ({{$total_items}})</b>
 												
 												@else
-													<b class="warning">OUT STOCK!!</b>";
+													<b class="warning">OUT STOCK!!</b>
 												@endif																			
 												</span></p>
-        									<p>Serial code:<span> {{$data["book_id"]}}</span></p>
+        									<p>Serial code:<span> {{$item->book_id}}</span></p>
         								</div>
         								<div class="product-reviews-summary d-flex">
         									<ul class="rating-summary d-flex">
@@ -55,7 +53,7 @@
         									</div>
         								</div>
         								<div class="price-box">
-        									<span>{{$data["price"]."$"}}</span>
+        									<span>{{$item->price."$"}}</span>
         								</div>
         								<div class="product-color-label">
         									<span>Color</span>
@@ -77,33 +75,25 @@
         									<a class="email" href="#"></a>
         								</div>
         								<div class="product__overview">
-        									<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-        									<ul class="pro__attribute">
-        										<li>• Two-tone gray heather hoodie.</li>
-        										<li>• Drawstring-adjustable hood. </li>
-        										<li>• Machine wash/dry.</li>
-        									</ul>
+        									{{Str::limit($item->description, $limit = 500, $end = '...')}}
         								</div>
-        							</div>
+									</div>
+									
 								</div>
 									
-        					</div>@endforeach	
-        				</div>
+        					</div>
+						</div>
+						
         				<div class="product__info__detailed">
 							<div class="pro_details_nav nav justify-content-start" role="tablist">
-	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">{{$data["description"]}}</a>
+	                            <a class="nav-item nav-link active" data-toggle="tab" href="#nav-details" role="tab">Details</a>
 	                            <a class="nav-item nav-link" data-toggle="tab" href="#nav-review" role="tab">Reviews</a>
 	                        </div>
 	                        <div class="tab__container">
 	                        	<!-- Start Single Tab Content -->
 	                        	<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
 									<div class="description__attribute">
-										<p>Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.Ideal for cold-weather training or work outdoors, the Chaz Hoodie promises superior warmth with every wear. Thick material blocks out the wind as ribbed cuffs and bottom band seal in body heat.</p>
-										<ul>
-											<li>• Two-tone gray heather hoodie.</li>
-											<li>• Drawstring-adjustable hood. </li>
-											<li>• Machine wash/dry.</li>
-										</ul>
+										{{$item->description}}
 									</div>
 	                        	</div>
 	                        	<!-- End Single Tab Content -->
@@ -208,10 +198,12 @@
 											</div>
 										</div>
 									</div>
-	                        	</div>
+								</div>
+								
 	                        	<!-- End Single Tab Content -->
 	                        </div>
-        				</div>
+						</div>
+						@endforeach
 						<div class="wn__related__product pt--80 pb--50">
 							<div class="section__title text-center">
 								<h2 class="title__be--2">Related Products</h2>
@@ -222,7 +214,7 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/1.jpg" alt="product image"></a>
+												<a class="first__img" href="{{route('shop_view')}}"><img src="/source_project/images/product/1.jpg" alt="product image"></a>
 												<a class="second__img animation1" href="single-product.html"><img src="source_project/images/product/2.jpg" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
@@ -733,7 +725,8 @@
         					</aside>
         				</div>
         			</div>
-        		</div>
+				</div>
+				
         	</div>
         </div>
         <!-- End main Content -->

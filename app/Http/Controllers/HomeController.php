@@ -10,88 +10,111 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
+use Cart;
+use Illuminate\Support\Facades\Session as FacadesSession;
+use Session;
 
 class HomeController extends Controller
 {
-    private $subpatchViewController='.page';
+    private $subpatchViewController = '.page';
     private $pathViewController = 'public.';
-    public function __construct() {
-        $slide_items=(new SilderController)->slide_homepage();
-        $list_items_product= (new ShopController)->all_list_view();
-        $list_items_categoy=(new CategoryController)->list_category();
-        $top_item_category=(new CategoryController)->top_list_category();
-        $admin_list=(new UserController)->all_list_view();
-        $pagi_list_product=(new ShopController  )->paginate_list_view();
-       
+    public function __construct()
+    {
+        $slide_items = (new SilderController)->slide_homepage();
+        $list_items_product = (new ShopController)->all_list_view();
+        $list_items_categoy = (new CategoryController)->list_category();
+        $top_item_category = (new CategoryController)->top_list_category();
+        $admin_list = (new UserController)->all_list_view();
+        $pagi_list_product = (new ShopController)->paginate_list_view();
+
         //$list_get_category=(new CategoryController)->get_category();
-        
+
     }
     public function view()
-    {     
-       return view($this->pathViewController.'index');
+    {
+        return view($this->pathViewController . 'index', ["info_book" => array()]);
     }
     public function about_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController . '.about');
+        return view($this->pathViewController . $this->subpatchViewController . '.about');
     }
     public function faq_view()
     {
-        return view($this->pathViewController .$this->subpatchViewController. '.faq');
+        return view($this->pathViewController . $this->subpatchViewController . '.faq');
     }
     public function policy_view()
     {
-        return view($this->pathViewController .$this->subpatchViewController. '.privacy-policy');
+        return view($this->pathViewController . $this->subpatchViewController . '.privacy-policy');
     }
     public function shipping_view()
     {
-        return view($this->pathViewController .$this->subpatchViewController. '.shipping');
+        return view($this->pathViewController . $this->subpatchViewController . '.shipping');
     }
     public function terms_view()
     {
-        return view($this->pathViewController .$this->subpatchViewController. '.terms-conditions');
+        return view($this->pathViewController . $this->subpatchViewController . '.terms-conditions');
     }
     public function shop_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.shop');
+        return view($this->pathViewController . $this->subpatchViewController  . '.shop');
     }
     public function get_list_id(Request $request)
-   {
-       $items=$request->id;
-       $items= \App\Models\ProductModel::with('category')->where("cat_id","=",$items);
-       view()->share('get_cat_items', $items);
-   }
+    {
+        $items = $request->id;
+        $items = ProductModel::with('category')->where("cat_id", "=", $items);
+        view()->share('get_cat_items', $items);
+    }
+    // Quick View chua xu ly duoc 
+    public function get_info(Request $request)
+    {
+        $id_book = $request->id;
+        $item = ProductModel::where("book_id", $id_book)->get();
+        // Fetch all records
+        view()->share("info_book", $item);
+    }
     public function get_category(Request $request)
     {
-        $id=$request->cat_id;
-        $mainModel= new CategoryModel();
+        $id = $request->cat_id;
+        $mainModel = new CategoryModel();
 
         //Truy xuat theo dieu kien trong Model()
 
         //$items=$mainModel->listItems("cat_id",['task'=>"special-list-items"],$id,"===");
-    
+
         //Truy xuat theo relationship
-        $items= \App\Models\ProductModel::with('category')->where("cat_id","=",$id)->paginate(6);
-        
-        return view($this->pathViewController.$this->subpatchViewController  .'.shop',["get_cat_items"=>$items]);
+        $items = ProductModel::with('category')->where("cat_id", "=", $id)->paginate(6);
+
+        return view($this->pathViewController . $this->subpatchViewController  . '.shop', ["get_cat_items" => $items]);
     }
     public function get_items(Request $request)
     {
-        $id=$request->id; 
-        $cat_id=$request->cat_id;
-        $mainModel= new ProductModel();
-        $total= new CategoryModel();
+        $id = $request->id;
+        $cat_id = $request->cat_id;
+        $mainModel = new ProductModel();
+        $total = new CategoryModel();
         //Truy xuat dieu kien trong Model()
-        $items=$mainModel->all_list_items("book_id",['task'=>"special-list-items"],"=",$id);
-        $total=$total->listItems("cat_id",['task'=>"special-list-items","=",$cat_id]);
+        //$items=$mainModel->all_list_items("book_id",['task'=>"special-list-items"],"=",$id);
+        $total = $total::select('total')->where('cat_id', $cat_id)->first();
         // Truy xuat theo relationship
-        //$items= \App\Models\ProductModel::with('category')->where("cat_id","=",$id)->get();  
-       //$total_items= \App\Models\CategoryModel::with('book')->where("cat_id","=",$cat_id);
-     
-        return view($this->pathViewController.$this->subpatchViewController .'.single-product',["get_singel_product"=>$items,"total_items"=>$total]);
+        $items = $mainModel::where("book_id", $id)->get();
+        $items_relate = $mainModel::where("cat_id", $items)->paginate(3);
+
+        $items_thumb = $mainModel::select('thumb')->where("book_id", $id)->first();
+        $items_thumb->toArray();
+        $result = explode(";", $items_thumb->thumb);
+        //$items=  
+        //$total_items= \App\Models\CategoryModel::with('book')->where("cat_id","=",$cat_id);
+
+        return view($this->pathViewController . $this->subpatchViewController . '.single-product', [
+            "get_singel_product" => $items,
+            "total_items" => $total->total,
+            "items_relate" => $items_relate,
+            "item_thumb" => $result
+        ]);
     }
     public function product_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.single-product');
+        return view($this->pathViewController . $this->subpatchViewController  . '.single-product');
     }
     public function error_view()
     {
@@ -99,34 +122,41 @@ class HomeController extends Controller
     }
     public function contact_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.contact');
+        return view($this->pathViewController . $this->subpatchViewController  . '.contact');
     }
     public function team_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.team');
+        return view($this->pathViewController . $this->subpatchViewController  . '.team');
     }
     public function wishlist_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.wishlist');
+        return view($this->pathViewController . $this->subpatchViewController  . '.wishlist');
     }
     public function checkout_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.checkout');
+        return view($this->pathViewController . $this->subpatchViewController  . '.checkout');
     }
-    public function cart_view()
+    public function add_wishlist(Request $request,$id)
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.cart');
+        $id_item=$request->id;
+        $item=ProductModel::find($id_item);
+        $oldcart = Session('cart')?FacadesSession::get('key'):null;
+        $cart= new Cart($oldcart);
+        $cart->add($item,$id);
+        $request->session()->put('cart',$cart);
+        return \redirect()->back();
+       
     }
     public function blog_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.blog');
+        return view($this->pathViewController . $this->subpatchViewController  . '.blog');
     }
     public function blogdetail_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.blog-details');
+        return view($this->pathViewController . $this->subpatchViewController  . '.blog-details');
     }
     public function account_view()
     {
-        return view($this->pathViewController.$this->subpatchViewController  .'.my-account');
+        return view($this->pathViewController . $this->subpatchViewController  . '.my-account');
     }
 }

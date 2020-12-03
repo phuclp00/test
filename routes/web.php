@@ -37,12 +37,10 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             $controller = HomeController::class;
             Route::get('/', [$controller, 'view'])->name("home_view");
             //Khong dung
-            Route::get('get_list={id}', [HomeController::class,'get_list_id'],function(){      
-                return redirect('public.index');
-            })->name('get_list');
-            Route::get('ajax-request', 'AjaxController@create');
-            Route::post('ajax-request', 'AjaxController@store');
+           // SHOW THONG TIN TAI TRANG CHU 
+           
         });
+        Route::get('#productmodal',[HomeController::class,'get_info'])->name('get_info_home');
 //===================================LOG-IN ========================================================================//
 
         //===================================SIGN-IN =========================================================//
@@ -79,8 +77,8 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 
             $controllerName = 'wishlist';
             Route::group(['prefix' => $controllerName], function () {
-                $controller = HomeController::class;
-                Route::get('/', [$controller, 'wishlist_view'])->name("wishlist_view");
+                $controller = ProductController::class;
+                Route::get('wishlist_add={id}', [$controller, 'add_wishlist'])->name("add_wishlist");
             });
             //======================================HOME - PRIVACY-POLICY ====================================//
 
@@ -136,7 +134,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                                 $controllerName = 'cart';
                                 Route::group(['prefix' => $controllerName], function () {
                                     $controller = HomeController::class;
-                                    Route::get('/', [$controller, 'cart_view'])->name("cart_view");
+                                    Route::get('/   ', [$controller, 'cart_view'])->name("cart_view");
                                 });
                 //======================================HOME - BLOG ====================================//
 
@@ -159,8 +157,9 @@ Route::group(['prefix' => $controllerName], function () {
     $controller = ProductController::class;
     //KHI KHONG TRUYEN ID THI TRA VE SHOP VIEW 
     Route::get('/', [HomeController::class, 'shop_view']);
-    //LAY ID VA CAT_ID SAN PHAM KHI DUOC TRUYEN GIA TRI VAO 
-   Route::get('/book_id={id} && cat_id={cat_id?}',[HomeController::class,'get_items'])->name("product_view");
+    
+    //LAY ID VA CAT_ID SAN PHAM KHI DUOC TRUYEN GIA TRI VAO TRA VE TRANG PRODUCT DETAIL
+   Route::get('/book_id={id} && cat_id={cat_id?}',[ HomeController::class,'get_items'])->name("product_view");
    
 });
 

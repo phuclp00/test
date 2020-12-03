@@ -19,4 +19,10 @@ class AjaxController extends Controller
 
         return response()->json(['success'=>'Ajax request submitted successfully']);
     }
+    public function show(Request $request, $id)
+    {
+        $value = $request->session()->get('key');
+
+        //
+    }
 }
