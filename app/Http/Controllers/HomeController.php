@@ -10,7 +10,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
-use Cart;
+use App\Cart;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
 
@@ -136,17 +136,7 @@ class HomeController extends Controller
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.checkout');
     }
-    public function add_wishlist(Request $request,$id)
-    {
-        $id_item=$request->id;
-        $item=ProductModel::find($id_item);
-        $oldcart = Session('cart')?FacadesSession::get('key'):null;
-        $cart= new Cart($oldcart);
-        $cart->add($item,$id);
-        $request->session()->put('cart',$cart);
-        return \redirect()->back();
-       
-    }
+  
     public function blog_view()
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.blog');

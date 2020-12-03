@@ -2,6 +2,8 @@
 	@section('content')
 	@include('public.slide.slide_header')
         <!-- cart-main-area start -->
+        <?php $content = Cart::content() ?> 
+   
         <div class="cart-main-area section-padding--lg bg--white">
             <div class="container">
                 <div class="row">
@@ -20,30 +22,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        @foreach ($content as $item)                         
+                                         <tr>
                                             <td class="product-thumbnail"><a href="#"><img src="/source_project/images/product/sm-3/1.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Natoque penatibus</a></td>
-                                            <td class="product-price"><span class="amount">$165.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$165.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
+                                            <td class="product-name"><a href="#">{{$item->name}}</a></td>
+                                            <td class="product-price"><span class="amount">{{$item->price}}</span></td>
+                                            <td class="product-quantity"><input type="number" value="{{$item->qty}}"></td>
+                                            <td class="product-subtotal">{{$item->price}}</td>
+                                            <td class="product-remove"><a href="#"></a></td>
                                         </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="/source_project/images/product/sm-3/2.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Quisque fringilla</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="/source_project/images/product/sm-3/3.jpg" alt="product img"></a></td>
-                                            <td class="product-name"><a href="#">Vestibulum suscipit</a></td>
-                                            <td class="product-price"><span class="amount">$50.00</span></td>
-                                            <td class="product-quantity"><input type="number" value="1"></td>
-                                            <td class="product-subtotal">$50.00</td>
-                                            <td class="product-remove"><a href="#">X</a></td>
-                                        </tr>
+                                        @endforeach
+                                       
                                     </tbody>
                                 </table>
                             </div>

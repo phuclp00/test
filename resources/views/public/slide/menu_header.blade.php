@@ -66,7 +66,6 @@
                                     <li><a href="{{route('account_view')}}">My Account</a></li>
                                     <li><a href="{{route('cart_view')}}">Cart Page</a></li>
                                     <li><a href="{{route('checkout_view')}}">Checkout Page</a></li>
-                                    <li><a href="{{route('checkout_view')}}">Wishlist Page</a></li>
                                     <li><a href="{{route('error_view')}}">404 Page</a></li>
                                     <li><a href="{{route('faq_view')}}">Faq Page</a></li>
                                     <li><a href="{{route('team_view')}}">Team Page</a></li>
@@ -85,42 +84,34 @@
                     <li class="shop_search"><a class="search__active" href="#"></a></li>
                     <li class="wishlist"><a href="#"></a></li>
                     <li class="shopcart"><a class="cartbox_active" href="#"><span class="product_qun">
-                        @if(session()->has('cart')) {{Session('cart')->totalQty}} @else 0 @endif</span></a>
+                       
                         <!-- Start Shopping Cart -->
                         <div class="block-minicart minicart__active">
                             <div class="minicart-content-wrapper">
                                 <div class="micart__close">
                                     <span>close</span>
-                                </div>       
+                                </div>
                                 <div class="items-total d-flex justify-content-between">
-                                    <span>
-                                        @if(session()->has('cart')) {{Session('cart')->totalQty}} @else 0 items @endif
-                                    </span>
+                                    <span>3 items</span>
                                     <span>Cart Subtotal</span>
                                 </div>
                                 <div class="total_amount text-right">
-                                    <span> @if(Session('cart')) {{Session('cart')->totalQty}} @else 0.0 $ @endif</span>
+                                    <span>$66.00</span>
                                 </div>
                                 <div class="mini_action checkout">
-                                    <a class="checkout__btn" href="{{route('cart_view')}}">Go to Checkout</a>
+                                    <a class="checkout__btn" href="{{route('checkout_view')}}">Go to Checkout</a>
                                 </div>
                                 <div class="single__items">
                                     <div class="miniproduct">
-                                    @if(session()->has('cart'))
-                                    @foreach($product_cart as $product)
-                                        
-                                
-                              
-                                       
-                                        <div class="item01 d-flex mt--20">
+                                        <div class="item01 d-flex">
                                             <div class="thumb">
-                                                <a href="product-details.html"><img src="source_project/images/product/sm-img/3.jpg" alt="product images"></a>
+                                                <a href="product-details.html"><img src="images/product/sm-img/1.jpg" alt="product images"></a>
                                             </div>
                                             <div class="content">
-                                                <h6><a href="product-details.html">{{$product->items->book_name}}</a></h6>
-                                                <span class="prize">{{$product->qty->price}}*{{$product->$item->$price}}</span>
+                                                <h6><a href="product-details.html">Voyage Yoga Bag</a></h6>
+                                                <span class="prize">$30.00</span>
                                                 <div class="product_prize d-flex justify-content-between">
-                                                    <span class="qun">{{Session('cart')->totalPrice}}</span>
+                                                    <span class="qun">Qty: 01</span>
                                                     <ul class="d-flex justify-content-end">
                                                         <li><a href="#"><i class="zmdi zmdi-settings"></i></a></li>
                                                         <li><a href="#"><i class="zmdi zmdi-delete"></i></a></li>
@@ -128,9 +119,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                       
-                                        @endforeach
-                                        @endif
                                         
                                     </div>
                                 </div>
@@ -222,10 +210,8 @@
                         </li>
                         <li><a href="{{route('about_view')}}">Pages</a>
                             <ul>
-                                <li><a href="{{route('about_view')}}">About Page</a></li>
-                                
+                                <li><a href="{{route('about_view')}}">About Page</a></li>                              
                                 <li><a href="{{route('account_view')}}">My Account</a></li>
-                                <li><a href="{{route('cart_view')}}">Cart Page</a></li>
                                 <li><a href="{{route('checkout_view')}}">Checkout Page</a></li>
                                 <li><a href="{{route('wishlist_view')}}">Wishlist Page</a></li>
                                 <li><a href="{{route('error_view')}}">404 Page</a></li>

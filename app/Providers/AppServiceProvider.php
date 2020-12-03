@@ -2,14 +2,15 @@
 
 namespace App\Providers;
 
-use Cart;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\ServiceProvider;
 use Request;
 use Session;
-
+use Cart;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -36,16 +37,15 @@ class AppServiceProvider extends ServiceProvider
         $list_book=json_decode($db_book,true);
         view()->share('list_book', $list_book);
         */
-      
-        view()->composer('public.page.slide.menu_header',function($view)
+       
+        view()->composer('public.slide.menu_header',function($view)
         {
-            if(Session('cart')){
-                $oldCart =FacadesSession::get('cart');
-                $cart= new Cart($oldCart);     
-                $view->with(['cart'=>FacadesSession::get('cart'),'product_cart'=>$cart->item,
-                'total_price'=>$cart->totalPrice,'totalQty'=>$cart->totalQty]); 
-            }
+            $list_items_product = (new ShopController)->all_list_view();
+            $list_items_categoy = (new CategoryController)->list_category();
+            $top_item_category = (new CategoryController)->top_list_category();
+
         });
+       
         Schema::defaultStringLength(255);
 
     }
