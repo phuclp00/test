@@ -121,14 +121,18 @@
                                                 </div>
                                             @endif
                                             <ul class="prize position__right__bottom d-flex">
-                                            <li>{{$list_product->promotion_price."$"}}</li>
-                                                <li class="old_prize">{{$list_product->price."$"}}</li>
-                                            </ul>
+                                                @if($list_product->promotion_price>0)
+                                                <li>{{number_format($list_product->promotion_price,2)."$"}}</li>
+                                                <li class="old_prize">{{number_format($list_product->price,2)."$"}}</li>
+                                            @else
+                                                <li>0.00 $</li>
+                                                <li class="old_prize">{{number_format($list_product->price,2)."$"}}</li>
+                                            @endif
                                             <div class="action">
                                                 <div class="actions_inner">
                                                     <ul class="add_to_links">
-                                                        <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                        <li><a class="wishlist" href="{{route('wishlist_view')}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                        <li><a class="cart" href="{{route('add_to_cart',[$list_product->book_id])}}"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                        <li><a class="wishlist" href="{{route('add_to_cart',[$list_product->book_id])}}"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                         <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                         <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                                     </ul>
@@ -176,14 +180,18 @@
                                             </div>
                                         @endif
                                         <ul class="prize position__right__bottom d-flex">
-                                        <li>{{$list_product->promotion_price."$"}}</li>
-                                            <li class="old_prize">{{$list_product->price."$"}}</li>
-                                        </ul>
+                                        @if($list_product->promotion_price>0)
+                                            <li>{{number_format(($list_product->promotion_price),2) ." $"}}</li>
+                                            <li class="old_prize">{{number_format(($list_product->price),2) ." $"}}</li>
+                                        @else
+                                            <li>0.00 $</li>
+                                            <li class="old_prize">{{number_format(($list_product->price),2) ." $"}}</li>
+                                        @endif
                                         <div class="action">
                                             <div class="actions_inner">
                                                 <ul class="add_to_links">
-                                                    <li><a class="cart" href="{{route('cart_view')}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                    <li><a class="wishlist" href="{{route('wishlist_view')}}"><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                    <li><a class="cart" href="{{route('add_to_cart',[$list_product->book_id])}}"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                    <li><a class="wishlist" href="{{route('add_to_cart',[$list_product->book_id])}}"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                     <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                     <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                                 </ul>
@@ -231,13 +239,20 @@
                                                 <li><i class="fa fa-star-o"></i></li>
                                             </ul>
                                             <ul class="prize__box">
-                                                <li>{{$item->promotion_price."$"}}</li>
-                                                <li class="old__prize">{{$item->price."$"}}</li>
+                                                <ul class="prize__box">                                         
+                                                @if($item->promotion_price>0)
+                                                    <li>{{number_format(($item->promotion_price),2) ." $"}}</li>
+                                                    <li class="old__prize">{{number_format(($item->price),2) ." $"}}</li>
+                                                @else
+                                                    <li>0.00 $</li>
+                                                    <li class="old__prize">{{number_format(($item->price),2) ." $"}}</li>
+                                                @endif
+                                                </ul>
                                             </ul>
                                             <p>{{Str::limit($item->description, $limit = 350, $end = '...')}}</p>
                                             <ul class="cart__action d-flex">
-                                                <li class="cart"><a href="{{route('cart_view')}}">Add to cart</a></li>
-                                                <li class="wishlist"><a href="{{route('cart_view')}}"></a></li>
+                                                <li class="cart"><a href="{{route('add_to_cart',[$item->book_id])}}">Add to cart</a></li>
+                                                <li class="wishlist"><a href="{{route('add_to_cart',[$item->book_id])}}"></a></li>
                                                 <li class="compare"><a href="{{route('cart_view')}}"></a></li>
                                             </ul>
 
@@ -264,13 +279,20 @@
                                             <li><i class="fa fa-star-o"></i></li>
                                         </ul>
                                         <ul class="prize__box">
-                                            <li>{{$item->promotion_price."$"}}</li>
-                                            <li class="old__prize">{{$item->price."$"}}</li>
+                                            <ul class="prize__box">                                         
+                                            @if($item->promotion_price>0)
+                                                <li>{{number_format(($item->promotion_price),2) ." $"}}</li>
+                                                <li class="old__prize">{{number_format(($item->price),2) ." $"}}</li>
+                                            @else
+                                                <li>0.00 $</li>
+                                                <li class="old__prize">{{number_format(($item->price),2) ." $"}}</li>
+                                            @endif
+                                            </ul>
                                         </ul>
                                         <p>{{Str::limit($item->description, $limit = 350, $end = '...')}}</p>
                                         <ul class="cart__action d-flex">
-                                            <li class="cart"><a href="{{route('cart_view')}}">Add to cart</a></li>
-                                            <li class="wishlist"><a href="{{route('cart_view')}}"></a></li>
+                                            <li class="cart"><a href="{{route('add_to_cart',[$item->book_id])}}">Add to cart</a></li>
+                                            <li class="wishlist"><a href="{{route('add_to_cart',[$item->book_id])}}"></a></li>
                                             <li class="compare"><a href="{{route('cart_view')}}"></a></li>
                                         </ul>
 
@@ -281,17 +303,18 @@
                             <!-- End Single Product -->                     
                         </div>
                     </div>
-                    @if($get_cat_items!=null) 
-                        <ul class="wn__pagination">
+                    
+                  
+                </div>
+                @if($get_cat_items!=null) 
+                        <ul class="wn__pagination" style="margin-top:100px; ">
                             {{ $get_cat_items->links('vendor.pagination.tailwind'),["paginator"=>$get_cat_items]}}
                         </ul>
                     @else
-                        <ul class="wn__pagination">
+                        <ul class="wn__pagination" style="margin-top:100px; ">
                             {{ $pagi_list_items->links('vendor.pagination.tailwind'),["paginator"=>$pagi_list_items]}}
                         </ul>
                     @endif
-                  
-                </div>
             </div>
         </div>
     </div>

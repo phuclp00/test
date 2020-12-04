@@ -136,7 +136,10 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                                     $controller = ProductController::class;
                                     
                                     Route::get('add-to-cart/{id}', [$controller,'add_to_cart'])->name("add_to_cart");
+                                    Route::get('destroy-cart/{id}', [$controller,'destroy_cart'])->name("destroy_cart");
+                                    Route::get('update-cart/id={id} && qty={qty}-', [$controller,'update_cart'])->name("update_cart");
                                     Route::get('show-cart', [$controller,'cart_view'])->name("cart_view");
+                                    
                                 });
                 //======================================HOME - BLOG ====================================//
 

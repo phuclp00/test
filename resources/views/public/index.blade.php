@@ -73,8 +73,13 @@
                             <div class="product__content content--center">
                                 <h4><a href="{{route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}">{{$product->book_name}}</a></h4>
                                 <ul class="prize d-flex">
-                                    <li>{{$product->promotion_price."$"}}</li>
-                                    <li class="old_prize">{{$product->price."$"}}</li>
+                                    @if($product->promotion_price>0)
+                                        <li>{{number_format(($product->promotion_price),2) ." $"}}</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @else
+                                        <li>0.00 $</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @endif
                                 </ul>
                                 <div class="action">
                                     <div class="actions_inner">
@@ -196,14 +201,19 @@
                                 <div class="product__content content--center content--center">
                                     <h4><a href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}">{{$product->book_name}}</a></h4>
                                     <ul class="prize d-flex">
-                                        <li>{{$product->promotion_price."$"}}</li>
-                                        <li class="old_prize">{{$product->price."$"}}</li>
+                                    @if($product->promotion_price>0)
+                                        <li>{{number_format(($product->promotion_price),2) ." $"}}</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @else
+                                        <li>0.00 $</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @endif
                                     </ul>
                                     <div class="action">
                                         <div class="actions_inner">
                                             <ul class="add_to_links">
                                                 <li><a class="cart" href="{{route('add_to_cart',[$product->book_id])}}"><i class="bi bi-shopping-bag4"></i></a></li>
-                                                <li><a class="wishlist" href="{{route('add_to_cart',[$product->book_id])}}><i class="bi bi-shopping-cart-full"></i></a></li>
+                                                <li><a class="wishlist" href="{{route('add_to_cart',[$product->book_id])}}"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                 <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                 <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
                                             </ul>
@@ -254,8 +264,13 @@
                                 <div class="product__content content--center content--center">
                                     <h4><a href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}">{{$product->book_name}}</a></h4>
                                     <ul class="prize d-flex">
-                                        <li>{{$product->promotion_price."$"}}</li>
-                                        <li class="old_prize">{{$product->price."$"}}</li>
+                                    @if($product->promotion_price>0)
+                                        <li>{{number_format(($product->promotion_price),2) ." $"}}</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @else
+                                        <li>0.00 $</li>
+                                        <li class="old_prize">{{number_format(($product->price),2) ." $"}}</li>
+                                    @endif
                                     </ul>
                                     <div class="action">
                                         <div class="actions_inner">
@@ -316,6 +331,7 @@
                                     @else
                                         <div class="hot__box color--2">
                                         <span class="hot-label"> HOT </span>
+                                   
                                     </div>
                                     @endif
                                  {{-- This comment will not be present in the rendered HTML 
@@ -328,13 +344,18 @@
                                 <div class="product__content content--center content--center">
                                     <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product->img}}}}">{{$product_tag->book_name}}</a></h4>
                                     <ul class="prize d-flex">
-                                        <li>{{$product_tag->promotion_price."$"}}</li>
-                                        <li class="old_prize">{{$product_tag->price."$"}}</li>
+                                    @if($product_tag->promotion_price>0)
+                                        <li>{{number_format(($product_tag->promotion_price),2) ." $"}}</li>
+                                        <li class="old_prize">{{number_format(($product_tag->price),2) ." $"}}</li>
+                                    @else
+                                        <li>0.00 $</li>
+                                        <li class="old_prize">{{number_format(($product_tag->price),2) ." $"}}</li>
+                                    @endif
                                     </ul>
                                     <div class="action">
                                         <div class="actions_inner">
                                             <ul class="add_to_links">
-                                                <li><a class="cart" href="href="{{route('add_to_cart',[$book_id->book_id])}}><i class="bi bi-shopping-bag4"></i></a></li>
+                                                <li><a class="cart" href="{{route('add_to_cart',[$book_id->book_id])}}"><i class="bi bi-shopping-bag4"></i></a></li>
                                                 <li><a class="wishlist" href="{{route('add_to_cart',[$book_id->book_id])}}"><i class="bi bi-shopping-cart-full"></i></a></li>
                                                 <li><a class="compare" href="#"><i class="bi bi-heart-beat"></i></a></li>
                                                 <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
@@ -387,8 +408,13 @@
                                 <div class="product__content content--center content--center">
                                     <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product_tag->img}}}}">{{$product_tag->book_name}}</a></h4>
                                     <ul class="prize d-flex">
-                                        <li>{{$product_tag->promotion_price."$"}}</li>
-                                        <li class="old_prize">{{$product_tag->price."$"}}</li>
+                                        @if($product_tag->promotion_price>0)
+                                            <li>{{number_format($product_tag->promotion_price,2)."$"}}</li>
+                                            <li class="old_prize">{{number_format($product_tag->price,2)."$"}}</li>
+                                        @else
+                                            <li>0.00 $</li>
+                                            <li class="old_prize">{{number_format($product_tag->price,2)."$"}}</li>
+                                        @endif
                                     </ul>
                                     <div class="action">
                                         <div class="actions_inner">
