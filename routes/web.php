@@ -42,20 +42,12 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
         });
         Route::get('#productmodal',[HomeController::class,'get_info'])->name('get_info_home');
 //===================================LOG-IN ========================================================================//
-
-        //===================================SIGN-IN =========================================================//
-
-        $controllerName = 'sign-in';
+        $controllerName = 'login';
         Route::group(['prefix' => $controllerName], function () {
             $controller = LoginController::class;
-            Route::get('/', [$controller, 'signin_view'])->name("sign-in_view");
-        });
-        //===================================SIGN-UP =========================================================//
-
-        $controllerName = 'sign-up';
-        Route::group(['prefix' => $controllerName], function () {
-            $controller = LoginController::class;
-            Route::get('/', [$controller, 'signup_view'])->name("sign-up_view");
+            Route::get('/sign-in', [$controller, 'Login'])->name("login_signin");
+            Route::get('/sign-up', [$controller, 'Register'])->name("login_signup");
+           
         });
 //===================================HOME - PAGE ====================================================================//
         //======================================HOME - ABOUT ===================================================//
@@ -128,16 +120,17 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                             Route::group(['prefix' => $controllerName], function () {
                                 $controller = HomeController::class;
                                 Route::get('/check-out-product', [$controller, 'checkout_view'])->name("checkout_view");
+                                Route::get('/check-out-order', [$controller, 'add_order_cart'])->name("add_order_cart");
+                                Route::get('/check-out-order-detail', [$controller, 'add_order_detail'])->name("add_order_detail");
+                                Route::get('/check-out-register-address', [LoginController::class, 'register_address'])->name("register_address");
                             });
                 //======================================HOME - CART ====================================//
                
                                 $controllerName = 'cart';
                                 Route::group(['prefix' => $controllerName], function () {
-                                    $controller = ProductController::class;
-                                    
+                                    $controller = ProductController::class;                
                                     Route::get('add-to-cart/{id}', [$controller,'add_to_cart'])->name("add_to_cart");
-                                    Route::get('destroy-cart/{id}', [$controller,'destroy_cart'])->name("destroy_cart");
-                                    Route::get('update-cart/id={id} && qty={qty}-', [$controller,'update_cart'])->name("update_cart");
+                                    Route::get('update-cart', [$controller,'update_cart'])->name("update_cart");
                                     Route::get('show-cart', [$controller,'cart_view'])->name("cart_view");
                                     
                                 });

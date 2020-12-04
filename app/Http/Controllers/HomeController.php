@@ -147,6 +147,11 @@ class HomeController extends Controller
     }
     public function account_view()
     {
+        if(session()->has('user_name')){
+            return \redirect()->back();
+        }
+        else {
         return view($this->pathViewController . $this->subpatchViewController  . '.my-account');
+        }
     }
 }

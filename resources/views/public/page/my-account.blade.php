@@ -1,60 +1,96 @@
-﻿	@extends('master')
-		@section('content')
-			
-		@include('public.slide.slide_header')
+﻿@extends('master')
+@section('content')
 
-		<!-- Start My Account Area -->
-		<section class="my_account_area pt--80 pb--55 bg--white">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-6 col-12">
-						<div class="my__account__wrapper">
-							<h3 class="account__title">Login</h3>
-							<form action="#">
-								<div class="account__form">
-									<div class="input__box">
-										<label>Username or email address <span>*</span></label>
-										<input type="text">
-									</div>
-									<div class="input__box">
-										<label>Password<span>*</span></label>
-										<input type="text">
-									</div>
-									<div class="form__btn">
-										<button>Login</button>
-										<label class="label-for-checkbox">
-											<input id="rememberme" class="input-checkbox" name="rememberme" value="forever" type="checkbox">
-											<span>Remember me</span>
-										</label>
-									</div>
-									<a class="forget_pass" href="#">Lost your password?</a>
-								</div>
-							</form>
+@include('public.slide.slide_header')
+
+
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6 col-12">
+				<div class="my__account__wrapper">
+					<h3 class="account__title">Login</h3>
+					<form action="{{route('login_signin')}}" method="get">
+						@csrf
+						<div class="account__form">
+							<div class="input__box">
+								<label>Username or email address <span>*</span></label>
+								<input type="text" name="username" value="">
+							</div>
+							<div class="input__box">
+								<label>Password<span>*</span></label>
+								<input type="password" name="userpassword" value="">
+							</div>
+							<div class="form__btn">
+								<button>Login</button>
+								<input type="hidden" name="Submit" value="Login">
+								<label class="label-for-checkbox">
+									<input id="rememberme" class="input-checkbox" name="rememberme" value="forever"
+										type="checkbox">
+									<span>Remember me</span>
+								</label>
+							</div>
+							<a class="forget_pass" href="#">Lost your password?</a>
 						</div>
-					</div>
-					<div class="col-lg-6 col-12">
-						<div class="my__account__wrapper">
-							<h3 class="account__title">Register</h3>
-							<form action="#">
-								<div class="account__form">
-									<div class="input__box">
-										<label>Email address <span>*</span></label>
-										<input type="email">
-									</div>
-									<div class="input__box">
-										<label>Password<span>*</span></label>
-										<input type="password">
-									</div>
-									<div class="form__btn">
-										<button>Register</button>
-									</div>
-								</div>
-							</form>
+					</form>
+				
+					
+					@if ((session()->has('user_name')))
+						<div class="alert alert-success">
+							{{"DANG NHAP THANH CONG !! XIN CHAO". session()->get('user_name')}}
 						</div>
-					</div>
+					@elseif(session()->has("fail"))
+						<div class="alert alert-danger">
+							{{ "Tạo tài khoản thát bại, vui lòng thử lại" }}
+						</div>
+					@endif
 				</div>
 			</div>
-		</section>
-		<!-- End My Account Area -->
-		
-		@endsection
+			<div class="col-lg-6 col-12">
+				<div class="my__account__wrapper">
+					<h3 class="account__title">Register</h3>
+					<form action="{{route('login_signup')}}" method="get">
+						@csrf
+						<div class="account__form">
+							<div class="input__box">
+								<label>User Name <span>*</span></label>
+								<input type="text" name="username_register" value="">
+							</div>
+							<div class="input__box">
+								<label>Email address <span>*</span></label>
+								<input type="email" name="email_register" value="">
+							</div>
+							<div class="input__box">
+								<label>Password<span>*</span></label>
+								<input type="password" name="password_register" va>
+							</div>
+							<div class="input__box">
+								<label>Phone<span>*</span></label>
+								<input type="text" name="phone_register" va>
+							</div>
+							<div class="form__btn">
+								<button>Register</button>
+								<input type="hidden" name="Submit" value="Register">
+							</div>
+						</div>
+					</form>
+					@if(session()->has('register_success'))
+						<div class="alert alert-success">
+							{{ "Tạo tài khoản thành công , tiếp tục mua sắm nào !!" }}
+						</div>
+					@elseif(session()->has('register_fail'))
+						<div class="alert alert-danger">
+							{{ "Tạo tài khoản thát bại, vui lòng thử lại" }}
+						</div>
+					@endif
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End My Account Area -->
+
+
+
+@endsection

@@ -2,13 +2,12 @@
 	@section('content')
 	@include('public.slide.slide_header')
         <!-- cart-main-area start -->
-        <?php $content = Cart::content() ?> 
-        
+        <?php $content = Cart::content() ?>         
         <div class="cart-main-area section-padding--lg bg--white">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 ol-lg-12">
-                        <form action="#">               
+                        <form action="{{route('update_cart')}}" method="GET"> {{csrf_field()}}              
                             <div class="table-content wnro__table table-responsive">
                                 <table>
                                     <thead>
@@ -18,7 +17,7 @@
                                             <th class="product-price">Price</th>
                                             <th class="product-quantity">Quantity</th>
                                             <th class="product-subtotal">Total</th>
-                                            <th class="product-remove">Remove</th>
+                                            <th class="product-remove">Remove Item </th>
                                             <th class="product-remove">Update Quantity</th>
                                         </tr>
                                     </thead>
@@ -26,13 +25,17 @@
                                       
                                         @foreach ($content as $item)                         
                                          <tr>
-                                            <td class="product-thumbnail"><a href="#"><img src="/source_project/images/product/sm-3/1.jpg" alt="product img"></a></td>
+                                         
+                                            <td class="product-thumbnail"><a href="#"><img src="/source_project/images/product/sm-3/{{$item->options->image}}" alt="product img"></a></td>
                                             <td class="product-name"><a href="#">{{$item->name}}</a></td>
                                             <td class="product-price"><span class="amount">{{number_format(($item->price),2) ." $"}}</span></td>
-                                            <td class="product-quantity"><input type="number" value="{{$item->qty}}"></td>
+                                            <td class="product-quantity"><input id="{{$item->rowId}}" name ="cart_quantity"type="number" value="{{$item->qty}}"></td>
                                             <td class="product-subtotal"> {{number_format(($item->price * $item->qty),2) ." $"}}</td>
-                                            <td class="product-remove"><a href="{{route('destroy_cart',$item->rowId)}}">X</a></td>
-                                            <td class="product-remove"><a href="{{route('update_cart',[$item->rowId,$item->qty])}}">&#10003;</a></td>
+                                            <input type="hidden" name="cart_rowId" value="{{$item->rowId}}">
+                                            <td class="product-remove" ><input type="submit"  name="remove_cart" value="Remove"style="padding: 0px;border:1px solid black"></td>
+                                            <td class="product-remove"><input type="submit" name="update_cart" value="Update" style="padding: 0px;border:1px solid black" ></td>
+                                            
+                                        
                                         </tr>
                                         @endforeach
                                        
@@ -44,8 +47,8 @@
                             <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
                                 <li><a href="#">Coupon Code</a></li>
                                 <li><a href="#">Apply Code</a></li>
-                                <li><a href="#">Update Cart</a></li>
-                                <li><a href="{{route('route('checkout_view')')}}">Check Out</a></li>
+                                <li><a href="#">Update Cart</a></button></li>
+                                <li><a href="{{route('checkout_view')}}">Check Out</a></li>
                             </ul>
                         </div>
                     </div>

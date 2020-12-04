@@ -45,7 +45,8 @@ class AppServiceProvider extends ServiceProvider
             $top_item_category = (new CategoryController)->top_list_category();
 
         });
-       
+        date_default_timezone_set('Asia/Ho_Chi_Minh');   
+
         Schema::defaultStringLength(255);
 
     }

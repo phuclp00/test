@@ -16,6 +16,7 @@ class UserModel extends Authenticatable
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modiffed';
     public $timestamps = false;
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -43,7 +44,7 @@ class UserModel extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'timestamp',
     ];
     public function user_detail()
     {

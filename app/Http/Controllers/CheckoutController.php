@@ -2,21 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CategoryModel;
 use Illuminate\Http\Request;
-use App\Models\ProductModel as MainModel;
-use App\Models\ProductModel;
-use Gloudemans\ShoppingCart\CartItem;
-use Illuminate\Support\Facades\Session as FacadesSession;
-use Session;
-use Category;
-use Cart;
 
-session_start();
-class ProductController extends Controller
+class CheckoutController extends Controller
 {
-    
-    public function add_to_cart(Request $request)
+    private $pathViewController = 'public.page.checkout';
+
+    public function login_checkout()
+    {
+        return \route('login_view');
+    }
+    public function checkout_view()
+    {
+        return view($this->pathViewController);
+    }
+    public function register_address(Request $request)
     {
         $id_item = $request->id;
         $item = ProductModel::find($id_item);
@@ -58,4 +58,5 @@ class ProductController extends Controller
         return view('public.page.cart');
 
     }
+    
 }

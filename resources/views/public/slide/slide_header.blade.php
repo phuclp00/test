@@ -1,5 +1,6 @@
      <!-- Header -->
      @include('public.slide.menu_header')
+     
     <!-- End Search Popup -->
     <!-- Start Bradcaump area -->
     <div class="ht__bradcaump__area bg-image--3">

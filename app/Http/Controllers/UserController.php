@@ -13,4 +13,5 @@ class UserController extends Controller
         $list_items = $mainModel->listItems('level',['task'=>"admin-list-items"],'=','admin');
         view()->share('list_admin',$list_items);  
     }
+    
 }
