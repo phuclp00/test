@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DBconnect;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\UserController;
@@ -170,10 +171,10 @@ Route::group(['prefix' => $controllerName], function () {
 $controllerName = 'shop';
 Route::group(['prefix' => $controllerName], function () {
     $controller = CategoryController::class;
-    Route::get('/', [HomeController::class, 'shop_view'])->name("shop_view");
+    Route::get('/', [HomeController::class, 'shop_view'])->name("shop_view",["get_cat_items"=>$get_cat_items=null]);
     //LAY ID CATEGORY KHI DUOC TRUYEN GIA TRI VAO TRA VE LIST THEO ID CATEGORY
     Route::get('/cat_id={cat_id}',[HomeController::class,'get_category'])->name("category_view");
-
+    Route::get('/search_product}',[ CategoryController::class,'find_product'])->name("find_product");
 });
 //====================================== - ACCOUNT ========================================================//
 

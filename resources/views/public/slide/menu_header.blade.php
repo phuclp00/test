@@ -255,13 +255,10 @@
 <!-- //Header -->
 <!-- Start Search Popup -->
 <div class="box-search-content search_active block-bg close__top">
-    <form id="search_mini_form" class="minisearch" action="#">
+    <form id="search_mini_form" class="minisearch" action="{{route('find_product')}}" method="GET">
         <div class="field__search">
-            <input type="text" placeholder="Search entire store here...">
-            <div class="action">
-                <a href="source_project/imagessource_project/imagessource_project/imagessource_project/images#"><i
-                        class="zmdi zmdi-search"></i></a>
-            </div>
+            <input type="text" placeholder="Search entire store here..." name="key_word">
+            <button class="minicart-content-wrapper" type="submit"><h3><i class="fa fa-search" aria-hidden="true"> Có thể search theo tên sách,từ khoá có trong mô tả của sách,mã sách,....</i></h3></button>
         </div>
     </form>
     <div class="close__wrap">

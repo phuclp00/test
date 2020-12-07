@@ -57,12 +57,14 @@ class UserController extends Controller
 
                 $data_user->refresh();
             }
-            if ($request->password != "11111122333") {
-                if ($request->password == $request->re_password) {
+            if ($request->password_register != "11111122333") {
+                if ($request->password_register == $request->re_password) {
                     $new_pass = $request->password_register;
                     $data_user->password = $new_pass;
                     $data_user->save();
                     $data_user->refresh();
+                    $request->session()->flash('update_info', '<div class="alert alert-danger">"Cập nhật mat khau thất bại, vui lòng thử lại!!"</div>');
+                    return \redirect()->route('account_view', [$data_account->user_name]);
                 }
             }
 
