@@ -3,6 +3,9 @@
 <body>
     <div  class=" right-col " style="    padding: 10px 20px 0;
     margin-left: 230px;">
+        @if(session()->has('cat_status'))
+	        {!!session()->get('cat_status')!!}
+        @endif
     <table class="table table-striped jambo_table bulk_action" style="border 1px solid red">
         <thead>
         <tr class="headings">
@@ -39,7 +42,7 @@
                         type="button" class="btn btn-icon btn-success" data-toggle="tooltip"
                         data-placement="top" data-original-title="Edit">
                     <i class="fa fa-pencil"></i>
-                </a><a href="/delete/2"
+                </a><a href="{{route('cat_delete',$value->cat_id)}}"
                     type="button" class="btn btn-icon btn-danger btn-delete"
                     data-toggle="tooltip" data-placement="top"
                     data-original-title="Delete">

@@ -1,6 +1,8 @@
 @extends('admin.main')
 @section('content')
-
+        @if(session()->has('account_status'))
+                {!!session()->get('account_status')!!}
+        @endif
 <div class="page-header zvn-page-header clearfix">
     <div class="zvn-page-header-title">
         <h3>Danh sách User</h3>

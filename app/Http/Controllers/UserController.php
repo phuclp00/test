@@ -97,7 +97,7 @@ class UserController extends Controller
     public function set_status(Request $request)
     {
         try {
-            dd($result->select_change_attr);
+            
             $result= UserModel::where('status',$request->user_id)->update('status',$request->select_change_attr);
            
             $request->session()->flash('account_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng' . $request->user_id . ' thành công </div>');

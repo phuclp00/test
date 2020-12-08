@@ -3,6 +3,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="csrf-token" content="{{ csrf_token() }}" />
 <link rel="icon" href="img/favicon.ico" type="image/ico"/>
 <title>Admin | Index</title>
 <!-- Bootstrap -->
@@ -19,3 +20,4 @@
 <link href="{{asset('admin/css/custom.min.css')}}" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="{{asset('admin/css/mycss.css')}}" rel="stylesheet">
+<script src = {{asset("https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js")}}></script>

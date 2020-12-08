@@ -14,6 +14,7 @@ use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Models\Show_info_user;
 use App\Models\SlideModel;
@@ -206,9 +207,12 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             Route::Get('/slider-list',function(){
                 return view('admin.slider.index');
             })->name('slider_list');
+              //================================ MANAGER USER================================================================//
             Route::get('users/{user_id}',[UserController::class,'delete_user'])->name('delete_user');
             Route::get('set_status/{user_id}',[UserController::class,'set_status'])->name('set_status');
-
+              //================================ MANAGER CATEEGORY================================================================//
+            
+              Route::get('cat-delete/{cat_id}',[CategoryController::class,'cat_delete'])->name('cat_delete');
     //================================ LOGIN ADMIN================================================================//
    
         Route::POST('/login',[AuthLoginController::class,'login'])->name('admin_login');
