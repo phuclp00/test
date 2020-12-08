@@ -5,10 +5,13 @@ namespace App\Providers;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SilderController;
+use App\Models\Show_info_user;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\ServiceProvider;
+
 use Request;
 use Session;
 use Cart;
@@ -44,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
         $slide_items = (new SilderController)->slide_homepage();
         
         date_default_timezone_set('Asia/Ho_Chi_Minh');   
-
+        view()->share(['data_user'=>Show_info_user::paginate(8),'data_admin'=>User::all()]);
         Schema::defaultStringLength(255);
 
     }

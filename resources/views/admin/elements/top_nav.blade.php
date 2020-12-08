@@ -1,4 +1,3 @@
-
 <div class="top_nav">
     <div class="nav_menu">
         <nav>
@@ -12,10 +11,20 @@
                         <img src="{{asset('admin/img/img.jpg')}}" alt="">Huu Loc
                         <span class=" fa fa-angle-down"></span>
                     </a>
-                    <ul class="dropdown-menu dropdown-usermenu pull-right">
-                        <li><a href="login.html"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
-                    </ul>
-                </li>             
+                   
+                        <ul class="dropdown-menu dropdown-usermenu pull-right">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-jet-dropdown-link href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                    {{ __('Logout') }}
+                                </x-jet-dropdown-link>
+                            </form>
+                        </ul>
+                    
+                </li>
+                
             </ul>
         </nav>
     </div>

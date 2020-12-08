@@ -16,6 +16,19 @@ use Session;
 
 class HomeController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
+
     private $subpatchViewController = '.page';
     private $pathViewController = 'public.';
     public function __construct()
@@ -24,19 +37,23 @@ class HomeController extends Controller
         $list_items_product = (new ShopController)->all_list_view();
         $list_items_categoy = (new CategoryController)->list_category();
         $top_item_category = (new CategoryController)->top_list_category();
-       
+
         $pagi_list_product = (new ShopController)->paginate_list_view();
 
         //$list_get_category=(new CategoryController)->get_category();
+       
+    }
 
+    public function view_Admin(){
+        $this->middleware('auth');
     }
     public function view()
     {
-        return view($this->pathViewController . 'index');
+        return view('public.index');
     }
     public function index()
     {
-        return view($this->pathViewController . 'index');
+        return view($this->pathViewController .'index');
     }
     public function about_view()
     {
@@ -140,7 +157,7 @@ class HomeController extends Controller
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.checkout');
     }
-  
+
     public function blog_view()
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.blog');
@@ -149,5 +166,4 @@ class HomeController extends Controller
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.blog-details');
     }
-    
 }

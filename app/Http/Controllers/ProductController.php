@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CategoryModel;
 use Illuminate\Http\Request;
-use App\Models\ProductModel as MainModel;
 use App\Models\ProductModel;
 use Gloudemans\ShoppingCart\CartItem;
 use Illuminate\Support\Facades\Session as FacadesSession;
@@ -15,7 +14,7 @@ use Cart;
 session_start();
 class ProductController extends Controller
 {
-    
+
     public function add_to_cart(Request $request)
     {
         $id_item = $request->id;
@@ -31,8 +30,6 @@ class ProductController extends Controller
         $data['weight'] = 25;
         Cart::add($data);
         return \redirect()->back();
-
-
     }
     //UPDATE AND DESTROY
     public function update_cart(Request $request)
@@ -41,21 +38,17 @@ class ProductController extends Controller
         $qty   = $request->cart_quantity;
         if (isset($request->remove_cart)) {
             Cart::update($rowId, 0);
-           return redirect('/cart/show-cart');
-
-
-        return redirect()->back();
+            
+            return redirect()->back();
         }
         if (isset($request->update_cart)) {
-           
+
             Cart::update($rowId, $qty);
             return redirect('/cart/show-cart');
-
         }
     }
     public function cart_view()
     {
         return view('public.page.cart');
-
     }
 }

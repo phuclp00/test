@@ -4,8 +4,7 @@
     	<!-- Header -->
     @include('public.slide.menu_header')
 		<!-- End Search Popup -->
-    <!-- Start Slider area ( MAX 10 SLIDE )-->
-   
+    <!-- Start Slider area ( MAX 10 SLIDE )-->    
         <!-- Start Single Slide -->
     <div class="slider-area brown__nav slider--15 slide__activation slide__arrow01 owl-carousel owl-theme">    
         @foreach($slide_items as $slide_items)
@@ -29,8 +28,6 @@
     <!-- End Slider area -->
     <!-- Start BEst Seller Area -->
   
-           
-
     <section class="wn__product__area brown--color pt--80  pb--30">
         <div class="container">
             <div class="row">

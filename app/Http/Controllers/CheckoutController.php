@@ -34,24 +34,24 @@ class CheckoutController extends Controller
 
 
     }
-    //UPDATE AND DESTROY
+
+    //DESTROY 
+    //UPDATE 
     public function update_cart(Request $request)
     {
+       
         $rowId = $request->cart_rowId;
         $qty   = $request->cart_quantity;
         if (isset($request->remove_cart)) {
             Cart::update($rowId, 0);
-           return redirect('/cart/show-cart');
-
-
+            return redirect()->back();
+        }
+        else 
+      
+        Cart::update($rowId, $qty);
         return redirect()->back();
-        }
-        if (isset($request->update_cart)) {
-           
-            Cart::update($rowId, $qty);
-            return redirect('/cart/show-cart');
 
-        }
+        
     }
     public function cart_view()
     {

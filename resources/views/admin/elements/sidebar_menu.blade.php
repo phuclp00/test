@@ -16,11 +16,10 @@
     <div class="menu_section">
         <h3>Menu</h3>
         <ul class="nav side-menu">
-            <li><a href="{{route('dashboard_view')}}"><i class="fa fa-home"></i> Dashboard</a></li>
-            <li><a href="{{route('dashboard_view')}}"><i class="fa fa-user"></i> User</a></li>
-            <li><a href="{{route('dashboard_view')}}"><i class="fa fa fa-building-o"></i> Category</a></li>
-            <li><a href="{{route('dashboard_view')}}"><i class="fa fa-newspaper-o"></i> Article</a></li>
-            <li><a href="{{route('slider_view')}}"><i class="fa fa-sliders"></i> Silders</a></li>
+            <li><a href="{{route('dash_view')}}"><i class="fa fa-home"></i> Dashboard</a></li>
+            <li><a href="{{route('index')}}"><i class="fa fa-user"></i> User</a></li>
+            <li><a href="{{route('category_list')}}"><i class="fa fa fa-building-o"></i> Category</a></li>
+            <li><a href="{{route('slider_list')}}"><i class="fa fa-sliders"></i> Silders</a></li>
         </ul>
     </div>
 </div>

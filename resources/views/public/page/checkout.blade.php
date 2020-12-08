@@ -1,7 +1,7 @@
 ﻿@extends('master')
 	@section('content')
 	@include('public.slide.slide_header')
-	<?php $content = Cart::content() ?> 
+	<?php $content = Cart::content(); $user=session()->get('user_info'); ?>
         <!-- Start Checkout Area -->
         <section class="wn__checkout__area section-padding--lg bg__white">
         	<div class="container">
@@ -34,9 +34,7 @@
         								<a href="#">Lost your password?</a>
         							</div>
 								</form>
-								<form action="{{route('add_order_cart')}}" method="GET">
-										
-								</form>
+								
         					</div>
         					<div class="checkout_info">
         						<span>Have a coupon? </span>
@@ -57,43 +55,29 @@
 					</form>
         			<div class="col-lg-6 col-12">
         				<div class="customer_details">
-        					<h3>Billing details</h3>
+        					<h3>Billing details</h3>	
         					<div class="customar__field">
-								<form action="" method="get">
-									<div class="margin_between">
-										
+								@foreach($user as $data_key)
+									<?php $data=\App\Models\UserDetail::find($data_key)->first() ?>
+								@endforeach
+								<form action="{{route('account_update',$data->user_name)}}" method="GET">
+									<div class="margin_between"	>	
 										<div class="input_box space_between">
-											<label>First name <span>*</span></label>
-											<input type="text" name="username_first">
-										</div>
-										<div class="input_box space_between">
-											<label>last name <span>*</span></label>
-											<input type="text" name="username_last">
+											<label>Full Name <span></span></label>
+											<input type="text" name="username_first" value="{{$data->user_name}}">
 										</div>
 									</div>    						
 									<div class="input_box">
-										<label>Country<span>*</span></label>
-										<select class="select__option" name="user_country">
-											<option>Select a country…</option>
-											<option>Afghanistan</option>
-											<option>American Samoa</option>
-											<option>Anguilla</option>
-											<option>American Samoa</option>
-											<option>Antarctica</option>
-											<option>Antigua and Barbuda</option>
-										</select>
-									</div>
-									<div class="input_box">
 										<label>Address <span>*</span></label>
-										<input type="text" placeholder="Street address" name="user_address">
+										<input type="text" placeholder="Street address" name="user_address" value="{{$data->street}}">
 									</div>
 									<div class="input_box">
-										<input type="text" placeholder="Street Address" name="sub_user_address">
+										<input type="text" placeholder="Street Address" name="sub_user_address" value="{{$data->street}}">
 									</div>
 									<div class="input_box">
 										<label>District<span>*</span></label>
 										<select class="select__option" name="user_district">
-											<option>Select a country…</option>
+											<option>{{$data->district}}</option>
 											<option>Afghanistan</option>
 											<option>American Samoa</option>
 											<option>Anguilla</option>
@@ -108,13 +92,8 @@
 									</div>
 									<div class="margin_between">
 										<div class="input_box space_between">
-											<label>Phone <span>*</span></label>
-											<input type="text" name="user_phone">
-										</div>
-
-										<div class="input_box space_between">
-											<label>Email address <span>*</span></label>
-											<input type="email" name="user_email">
+											<label><span>*</span></label>
+											<input type="text" name="user_phone" value="{{$data->phone}}">
 										</div>
 									</div>
 									<div class="input_box">

@@ -1,15 +1,59 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@extends('admin.main')
+@section('content')
 <body>
-   <h1><?php echo $name?></h1>
-   <h1><?php echo $id?></h1>
-   <h1></h1>
-   <h1></h1>
+    <div  class=" right-col " style="    padding: 10px 20px 0;
+    margin-left: 230px;">
+    <table class="table table-striped jambo_table bulk_action" style="border 1px solid red">
+        <thead>
+        <tr class="headings">
+            <th class="column-title">Category ID</th>
+            <th class="column-title">CateGory Name</th>
+            <th class="column-title">Total</th>
+            <th class="column-title">Created</th>
+            <th class="column-title">Created By</th>
+            <th class="column-title">Modiffer</th>
+            <th class="column-title">Modiffer By</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="table_left">
+            
+            @foreach ($list_category as $value )
+
+            <td class=""> {{$value->cat_id}}</td>
+            <td width="10%">{{$value->cat_name}}</td>
+            <td>{{$value->total}}</td>
+            <td>
+                <p><i class="fa fa-user"></i>{{$value->created_by==null?" Admin ":$value->created_by}}</p>
+                <p><i class="fa fa-clock-o"></i> {{$value->created}}</p>
+            </td>
+            <td>
+                <p><i class="fa fa-user"></i>{{$value->modiffer_by==null?" Admin ":$value->modiffer_by}}</p>
+                <p><i class="fa fa-clock-o"></i> {{$value->modiffer}}</p>
+            </td>
+            
+            <td class="last">
+                <div class="zvn-box-btn-filter"><a
+                        href="{/form/2}"
+                        type="button" class="btn btn-icon btn-success" data-toggle="tooltip"
+                        data-placement="top" data-original-title="Edit">
+                    <i class="fa fa-pencil"></i>
+                </a><a href="/delete/2"
+                    type="button" class="btn btn-icon btn-danger btn-delete"
+                    data-toggle="tooltip" data-placement="top"
+                    data-original-title="Delete">
+                    <i class="fa fa-trash"></i>
+                </a>
+                </div>
+            </td>
+        </tr>
+        
+        @endforeach
+        </tbody>
+    </table>
+</div>
 </body>
-</html>
+
+
+@endsection

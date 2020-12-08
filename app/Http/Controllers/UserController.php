@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Show_info_user as MainModel;
 use App\Models\User;
+use App\Models\UserModel;
 use App\Models\UserDetail;
 use Exception;
 
@@ -33,10 +34,10 @@ class UserController extends Controller
     {
         try {
             $data = UserDetail::find($request->user_name);
-            $data->img=$request->file;
+            $data->img = $request->file;
             $data->save();
-            $data->refresh(); 
-            return \redirect(\route('account_view',$request->user_name));
+            $data->refresh();
+            return \redirect(\route('account_view', $request->user_name));
         } catch (Exception $e) {
             session()->flash('account_info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
                   Cập nhật thất bại </div>');
@@ -46,9 +47,8 @@ class UserController extends Controller
     {
 
         $key_find = $request->user_name;
-        $data_user = User::find($key_find);
+        $data_user = UserModel::where('user_name', $key_find)->first();
         $data_account = UserDetail::find($key_find);
-
         try {
             if ($request->email_register != $data_user->email && $request->email_register != "") {
                 $data_user->email = $request->email_register;
@@ -82,5 +82,28 @@ class UserController extends Controller
             $request->session()->flash('update_info', '<div class="alert alert-danger">"Cập nhật tài khoản thất bại, vui lòng thử lại!!"</div>');
             return \redirect()->route('account_view', [$data_account->user_name]);
         }
+    }
+    public function delete_user(Request $request)
+    {
+        try {
+            UserModel::destroy($request->user_id);
+
+            $request->session()->flash('account_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng' . $request->user_id . ' thành công </div>');
+        } catch (Exception $e) {
+            $request->session()->flash('account_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng ' . $request->user_id . 'thất bại, vui lòng thử lại </div>');
+        }
+        return \redirect()->back();
+    }
+    public function set_status(Request $request)
+    {
+        try {
+            dd($result->select_change_attr);
+            $result= UserModel::where('status',$request->user_id)->update('status',$request->select_change_attr);
+           
+            $request->session()->flash('account_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng' . $request->user_id . ' thành công </div>');
+        } catch (Exception $e) {
+            $request->session()->flash('account_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng ' . $request->user_id . 'thất bại, vui lòng thử lại </div>');
+        }
+        return \redirect()->back();
     }
 }
