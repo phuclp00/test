@@ -1,7 +1,9 @@
 ﻿@extends('master')
 	@section('content')
 	@include('public.slide.slide_header')
-	<?php $content = Cart::content(); $user=session()->get('user_info'); ?>
+	<?php 
+		$content = Cart::content(); $user=session()->get('user_info');
+	 ?>
         <!-- Start Checkout Area -->
         <section class="wn__checkout__area section-padding--lg bg__white">
         	<div class="container">

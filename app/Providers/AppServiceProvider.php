@@ -45,7 +45,7 @@ class AppServiceProvider extends ServiceProvider
         $list_items_categoy = (new CategoryController)->list_category();
         $top_item_category = (new CategoryController)->top_list_category();
         $slide_items = (new SilderController)->slide_homepage();
-        
+       
         date_default_timezone_set('Asia/Ho_Chi_Minh');   
         view()->share(['data_user'=>Show_info_user::paginate(8),'data_admin'=>User::all()]);
         Schema::defaultStringLength(255);

@@ -1,6 +1,5 @@
 <header id="wn__header" class="header__area header__absolute sticky__header">
     <?php $content = Cart::content(); ?>
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 col-sm-6 col-6 col-lg-2">
@@ -148,7 +147,12 @@
                                 <div class="switcher__account">
                                     @if(session()->has("user_info"))
                                     @foreach (session()->get("user_info") as $user)
-                                    {{$temp_name=$user->name}}
+                                   
+                                    @if($user->img !=null)
+                                        <img src="{{asset('images/user_profile/'.$user->img)}}" class="avatar"style="vertical-align: middle; width: 100px;height: 100px;border-radius:50%;" alt="avatar">
+                                    @else
+					                    <img src="source_project/images/users/user_default.svg" class="avatar"style="vertical-align: middle; width: 50px;height: 50px;border-radius:50%;" alt="avatar">
+                                    @endif
                                     <h3 class="account__title">Xin chào</h3>
                                     <h5>{{$user->user_name==null?$user->email:$user->user_name}}</h5>
                                     <div class="switcher-currency">

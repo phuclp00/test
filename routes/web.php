@@ -7,12 +7,12 @@ use App\Http\Controllers\SilderController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DBconnect;
+use App\Http\Controllers\FileuploadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
-use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
@@ -173,7 +173,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             $controllerName = 'my-account';
             Route::group(['prefix' => $controllerName], function () {
                 $controller = UserController::class;
-                Route::get('/img_change/{user_name}', [$controller, 'update_img'])->name("update_img");
+                Route::POST('/img_change/{user_name}', [$controller, 'update_img'])->name("update_img");
                 Route::get('/account_view/{user_name}', [$controller, 'account_view'])->name("account_view");
                 Route::post('/account-update/{user_name}',[$controller,'account_update'])->name("account_update");
             });
@@ -190,8 +190,6 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //====================================== - ACCOUNT ========================================================//
 
           
-            //====================================== - UUPLOAD ========================================================//
-            Route::get('/upload',[UploadController::class,'uploadFile'])->name('uploadFile');
 //===================================ADMIN ===========================================================================//
         Route::group(['prefix' => $prefixAdmin], function () {
 
@@ -245,13 +243,8 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 });
 
 
-
-
-
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
-
-
-
+    //================================ UPLOAD_ FILE ========================================================//
+        Route::post('fileupload', [FileuploadController::class,'store'])->name('fileupload.store');

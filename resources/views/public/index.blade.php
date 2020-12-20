@@ -1,6 +1,7 @@
     @extends('master')
     @section('content')
     {{$items =null}}
+   
     	<!-- Header -->
     @include('public.slide.menu_header')
 		<!-- End Search Popup -->
