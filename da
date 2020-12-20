@@ -1,0 +1,41 @@
+[33mcommit ec250e04086b65df013980e7a7da5f096d48eee3[m[33m ([m[1;36mHEAD -> [m[1;32mfeature[m[33m)[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Wed Dec 2 04:48:55 2020 +0700
+
+    them tinh nang hien thi theo danh sach category
+
+[33mcommit d299980f087bd1e2014ef4f29076de8891509003[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Tue Dec 1 22:18:23 2020 +0700
+
+    do slide ra trang chu, get data theo id, fix loi pagination , sua lai function ShopController
+
+[33mcommit 4b0ad0393da67c613493af1efa590628b20cb91e[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Mon Nov 30 18:24:28 2020 +0700
+
+    doi temple, update database, thay giao dien, fix loi khong hien html, keo db tu slide ra trang chu
+
+[33mcommit 5ad99d424417115701d2330f83c4a2ca4e941f20[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Sun Nov 29 21:35:42 2020 +0700
+
+    Xong phan cat template login
+
+[33mcommit 2ab8f27ef6f7916e471f0f3d2bcc6b8fca46e267[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Sun Nov 29 03:30:08 2020 +0700
+
+    add admin template ,edit template
+
+[33mcommit 61dc5de5d39f4353b3a8c5b44017803ae610391b[m[33m ([m[1;32mmaster[m[33m, [m[1;32mfeatures[m[33m)[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Sat Nov 28 21:18:10 2020 +0700
+
+    file on ready
+
+[33mcommit cf717de613fc8a4c0415e900fbf002a7bdbbda1a[m
+Author: phuclp00 <62292782+phuclp00@users.noreply.github.com>
+Date:   Wed Nov 25 18:49:29 2020 +0700
+
+    Folder_Origin
