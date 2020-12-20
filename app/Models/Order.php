@@ -15,9 +15,9 @@ class Order extends Model
     const UPDATED_AT = 'modiffed';
     public $timestamps = false;
 
-    public function order_detail()
+    public function user_detail()
     {
-        return $this->belongsTo("App\Models\OrderDetail","order_id","order_id");
+        return $this->belongsTo("App\Models\OrderDetail","user_name","order_id");
     }
     public function book()
     {

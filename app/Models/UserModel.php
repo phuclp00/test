@@ -79,7 +79,7 @@ class UserModel extends Authenticatable
     ];
     public function user_detail()
     {
-        return $this->hasOne('App\Models\UserDetail');
+        return $this->hasOne('App\Models\UserDetail','user_name','user_id');
     }
     public function setPasswordAttribute($value)
     {

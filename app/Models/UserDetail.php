@@ -51,12 +51,12 @@ class UserDetail extends Model
     ];
         public function user_account()
         {
-            return $this->belongsTo('App\Models\User','user_id','user_id');
+            return $this->belongsTo('App\Models\UserModel','user_name','user_name');
 
         }
         public function order_detail()
         {
-            return $this->hasMany('App\Models\OrderDetail','order_id','order_id');
+            return $this->hasMany('App\Models\OrderDetail','user_name','user_name');
         }
         
 }

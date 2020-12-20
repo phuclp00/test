@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Show_info_user as MainModel;
+use App\Models\Show_info_user;
 use App\Models\User;
 use App\Models\UserModel;
 use App\Models\UserDetail;
@@ -45,9 +46,13 @@ class UserController extends Controller
             $data = UserDetail::find($request->user_name);
             $data->img = $file->getClientOriginalName();
             $data->save();
-            $data->refresh();
             $path = $file->storeAs('user_profile',$file->getClientOriginalName(),'images');
-            return \redirect(\route('account_view', $request->user_name));
+            //Update lai thong tin nguoi dung 
+            \session()->forget('user_info');
+            $show_info = Show_info_user::where('user_name', $data->user_name)->first();
+            \session()->push('user_info', $show_info);
+            $data->refresh();
+            return \redirect()->back();
         } catch (Exception $e) {
             session()->flash('account_info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
                   Cập nhật ảnh thất bại </div>');
@@ -73,18 +78,17 @@ class UserController extends Controller
                     $data_user->password = $new_pass;
                     $data_user->save();
                     $data_user->refresh();
-                    $request->session()->flash('update_info', '<div class="alert alert-danger">"Cập nhật mat khau thất bại, vui lòng thử lại!!"</div>');
+                    $request->session()->flash('update_info', '<div class="alert alert-success">"Cập nhật mật khẩu thành công !!!"</div>');
                     return \redirect()->route('account_view', [$data_account->user_name]);
                 }
             }
-
-
             $data_account->full_name = $request->fullname;
             $data_account->phone = $request->phone;
             $data_account->street = $request->street;
             $data_account->district = $request->district;
             $data_account->city = $request->city;
             $data_account->save();
+            
             $request->session()->flash('update_info', '<div class="alert alert-success">"Cập nhật khoản thành công , tiếp tục mua sắm nào !!"</div>');
             return \redirect()->route('account_view', [$data_account->user_name]);
         } catch (Exception $e) {
