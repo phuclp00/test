@@ -29,7 +29,7 @@
                             <tr>
 
                                 <td class="product-thumbnail"><a href="#"><img
-                                            src="/source_project/images/product/sm-3/{{$item->options->image}}"
+                                            src="{{asset('images/product/sm-3/'.$item->options->image)}}"
                                             alt="product img"></a></td>
                                 <td class="product-name"><a href="#">{{$item->name}}</a></td>
                                 <td class="product-price"><span

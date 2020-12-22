@@ -16,10 +16,10 @@
 	        							<div class="fotorama wn__fotorama__action" data-nav="thumbs">											
 										@foreach($item_thumb as $key)									
 											@if($item_thumb ==0)
-												<a href="1.jpg"><img src="/source_project/images/product/Hello_World.PNG" alt=""></a>
+												<a href="1.jpg"><img src="{{asset('images/product/Hello_World.PNG')}}" alt=""></a>
 												@break
 											@else	
-												<a href="1.jpg"><img src="/source_project/images/product/{{$key}}" alt="Book-{{$item->book_name}}"></a>															
+												<a href="1.jpg"><img src="{{asset('images/product/'.{{$key}})}}" alt="Book-{{$item->book_name}}"></a>															
 											@endif
 										@endforeach	
 	        							</div>
@@ -214,8 +214,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="{{route('shop_view')}}"><img src="/source_project/images/product/1.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="source_project/images/product/2.jpg" alt="product image"></a>
+												<a class="first__img" href="{{route('shop_view')}}"><img src="{{asset('images/product/1.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/2.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -251,8 +251,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="source_project/images/product/2.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/4.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/2.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/4.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -288,8 +288,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/3.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/6.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/3.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/6.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -325,8 +325,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/4.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/8.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/4.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/8.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -362,8 +362,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/9.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/2.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/9.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/2.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -399,8 +399,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/9.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/8.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/9.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/8.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -445,8 +445,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/2.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/1.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/2.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/1.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -482,8 +482,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/4.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/3.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/4.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/3.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -519,8 +519,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/6.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/5.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/6.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/5.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -556,8 +556,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/8.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/7.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/8.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/7.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -593,8 +593,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/9.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/2.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/9.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/2.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -630,8 +630,8 @@
 									<div class="col-lg-4 col-md-4 col-sm-6 col-12">
 										<div class="product">
 											<div class="product__thumb">
-												<a class="first__img" href="single-product.html"><img src="/source_project/images/product/9.jpg" alt="product image"></a>
-												<a class="second__img animation1" href="single-product.html"><img src="/source_project/images/product/8.jpg" alt="product image"></a>
+												<a class="first__img" href="single-product.html"><img src="{{asset('images/product/9.jpg')}}" alt="product image"></a>
+												<a class="second__img animation1" href="single-product.html"><img src="{{asset('images/product/8.jpg')}}" alt="product image"></a>
 												<div class="new__box">
 													<span class="new-label">New</span>
 												</div>
@@ -717,7 +717,7 @@
         						</ul>
         					</aside>
         					<aside class="wedget__categories sidebar--banner">
-								<img src="/source_project/images/others/banner_left.jpg" alt="banner images">
+								<img src="{{asset('images/others/banner_left.jpg')}}" alt="banner images">
 								<div class="text">
 									<h2>new products</h2>
 									<h6>save up to <br> <strong>40%</strong>off</h6>
@@ -773,13 +773,13 @@
 				<div class="row">
 					<div class="col-lg-12">
 						<ul class="brand__activation arrows_style owl-carousel owl-theme">
-							<li><a href="#"><img src="/source_project/images/brand/1.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/2.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/3.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/4.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/5.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/6.png" alt="brand images"></a></li>
-							<li><a href="#"><img src="/source_project/images/brand/7.png" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/1.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/2.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/3.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/4.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/5.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/6.png')}}" alt="brand images"></a></li>
+							<li><a href="#"><img src="{{asset('images/brand/7.png')}}" alt="brand images"></a></li>
 						</ul>
 					</div>
 				</div>

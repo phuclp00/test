@@ -49,7 +49,7 @@
 							<div class="footer__widget footer__menu">
 								<div class="ft__logo">
 									<a href="{{route('home_view')}}">
-										<img src="source_project/images/logo/3.png" alt="logo">
+										<img src="{{asset('images/logo/3.png')}}" alt="logo">
 									</a>
 									<p>There are many variations of passages of Lorem Ipsum available, but the majority
 										have suffered duskam alteration variations of passages</p>
@@ -89,7 +89,7 @@
 						</div>
 						<div class="col-lg-6 col-md-6 col-sm-12">
 							<div class="payment text-right">
-								<img src="source_project/images/icons/payment.png" alt="" />
+								<img src="{{asset('images/icons/payment.png')}}" alt="" />
 							</div>
 						</div>
 					</div>

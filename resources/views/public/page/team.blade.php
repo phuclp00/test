@@ -12,7 +12,7 @@
         			<div class="col-lg-3">
         				<div class="wn__team text-center">
         					<div class="thumb">
-        						<img src="/source_project/images/about/team/1.jpg" alt="Team images">
+        						<img src="{{asset('images/about/team/1.jpg')}}" alt="Team images">
         					</div>
         					<div class="content">
 							<h4>{{$item->full_name}}</h4>

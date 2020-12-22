@@ -54,7 +54,7 @@
                         </ul>
                     </aside>
                     <aside class="wedget__categories sidebar--banner">
-                        <img src="source_project/images/others/banner_left.jpg" alt="banner images">
+                        <img src="{{asset('images/others/banner_left.jpg')}}" alt="banner images">
                         <div class="text">
                             <h2>new products</h2>
                             <h6>save up to <br> <strong>40%</strong>off</h6>
@@ -104,8 +104,8 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                         <div class="product">
                                             <div class="product__thumb">
-                                                <a class="first__img" href="{{ route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id]) }}"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
-                                                <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
+                                                <a class="first__img" href="{{ route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$list_product->img)}}"  alt="product image"></a>
+                                                <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"></a>
                                                 {{-- This comment will not be present in the rendered HTML 
                                                 // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                                 // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -162,8 +162,8 @@
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                                         <div class="product">
                                             <div class="product__thumb">
-                                                <a class="first__img" href="{{ route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id]) }}"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
-                                                <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
+                                                <a class="first__img" href="{{ route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$list_product->img)}}"  alt="product image"></a>
+                                                <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"></a>
                                                 {{-- This comment will not be present in the rendered HTML 
                                                 // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                                 // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -221,8 +221,8 @@
                                     <div class="product">
                                         <div class="product__thumb">
                                             
-                                            <a class="first__img" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/test_img/{{$list_product->img}}"  alt="product image"></a>
-                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"></a>
+                                            <a class="first__img" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="{{asset('images/books/test_img/'.$list_product->img)}}"  alt="product image"></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$list_product->book_id,'cat_id'=>$list_product->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"></a>
                                             {{-- This comment will not be present in the rendered HTML 
                                             // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                             // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -288,8 +288,8 @@
                                 @foreach ($list_search as $item)                                                    
                                     <div class="list__view mt--40">
                                         <div class="thumb">
-                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
-                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
+                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/test_img/'.$item->img)}}" alt="product images"  ></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product images"></a>
                                         </div>
                                         <div class="content">
                                             <h2><a href="{{route('product_view',$item->book_id)}}">{{$item->book_name}}</a></h2>
@@ -327,8 +327,8 @@
                                 @foreach ($get_cat_items as $item)                                                    
                                     <div class="list__view mt--40">
                                         <div class="thumb">
-                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
-                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
+                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/test_img/'.$item->img)}}" alt="product images"  ></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product images"></a>
                                         </div>
                                         <div class="content">
                                             <h2><a href="{{route('product_view',$item->book_id)}}">{{$item->book_name}}</a></h2>
@@ -366,8 +366,8 @@
                                 @foreach ($pagi_list_items as $item)                                             
                                     <div class="list__view mt--40">
                                         <div class="thumb">
-                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/test_img/{{$item->img}}" alt="product images"  ></a>
-                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product images"></a>
+                                            <a class="first__img " href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/test_img/'.$item->img)}}" alt="product images"  ></a>
+                                            <a class="second__img animation1" href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product images"></a>
                                         </div>
                                         <div class="content">
                                             <h2><a href="{{route('product_view',['id'=>$item->book_id,'cat_id'=>$item->cat_id])}}">{{$item->book_name}}</a></h2>

@@ -250,7 +250,7 @@
 						    <div class="payment">
 						        <div class="che__header" role="tab" id="headingFour">
 						          	<a class="collapsed checkout__title" data-toggle="collapse" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-							            <span>PayPal <img src="images/icons/payment.png" alt="payment images"> </span>
+							            <span>PayPal <img src="{{asset('images/icons/payment.png')}}" alt="payment images"> </span>
 						          	</a>
 						        </div>
 						        <div id="collapseFour" class="collapse" role="tabpanel" aria-labelledby="headingFour" data-parent="#accordion">

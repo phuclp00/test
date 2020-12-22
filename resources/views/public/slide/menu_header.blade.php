@@ -5,7 +5,7 @@
             <div class="col-md-6 col-sm-6 col-6 col-lg-2">
                 <div class="logo">
                     <a href="{{route('home_view')}}">
-                        <img src="source_project/images/logo/logo.png" alt="logo images">
+                        <img src="{{asset('images/logo/logo.png')}}" alt="logo images">
                     </a>
                 </div>
             </div>
@@ -116,7 +116,7 @@
                                         <div class="item01 d-flex">
                                             <div class="thumb">
                                                 <a href="product-details.html"><img
-                                                        src="images/product/sm-img/{{$item->options->image}}"
+                                                        src="{{asset('images/product/sm-img/'.$item->options->image)}}"
                                                         alt="product images"></a>
                                             </div>
                                             <div class="content">
@@ -151,7 +151,7 @@
                                     @if($user->img !=null)
                                         <img src="{{asset('images/user_profile/'.$user->img)}}" class="avatar"style="vertical-align: middle; width: 100px;height: 100px;border-radius:50%;" alt="avatar">
                                     @else
-					                    <img src="source_project/images/users/user_default.svg" class="avatar"style="vertical-align: middle; width: 50px;height: 50px;border-radius:50%;" alt="avatar">
+					                    <img src="{{asset('images/users/user_default.svg')}}" class="avatar"style="vertical-align: middle; width: 50px;height: 50px;border-radius:50%;" alt="avatar">
                                     @endif
                                     <h3 class="account__title">Xin chào</h3>
                                     <h5>{{$user->user_name==null?$user->email:$user->user_name}}</h5>

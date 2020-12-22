@@ -87,7 +87,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                         <div class="wn__team">
                             <div class="thumb">
-                                <img src="images/about/team/1.jpg" alt="Team images">
+                                <img src="{{asset('images/about/team/1.jpg')}}" alt="Team images">
                             </div>
                             <div class="content text-center">
                                 <h4>JOHN SMITH</h4>
@@ -107,7 +107,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                         <div class="wn__team">
                             <div class="thumb">
-                                <img src="images/about/team/2.jpg" alt="Team images">
+                                <img src="{{asset('images/about/team/2.jpg')}}" alt="Team images">
                             </div>
                             <div class="content text-center">
                                 <h4>ALICE KIM</h4>
@@ -127,7 +127,7 @@
                     <div class="col-lg-4 col-md-4 col-sm-6 col-12">
                         <div class="wn__team">
                             <div class="thumb">
-                                <img src="images/about/team/3.jpg" alt="Team images">
+                                <img src="{{asset('images/about/team/3.jpg')}}" alt="Team images">
                             </div>
                             <div class="content text-center">
                                 <h4>VICTORIA DOE</h4>

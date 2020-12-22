@@ -8,11 +8,16 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="bradcaump__inner text-center">
-                        <h2 class="bradcaump-title">About us</h2>
+                        <h2 class="bradcaump-title"><?php
+                        $url=$_SERVER['REQUEST_URI'];
+                        $url_temp=explode("/",$url);
+                             echo end($url_temp);
+                            ?></h2>
                         <nav class="bradcaump-content">
-                            <a class="breadcrumb_item" href="source_project/imagessource_project/imagessource_project/imagessource_project/imagesindex.html">Home</a>
+                            <a class="breadcrumb_item" href="{{route('home_view')}}">Home</a>
                             <span class="brd-separetor">/</span>
-                            <span class="breadcrumb_item active">About us</span>
+                            <span class="breadcrumb_ite
+                            m active">{{ end($url_temp)}}</span>
                         </nav>
                     </div>
                 </div>

@@ -105,7 +105,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             });
             //======================================HOME - CONTACT====================================//
 
-            $controllerName = 'contact_us';
+            $controllerName = 'contact';
             Route::group(['prefix' => $controllerName], function () {
                 $controller = HomeController::class;
                 Route::get('/', [$controller, 'contact_view'])->name("contact_view");

@@ -49,8 +49,8 @@
                     <div class="product product__style--3">
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product__thumb">
-                            <a class="first__img" href="{{route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="source_project/images/books/test_img/{{$product->img}}" alt="product image" style="width: 270px;height: 340px;"></a>
-                            <a class="second__img animation1" href="{{route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"style="width: 270px;height: 340px;"></a>
+                            <a class="first__img" href="{{route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="{{asset('images/books/test_img/'.$product->img)}}" alt="product image" style="width: 270px;height: 340px;"></a>
+                            <a class="second__img animation1" href="{{route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"style="width: 270px;height: 340px;"></a>
                             {{-- This comment will not be present in the rendered HTML 
                                 // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                 // Neu san pham tong ban tren 30 thi se la HOT, tren 100 la BEST SELLER   
@@ -173,8 +173,8 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">  
                             <div class="product product__style--3">
                                 <div class="product__thumb">
-                                    <a class="first__img" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="source_project/images/books/test_img/{{$product->img}}" alt="product image" style="width: 270px;height: 340px;"></a>
-                                    <a class="second__img animation1" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="source_project/images/books/8k.jpg" alt="product image"style="width: 270px;height: 340px;"></a>{{-- This comment will not be present in the rendered HTML 
+                                    <a class="first__img" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="{{asset('images/books/test_img/'.$product->img)}}" alt="product image" style="width: 270px;height: 340px;"></a>
+                                    <a class="second__img animation1" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id])}}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"style="width: 270px;height: 340px;"></a>{{-- This comment will not be present in the rendered HTML 
                                         // START IF
                                         // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                         // Neu san pham gia tren 5000 thi se la HOT   
@@ -235,8 +235,8 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">  
                             <div class="product product__style--3">
                                 <div class="product__thumb">
-                                    <a class="first__img" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product->img}}" alt="product image" style="width: 270px;height: 340px;"></a>
-                                    <a class="second__img animation1" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product->img}}}}"><img src="source_project/images/books/8k.jpg" alt="product image"style="width: 270px;height: 340px;"></a>{{-- This comment will not be present in the rendered HTML 
+                                    <a class="first__img" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$product->img)}}" alt="product image" style="width: 270px;height: 340px;"></a>
+                                    <a class="second__img animation1" href="{{ route('product_view',['id'=>$product->book_id,'cat_id'=>$product->cat_id]) }}"><img src="{{asset('images/books/8k.jpg')}}" alt="product image"style="width: 270px;height: 340px;"></a>{{-- This comment will not be present in the rendered HTML 
                                         // START IF
                                         // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                         // Neu san pham gia tren 5000 thi se la HOT   
@@ -314,8 +314,8 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product product__style--3">
                                 <div class="product__thumb">
-                                    <a class="first__img" href="single-product.html"><img src="source_project/images/books/test_img/{{$product_tag->img}}" alt="product image"></a>
-                                    <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/test_img/8k.jpg" alt="product image"></a>
+                                    <a class="first__img" href="single-product.html"><img src="{{asset('images/books/test_img/'.$product_tag->img)}}" alt="product image"></a>
+                                    <a class="second__img animation1" href="single-product.html"><img src="{{asset('images/books/test_img/8k.jpg')}}" alt="product image"></a>
                                    {{-- // START IF
                                         // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                         // Neu san pham gia tren 5000 thi se la HOT   
@@ -342,7 +342,7 @@
                                 </div>
                                 
                                 <div class="product__content content--center content--center">
-                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product->img}}}}">{{$product_tag->book_name}}</a></h4>
+                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$product->img)}}">{{$product_tag->book_name}}</a></h4>
                                     <ul class="prize d-flex">
                                     @if($product_tag->promotion_price>0)
                                         <li>{{number_format(($product_tag->promotion_price),2) ." $"}}</li>
@@ -379,8 +379,8 @@
                         <div class="col-lg-3 col-md-4 col-sm-6 col-12">
                             <div class="product product__style--3">
                                 <div class="product__thumb">
-                                    <a class="first__img" href="single-product.html"><img src="source_project/images/books/test_img/{{$product_tag->img}}" alt="product image"></a>
-                                    <a class="second__img animation1" href="single-product.html"><img src="source_project/images/books/test_img/8k.jpg" alt="product image"></a>
+                                    <a class="first__img" href="single-product.html"><img src="{{asset('images/books/test_img/'.$product_tag->img)}}" alt="product image"></a>
+                                    <a class="second__img animation1" href="single-product.html"><img src="{{asset('asset(images/books/8k.jpg')}}" alt="product image"></a>
                                    {{-- // START IF
                                         // Danh sach cac san pham moi voi ngay ra mat khong qua 30 ngay 
                                         // Neu san pham gia tren 5000 thi se la HOT   
@@ -406,7 +406,7 @@
                                 </div>
                                 
                                 <div class="product__content content--center content--center">
-                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="source_project/images/books/test_img/{{$product_tag->img}}}}">{{$product_tag->book_name}}</a></h4>
+                                    <h4><a href="{{ route('product_view',['id'=>$product_tag->book_id,'cat_id'=>$product_tag->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$product_tag->img)}}">{{$product_tag->book_name}}</a></h4>
                                     <ul class="prize d-flex">
                                         @if($product_tag->promotion_price>0)
                                             <li>{{number_format($product_tag->promotion_price,2)."$"}}</li>
@@ -534,7 +534,7 @@
                 @if($item_bestseller->totall_sell>20 && $item_bestseller->first())
                     <div class="product product__style--3">
                         <div class="product__thumb">
-                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="source_project/images/books/test_img/{{$item_bestseller->img}}" alt="product image"></a>
+                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$item_bestseller->img)}}" alt="product image"></a>
                         </div>
                         <div class="product__content content--center">
                             <div class="action">
@@ -564,7 +564,7 @@
             <!-- Single product start -->    
                     <div class="product product__style--3">
                         <div class="product__thumb">
-                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="source_project/images/books/test_img/{{$item_bestseller->img}}" alt="product image"></a>
+                            <a class="first__img" href="{{ route('product_view',['id'=>$item_bestseller->book_id,'cat_id'=>$item_bestseller->cat_id]) }}"><img src="{{asset('images/books/test_img/'.$item_bestseller->img)}}" alt="product image"></a>
                         </div>
                         <div class="product__content content--center">
                             <div class="action">
