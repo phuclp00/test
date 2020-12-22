@@ -140,6 +140,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             Route::group(['prefix' => $controllerName], function () {
                 $controller = ProductController::class;               
                 Route::get('/add-to-cart/{id}', [$controller,'add_to_cart'])->name("add_to_cart");
+                Route::post('/add-to-cart-special',[$controller,'add_cart_ajax'])->name("add_to_cart_ajax");
                 Route::get('/update-cart', [$controller,'update_cart'])->name("update_cart");
                 Route::get('/show-cart', [$controller,'cart_view'])->name("cart_view");
                 
@@ -248,3 +249,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
     //================================ UPLOAD_ FILE ========================================================//
         Route::post('fileupload', [FileuploadController::class,'store'])->name('fileupload.store');
+    //================================ AJAX - POST REQUEST =================================================//
+        Route::post('item',function($request){
+            
+        });

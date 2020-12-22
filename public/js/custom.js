@@ -28,13 +28,7 @@ $(document).ready(function() {
     });
 
 
-    // Search by book_id
-    $('#quick_search').click(function() {
-        $.ajax({
 
-        });
-
-    });
 
 
 });

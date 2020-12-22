@@ -611,12 +611,12 @@
 		                        <!-- Start product images -->
 		                        <div class="product-images">
 		                            <div class="main-image images">
-		                                <img alt="big images" src="source_project/images/product/big-img/1.jpg">
+		                                <img alt="big images" src="{{asset('images/product/big-img/1.jpg')}}">
 		                            </div>
 		                        </div>
 		                        <!-- end product images -->
 		                        <div class="product-info">
-		                            <h1>Simple Fabric Bags</h1>
+		                            <h1></h1>
 		                            <div class="rating__and__review">
 		                                <ul class="rating">
 		                                    <li><span class="ti-star"></span></li>

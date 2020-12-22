@@ -5,6 +5,7 @@
 	<base href="{{asset('')}}">
 	<meta charset="utf-8">
 	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<title>Home | Bookshop Responsive Bootstrap4 Template - SHARED ON THEMELOCK.COM</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,20 +19,25 @@
 		rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
+
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="source_project/css/bootstrap.min.css">
 	<link rel="stylesheet" href="source_project/css/plugins.css">
 	<link rel="stylesheet" href="source_project/style.css">
+	<!-- AJAX -->
+	<script src="http://code.jquery.com/jquery-3.3.1.min.js"
+		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Cusom css -->
 	<link rel="stylesheet" href="source_project/css/custom.css">
 
 	<!-- Modernizer js -->
 	<script src="source_project/js/vendor/modernizr-3.5.0.min.js"></script>
+	
 </head>
 
 <body>
-	
+
 	<!--[if lte IE 9]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 	<![endif]-->
@@ -40,6 +46,50 @@
 	<div class="wrapper" id="wrapper">
 
 		@yield('content')
+		<div id="myModal" class="modal">
+			<!-- Modal content -->
+			<div class="modal-content">
+				<div class="modal-header">
+					
+					<h2 class=" close title__be--2">CLOSE</h2>
+				</div>
+				<div class="modal-body">
+					<div class="section__title text-center">
+						<h2 class="title__be--1" style="font-family: 'Times New Roman', Times, serif">Bạn vừa đặt hàng thành công</h2>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<h3 class="title__be--1">Click any where to close this pop-up</h3>
+				</div>
+			</div>
+			<script>
+				var modal = document.getElementById("myModal");
+		
+				// Get the button that opens the modal
+				var btn = document.getElementById("myBtn");
+		
+				// Get the <span> element that closes the modal
+				var span = document.getElementsByClassName("close")[0];
+		
+				// When the user clicks the button, open the modal 
+				
+		
+				// When the user clicks on <span> (x), close the modal
+					
+				span.onclick = function() {
+					modal.style.display = "none";
+					location.reload();
+				}
+		
+				// When the user clicks anywhere outside of the modal, close it
+				window.onclick = function(event) {
+				if (event.target == modal) {
+					modal.style.display = "none";
+					location.reload();
+					}
+				}
+			</script>
+		</div>
 		<!-- Footer Area -->
 		<footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
 			<div class="footer-static-top">
@@ -102,11 +152,13 @@
 	<!-- //Main wrapper -->
 
 	<!-- JS Files -->
-	<script src="source_project/js/vendor/jquery-3.2.1.min.js"></script>
-	<script src="source_project/js/popper.min.js"></script>
-	<script src="source_project/js/bootstrap.min.js"></script>
-	<script src="source_project/js/plugins.js"></script>
-	<script src="source_project/js/active.js"></script>
+
+	<script src="{{asset('js/custom.js')}}"></script>
+	<script src="{{asset('source_project/js/vendor/jquery-3.2.1.min.js')}}"></script>
+	<script src="{{asset('source_project/js/popper.min.js')}}"></script>
+	<script src="{{asset('source_project/js/bootstrap.min.js')}}"></script>
+	<script src="{{asset('source_project/js/plugins.js')}}"></script>
+	<script src="{{asset('source_project/js/active.js')}}"></script>
 
 </body>
 
