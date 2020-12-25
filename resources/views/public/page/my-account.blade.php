@@ -55,7 +55,7 @@
 							</div>
 							<div class="input__box">
 								<label>Password<span>*</span></label>
-								<input type="password" name="password_register" va>
+								<input type="password" name="password_register" value="">
 							</div>						
 							<div class="form__btn">
 								<button type="submit">Register</button>

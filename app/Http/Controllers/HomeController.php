@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Cart;
+use App\Models\PublisherModel;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
 
@@ -43,7 +44,7 @@ class HomeController extends Controller
         //$list_get_category=(new CategoryController)->get_category();
        
     }
-
+    // FRONT-END
     public function view_Admin(){
         $this->middleware('auth');
     }
@@ -171,4 +172,55 @@ class HomeController extends Controller
     {
         return view($this->pathViewController . $this->subpatchViewController  . '.blog-details');
     }
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    // BACK-END
+    
+    public function admin_login(){
+        return view('admin.index');
+    }
+    public function dash_view(){
+        return view('admin.layout.admin-dashboard');
+    }
+    //Category
+    public function category_view(){
+        $result=CategoryModel::all();
+        return view('admin.layout.admin-category',['cat_list'=>$result]);
+    }
+    public function category_add_view(){
+        return view('admin.layout.add.admin-add-category');
+    }
+     public function category_edit_view(Request $request){
+        $result=CategoryModel::find($request->cat_id);
+        return view('admin.layout.add.admin-add-category',['category'=>$result]);
+    }
+    //Book
+    public function book_list_view(){
+        return view('admin.layout.admin-books');
+    }
+     public function book_list_add_view(Request $request){
+         $resullt=ProductModel::find($request->book_id);
+        return view('admin.layout.add.admin-add-book',['book',$resullt]);
+    }
+    //Publisher 
+    public function publisher_view(){
+        $result=PublisherModel::all();
+        return view('admin.layout.admin-publisher',['pub_list'=>$result]);
+    }
+    public function add_publisher_view(){
+        return view('admin.layout.add.admin-add-publisher');
+    }
+    public function edit_publisher_view(Request $request){
+        $result=PublisherModel::find($request->pub_id);
+        return view('admin.layout.edit.admin-edit-publisher',['publisher'=>$result]);
+    }
+    //User
+    public function user_list_view()
+    {
+        return view('admin.layout.admin-user-list');
+    }
+    public function add_user()
+    {
+        return view('admin.layout.add.add-user');
+    }
 }
+

@@ -52,15 +52,27 @@ class CategoryController extends Controller
             return view('errors.error404');
         }
     }
-    public function cat_delete(Request $request)
+    public function add_category(){
+        return view('');
+
+    }
+    public function admin_cat_delete(Request $request)
     {
         try {
-            CategoryModel::destroy($request->cat_id);
+            MainModel::destroy($request->cat_id);
 
             $request->session()->flash('cat_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá danh mục' . $request->cat_id . ' thành công </div>');
         } catch (Exception $e) {
             $request->session()->flash('cat_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá danh mục ' . $request->cat_id . 'thất bại, vui lòng thử lại </div>');
         }
         return \redirect()->back();
+    }
+    public function category_edit(Request $request)
+    {
+        # code...
+    }
+    public function category_delete(Request $request)
+    {
+        # code...
     }
 }

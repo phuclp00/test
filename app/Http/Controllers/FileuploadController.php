@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Fileupload;
+use Exception;
 use Illuminate\Http\Request;
 
 class FileuploadController extends Controller
@@ -33,18 +34,15 @@ class FileuploadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($request,$folder)
     {
-        $file=$request->file('upload_file');
-        dd($file);
-        $file_name=$file->getClientOriginalName();
-        $file_name=time().'.'.$file_name;
-        $path=$file->storeAs('public',$file_name);
-        Fileupload::create([
-            'filename'=>$path,
-        ]);
-
-        return \redirect()->back();
+        try {
+            $path = $request->storeAs($folder,$request->getClientOriginalName(),'images');
+            return true;
+            //Update lai thong tin nguoi dung 
+        } catch (Exception $e) {
+            return \false;
+        }
     }
 
     /**

@@ -10,17 +10,20 @@ use App\Http\Controllers\DBconnect;
 use App\Http\Controllers\FileuploadController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PublisherController;
 use App\Http\Controllers\ShopController;
 use App\Http\Controllers\SigninController;
 use App\Http\Controllers\SignupController;
 use App\Http\Controllers\UserController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
+use App\Models\PublisherModel;
 use App\Models\Show_info_user;
 use App\Models\SlideModel;
 use App\Models\User;
 use App\Models\UserModel;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +57,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                     $controllerName = 'login';
                     Route::group(['prefix' => $controllerName], function () {
                         $controller = LoginController::class;
-                        Route::get('/login', [$controller , 'show_login'])->name("show_login");
+                        Route::get('/login-view', [$controller , 'show_login'])->name("show_login");
                         Route::get('/sign-in', [$controller , 'Login'])->name("login_signin");
                         Route::get('/sign-up', [$controller , 'Register'])->name("login_signup");
                         Route::get('/log-out', [$controller , 'log_out'])->name("log_out");
@@ -192,55 +195,66 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 
           
 //===================================ADMIN ===========================================================================//
-        Route::group(['prefix' => $prefixAdmin], function () {
+        Route::group(['prefix' => 'admin'], function () {
 
             Route::get('/', function () {
-                return view('admin.main');
+                return view('admin.index');
             })->name('index');
-            Route::Get('/dash-board',function(){        
-                return view('admin.dashboard.index');
-            })->name('dash_view');
-            Route::Get('/category-list',function(){
-                return view('admin.category.view');
-            })->name('category_list');
-            Route::Get('/slider-list',function(){
-                return view('admin.slider.index');
-            })->name('slider_list');
-              //================================ MANAGER USER================================================================//
-            Route::get('users/{user_id}',[UserController::class,'delete_user'])->name('delete_user');
-            Route::get('set_status/{user_id}',[UserController::class,'set_status'])->name('set_status');
+
+            //Dash board
+            Route::get('/dashboard',[HomeController::class,'dash_view'])->name('admin.dash_view');
+
+            //==========================================Category==============================================================
+            Route::get('/category',[HomeController::class,'category_view'])->name('admin.category_view');
+            //Category add view 
+            Route::get('/category-view-add',[HomeController::class,'category_add_view'])->name('admin.add-category_view');
+            //Category add 
+            Route::get('/category-add',[CategoryController::class,'add_category'])->name('admin.add_category');
+            //Category edit view
+            Route::get('/category-edit{cat_id}',[HomeController::class,'category_edit_view'])->name('admin.edit_category_view');
+            //Category edit 
+            Route::get('/category-edit{cat_id}',[CategoryController::class,'category_edit'])->name('admin.edit_category');
+            //Category delete 
+            Route::get('/category-delete{cat_id}',[CategoryController::class,'category_delete'])->name('admin.delete_category');
+
+            //==========================================Book list==============================================================
+            Route::get('/book-list',[HomeController::class,'book_list_view'])->name('admin.book_list_view');
+            //Book add view
+            Route::get('/book-add-view',[HomeController::class,'book_list_add_view'])->name('admin.add_book_view');
+            //Book add
+            Route::get('/book-add',[AdminController::class,'add_book'])->name('admin.add_book');
+            //Book edit view
+            Route::get('/book-edit-view{book_id}',[PublisherController::class,'book_edit'])->name('admin.edit_book_view');
+            //Book edit
+            Route::get('/book-edit{book_id}',[AdminController::class,'add_book'])->name('admin.edit_book');
+            //Book delete 
+            Route::get('/book-delete{book_id}',[PublisherModel::class,'book_delete'])->name('admin.book_category');
+
+            //==========================================Publisher=============================================================
+            Route::get('/publisher',[HomeController::class,'publisher_view'])->name('admin.publisher_view');
+            //Publisher-add view
+            Route::get('publisher-add-view',[HomeController::class,'add_publisher_view'])->name('admin.add_publisher_view');
+            //Publisher-add
+            Route::post('publisher-add',[PublisherController::class,'add_publisher'])->name('admin.add_publisher');
+            //Publisher-edit view
+            Route::get('publisher-edit-view/{pub_id}',[HomeController::class,'edit_publisher_view'])->name('admin.edit_publisher_view');
+            //Publisher edit
+            Route::post('publisher-edit/{pub_id}',[PublisherController::class,'edit_publisher'])->name('admin.edit_publisher');
+            //Publisher delete
+            Route::get('publisher-delete/{pub_id}',[PublisherController::class,'delete_publisher'])->name('admin.delete_publisher');
+            
+
+            //================================ MANAGER USER================================================================//
+            Route::get('user-list',[HomeController::class,'user_list_view'])->name('admin.user_list_view');
+            Route::get('add-user',[HomeController::class,'add_user'])->name('admin.add_user');
               //================================ MANAGER CATEEGORY================================================================//
             
-              Route::get('cat-delete/{cat_id}',[CategoryController::class,'cat_delete'])->name('cat_delete');
-    //================================ LOGIN ADMIN================================================================//
+            Route::get('cat-delete/{cat_id}',[CategoryController::class,'cat_delete'])->name('cat_delete');
+            //================================ LOGIN ADMIN================================================================//
    
-        Route::POST('/login',[AuthLoginController::class,'login'])->name('admin_login');
-       
-
-    //================================ SLIDER ====================================================================//
-        $prefix = 'slider';
-        $controllerName = 'slider';
-        Route::group(['prefix' => $controllerName], function () {
-            $controller = SilderController::class;
-        Route::get('/', [$controller, 'view'])->name("slider_view");
-        //DATABASE TEST
-        Route::get('/users/{name}', [DBconnect::class, 'show2'])->name("db_slider");
-        //StatusCheck Method 
-        Route::get('/change-status-{active}/{id}', [$controller, 'status'])->where('id', '[0-9]+')->name('slider_status');
-        //Edit and Add method 
-        //if id==true => edit || id=="" => Add
-        Route::get('/form/{id?}', [$controller, 'form'])->where('id', '[0-9]+')->name('slider_form');
-        //Delete method
-        Route::get('/delete/{id}', [$controller, 'delete'])->where('id', '[0-9]+')->name('slider_delete');
-    });
-    //================================ DASHBOARD ========================================================//
-
-    $prefix = 'dashboard';
-    $controllerName = 'dashboard';
-    Route::group(['prefix' => $controllerName], function () use ($prefix) {
-        $controller = DashboardController::class;
-        Route::get('/', [$controller, 'view'])->name("dashboard_view");
-    });
+            Route::POST('/admin',[HomeController::class,'admin_login'])->name('admin_login');
+             //================================ SLIDER ====================================================================//
+    
 });
 
 

@@ -13,10 +13,33 @@ class CategoryModel extends Model
     protected $primaryKey = "cat_id";
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modiffed';
-    public $timestamps = false;
     //DINH NGHIA KHOA TRONG TABBLE NAY KHONG PHAI LA KHOA TU TANG VA KIEU KHOA LA STRING 
     public $incrementing = false;
     protected $keyType = 'string';
+      /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'cat_id',
+        'cat_name',
+        'total',
+        'description',
+        'created',
+        'created_by',
+        'modiffer',
+        'modiffer_by',
+    ];
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'modiffed' => 'datetime',
+        'created'  => 'datetime',
+    ];
     public function book()
     {
         return $this->hasMany("App\Models\ProductModel", "cat_id", "cat_id");

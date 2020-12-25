@@ -8,7 +8,7 @@
 					<div class="col-lg-12">
 						<div class="error__inner text-center">
 							<div class="error__logo">
-								<a href="#"><img src="source_project/images/others/404.png" alt="error images"></a>
+								<a href="#"><img src="{{asset('images/others/404.png')}}" alt="error images"></a>
 							</div>
 							<div class="error__content">
 								<h2>error - not found</h2>

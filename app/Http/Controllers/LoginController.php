@@ -56,9 +56,6 @@ class LoginController extends Controller
     }
     public function Register(Request $request)
     {
-        $request->validate([
-            'upload_file'=>'required',
-        ]);
         $data = new UserModel();
         $data_detail = new UserDetail();
         date_default_timezone_set('Asia/Ho_Chi_Minh');
