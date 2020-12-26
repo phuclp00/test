@@ -211,9 +211,9 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Category add 
             Route::get('/category-add',[CategoryController::class,'add_category'])->name('admin.add_category');
             //Category edit view
-            Route::get('/category-edit{cat_id}',[HomeController::class,'category_edit_view'])->name('admin.edit_category_view');
+            Route::get('/category-edit-view/{cat_id}',[HomeController::class,'category_edit_view'])->name('admin.edit_category_view');
             //Category edit 
-            Route::get('/category-edit{cat_id}',[CategoryController::class,'category_edit'])->name('admin.edit_category');
+            Route::get('/category-edit/{cat_id}',[CategoryController::class,'category_edit'])->name('admin.edit_category');
             //Category delete 
             Route::get('/category-delete{cat_id}',[CategoryController::class,'category_delete'])->name('admin.delete_category');
 
@@ -222,13 +222,13 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Book add view
             Route::get('/book-add-view',[HomeController::class,'book_list_add_view'])->name('admin.add_book_view');
             //Book add
-            Route::get('/book-add',[AdminController::class,'add_book'])->name('admin.add_book');
+            Route::get('/book-add',[ProductModel::class,'book_add'])->name('admin.add_book');
             //Book edit view
-            Route::get('/book-edit-view{book_id}',[PublisherController::class,'book_edit'])->name('admin.edit_book_view');
+            Route::get('/book-edit-view/{book_id}',[HomeController::class,'book_edit_view'])->name('admin.edit_book_view');
             //Book edit
-            Route::get('/book-edit{book_id}',[AdminController::class,'add_book'])->name('admin.edit_book');
+            Route::get('/book-edit/{book_id}',[ProductModel::class,'book_edit'])->name('admin.edit_book');
             //Book delete 
-            Route::get('/book-delete{book_id}',[PublisherModel::class,'book_delete'])->name('admin.book_category');
+            Route::get('/book-delete/{book_id}',[ProductModel::class,'book_delete'])->name('admin.book_category');
 
             //==========================================Publisher=============================================================
             Route::get('/publisher',[HomeController::class,'publisher_view'])->name('admin.publisher_view');

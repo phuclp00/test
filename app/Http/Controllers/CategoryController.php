@@ -52,9 +52,22 @@ class CategoryController extends Controller
             return view('errors.error404');
         }
     }
-    public function add_category(){
-        return view('');
-
+    public function add_category(Request $request){
+        try {
+            $data= new CategoryModel();
+            $data->cat_id=$request->cat_id;
+            $data->cat_name=$request->cat_name;
+            $data->description=$request->content;
+            $data->save();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">
+            Thêm danh mục '.$request->cat_name.' thành công </div>');            
+            return \redirect()->back();
+        } catch ( Exception $e) {
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
+            Thêm danh mục '.$request->cat_name.' thất bại</div>');            
+            return \redirect()->back();
+        }
+        
     }
     public function admin_cat_delete(Request $request)
     {
@@ -69,7 +82,20 @@ class CategoryController extends Controller
     }
     public function category_edit(Request $request)
     {
-        # code...
+        try{
+            $data=MainModel::find($request->cat_id);
+            $data->cat_name=$request->cat_name;
+            if($request->description!=$request->content && $request->content !=null){
+                $data->description=$request->content;
+            }
+            $data->save();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Chỉnh sửa danh mục' . $request->cat_id . ' thành công </div>');
+            return \redirect()->route('admin.category_view');
+        }
+        catch(Exception $e){
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Chỉnh sửa danh mục ' . $request->cat_id . 'thất bại, vui lòng thử lại </div>');
+            return \redirect()->back();
+        }
     }
     public function category_delete(Request $request)
     {

@@ -24,12 +24,7 @@ class CategoryModel extends Model
     protected $fillable = [
         'cat_id',
         'cat_name',
-        'total',
         'description',
-        'created',
-        'created_by',
-        'modiffer',
-        'modiffer_by',
     ];
     /**
      * The attributes that should be cast to native types.

@@ -9,6 +9,9 @@
                <div class="iq-card-header d-flex justify-content-between">
                   <div class="iq-header-title">
                      <h4 class="card-title">Category Lists</h4>
+                     @if(session()->has('info_warning'))
+                           {!!session()->get('info_warning')!!}
+                     @endif
                   </div>
                   <div class="iq-card-header-toolbar d-flex align-items-center">
                      <a href="{{route('admin.add-category_view')}}" class="btn btn-primary">Add New Category</a>
@@ -19,12 +22,13 @@
                      <table class="data-tables table table-striped table-bordered" style="width:100%">
                         <thead>
                            <tr>
-                              <th width="8%">Category ID</th>
-                              <th width="15%">Category Name</th>
-                              <th width="45%">Category Description</th>
-                              <th width="10%">Category Total</th>
+                              <th width="5%">Category ID</th>
+                              <th width="10%">Category Name</th>
+                              <th width="50%">Category Description</th>
+                              <th width="5%">Total</th>
                               <th width="10%">Created</th>
-                              <th width="8%">Action</th>
+                              <th width="10%">Modiffer</th>
+                              <th width="6%">Action</th>
                            </tr>
                         </thead>
                         <tbody>
@@ -37,10 +41,15 @@
                               </td>
                               <td>{{$value->total}}</td>
                               <td>{{$value->created}}</td>
+                           @if($value->modiffed_by==null)
+                              <td>{{$value->created_by}}</td>
+                           @else
+                              <td>{{$value->modiffed_by}}</td>
+                           @endif
                               <td>
                                  <div class="flex align-items-center list-user-action">
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Edit" href="{{route('admin.add-category_view',$value->cat_id)}}"><i
+                                       data-original-title="Edit" href="{{route('admin.edit_category_view',$value->cat_id)}}"><i
                                           class="ri-pencil-line"></i></a>
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Delete" href="{{route('admin.delete_category',$value->cat_id)}}"><i class="ri-delete-bin-line"></i></a>
@@ -50,6 +59,7 @@
                            @endforeach
                         </tbody>
                      </table>
+                     
                   </div>
                </div>
             </div>

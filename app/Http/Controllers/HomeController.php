@@ -11,6 +11,7 @@ use App\Http\Controllers\CategoryController;
 use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Cart;
+use App\Models\Book_list_view;
 use App\Models\PublisherModel;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
@@ -186,20 +187,28 @@ class HomeController extends Controller
         $result=CategoryModel::all();
         return view('admin.layout.admin-category',['cat_list'=>$result]);
     }
-    public function category_add_view(){
+    public function category_add_view(Request $request){
         return view('admin.layout.add.admin-add-category');
     }
      public function category_edit_view(Request $request){
         $result=CategoryModel::find($request->cat_id);
-        return view('admin.layout.add.admin-add-category',['category'=>$result]);
+        
+        return view('admin.layout.edit.admin-edit-category',['category'=>$result]);
     }
     //Book
     public function book_list_view(){
-        return view('admin.layout.admin-books');
+        $result=Book_list_view::all();
+        return view('admin.layout.admin-books',['book'=>$result]);
     }
-     public function book_list_add_view(Request $request){
-         $resullt=ProductModel::find($request->book_id);
-        return view('admin.layout.add.admin-add-book',['book',$resullt]);
+    public function book_list_add_view(Request $request){
+        $cat=CategoryModel::all();
+        $pub=PublisherModel::all();
+        return view('admin.layout.add.admin-add-book',['cat'=>$cat,'pub'=>$pub]);
+    }
+    public function book_edit_view(Request $request)
+    {
+        $result=ProductModel::find($request->book_id);
+        return view('admin.layout.edit.admin-edit-book',['book'=>$result]);
     }
     //Publisher 
     public function publisher_view(){

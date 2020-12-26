@@ -9,7 +9,7 @@ class Admincontroller extends Controller
     
     public function add_category(Request $request)
     {
-        return view('')
+        return view('');
     }
     public function add_book(Request $request)
     {

@@ -10,22 +10,18 @@
                      <div class="iq-card">
                         <div class="iq-card-header d-flex justify-content-between">
                            <div class="iq-header-title">
-                              <h4 class="card-title">Add Categories</h4>
+                              <h4 class="card-title">Edit Categories: {{$category->cat_id}}</h4>
                            </div>
                         </div>
                         <div class="iq-card-body">
-                           <form action="{{route('admin.add_category')}}">
-                              <div class="form-group">
-                                 <label>Category ID:</label>
-                                 <input type="text" name="cat_id" class="form-control" value="">
-                              </div>
+                           <form action="{{route('admin.edit_category',[$category->cat_id])}}">
                               <div class="form-group">
                                  <label>Category Name:</label>
-                                 <input type="text" name="cat_name"class="form-control">
+                                 <input type="text" name="cat_name"class="form-control" value="{{$category->cat_name}}">
                               </div>
                               <div class="form-group">
                                  <label>Category Description:</label>
-                                 <textarea class="form-control" rows="4" name="content" id="editor"></textarea>
+                                 <textarea class="form-control" rows="4" name="content" id="editor">{{$category->description}}</textarea>
                               </div>
                               <button type="submit" class="btn btn-primary">Submit</button>
                               <button type="reset" class="btn btn-danger"onclick="document.getElementById('edit_form').reset(); return false;">Reset</button>
