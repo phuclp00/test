@@ -9,4 +9,7 @@ class Book_list_view extends Model
     use HasFactory;
     //DEFINED DATABASE TABLE
     protected $table = "book_list_view";
+    protected $keyType = 'string';
+
+    
 }

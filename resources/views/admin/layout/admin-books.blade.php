@@ -36,7 +36,7 @@
                            <tr>
                               <td>{{$item->book_id}}</td>
                               @if($item->img!=null)
-                              <td><img class="img-fluid rounded" style="width: 200px;height: 250px;" src="{{asset('images/books/test_img/'.$item->img)}}" alt=""></td>
+                              <td><img class="img-fluid rounded" style="width: 200px;height: 250px;" src="{{asset('images/books/'.$item->img)}}" alt=""></td>
                               @else
                               <td><img class="img-fluid rounded" style="width: 250px;height: 250px;" src="{{asset('images/books/8k.jpg')}}" alt=""></td>
                               @endif

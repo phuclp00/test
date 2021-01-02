@@ -22,9 +22,9 @@
                  <li class="active active-menu">
                     <a href="#dashboard" class="iq-waves-effect" data-toggle="collapse" aria-expanded="true"><span class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Shop</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                     <ul id="dashboard" class="iq-submenu collapse show" data-parent="#iq-sidebar-toggle">
-                       <li class="active"><a href="index-2.html"><i class="las la-house-damage"></i>Home Page</a></li>
-                       <li><a href="{{route('shop_view')}}"><i class="ri-function-line"></i>Shop Page</a></li>
-                       <li><a href="{{route('blog_view')}}"><i class="ri-book-line"></i>Blog Page</a></li>
+                       <li class="active"><a href="{{route('index')}}"><i class="las la-house-damage"></i>Home Page</a></li>
+                       <li><a href="#"><i class="ri-function-line"></i>Shop Page</a></li>
+                       <li><a href="#"><i class="ri-book-line"></i>Blog Page</a></li>
                     </ul>
                  </li>
                  <li>

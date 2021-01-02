@@ -6,16 +6,26 @@
          <div class="row">
             <div class="col-sm-12">
                <div class="iq-card">
+                  <div class="iq-card-img-top">
+                     @if($book->img==null)
+                        <img src="{{asset('images/books/8k.jpg')}}" alt="Book Image" style="width: 350px;height: 300px;padding: 20px;">
+                     @else
+                        <img src="{{asset('images/books/'.$book->book_id.'/'.$book->img)}}" alt="Book Image" style="width: 350px;height: 300px;padding: 20px;">
+                     @endif
+                  </div>
                   <div class="iq-card-header d-flex justify-content-between">
                      <div class="iq-header-title">
                         <h4 class="card-title">Edit Books: {{$book->book_id}}</h4>
                      </div>
                   </div>
+                  @include('post.create')
                   <div class="iq-card-body">
-                     <form action="https://iqonic.design/themes/booksto/html/admin-books.html">
+                     <form action="{{route('admin.edit_book')}}" method="post" enctype="multipart/form-data">
+                        @csrf
                         <div class="form-group">
                            <label>Book ID:</label>
-                           <input  name="book_id" type="text" class="form-control" value="{{$book->book_id}}">
+                           <input name="id_block" type="text" class="form-control" value="{{$book->book_id}}" disabled>
+                           <input name="book_id" type="hidden" class="form-control" value="{{$book->book_id}}">
                         </div>
                         <div class="form-group">
                            <label>Book Name:</label>
@@ -23,26 +33,32 @@
                         </div>
                         <div class="form-group">
                            <label>Book Category:</label>
-                           <select class="form-control" id="exampleFormControlSelect1">
-                              <option selected="{{$book->cat_id}}" disabled="">Book Category</option>
+                           <select name="cat_id"class="form-control" id="exampleFormControlSelect1">
                               @foreach($cat as $data=>$item)
-                              <option value="{{$item->cat_id}}">{{$item->cat_name}}</option>
+                                 @if($book->cat_id==$item->cat_id)
+                                    <option value="{{$item->cat_id}}" selected>{{$item->cat_name}}</option>
+                                 @else
+                                    <option value="{{$item->cat_id}}">{{$item->cat_name}}</option>    
+                                 @endif
                               @endforeach
                            </select>
                         </div>
                         <div class="form-group">
                            <label>Book Publisher:</label>
-                           <select class="form-control" id="exampleFormControlSelect2">
-                              <option selected="{{$book->pub_id}}" disabled="">Book Publisher</option>
+                           <select name="pub_id" class="form-control" id="exampleFormControlSelect2">
                               @foreach($pub as $data =>$item)
-                              <option value="{{$item->pub_id}}">{{$item->pub_name}}</option>
+                                 @if($book->pub_id==$item->pub_id)
+                                    <option value="{{$item->pub_id}}" selected>{{$item->pub_name}}</option>
+                                 @else
+                                    <option value="{{$item->pub_id}}">{{$item->pub_name}}</option>
+                                 @endif
                               @endforeach
                            </select>
                         </div>
                         <div class="form-group">
                            <label>Book Image:</label>
                            <div class="custom-file">
-                              <input id="picture" type="file" class="custom-file-input" onchange="javascript:showname_file()" accept="image/png, image/jpeg">
+                              <input id="picture" name="img" type="file" class="custom-file-input" onchange="javascript:showname_file()" accept="image/png, image/jpeg">
                               <label class="custom-file-label">Choose file</label>
                            </div>
                            <div id="file_name" class="btn-outline-danger"></div>
@@ -56,16 +72,24 @@
                            <div id="fileList" class="btn-outline-danger"></div>
                         </div>
                         <div class="form-group">
-                           <label>Promotion Price:</label>
-                           <input name="promotion" type="text" class="form-control">
+                           <label class="custom-file">Old Thumbnail</label>
+                              <div>
+                                 @foreach ($old_thumb as $key=>$item)
+                                    <img src="{{asset('images/books/'.$book->book_id.'/'.$item)}}"alt="Old Thumbnail" style="width: 350px;height: 275px;padding: 10px">
+                                 @endforeach
+                              </div>
+                        </div>
+                        <div class="form-group">
+                           <label>Price:</label>
+                           <input name="price" type="text" class="form-control" value="{{$book->price}}">
                         </div>
                         <div class="form-group">
                            <label>Promotion Price:</label>
-                           <input name="price" type="text" class="form-control">
+                           <input name="promotion" type="text" class="form-control" value="{{$book->promotion_price}}">
                         </div>
                         <div class="form-group">
                            <label>Book Description:</label>
-                           <textarea class="form-control" rows="4" name="content" id="editor"></textarea>
+                           <textarea class="form-control" rows="4" name="content" id="editor">{{$book->description}}</textarea>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
                         <button type="reset" class="btn btn-danger"onclick="document.getElementById('edit_form').reset(); return false;">Reset</button>

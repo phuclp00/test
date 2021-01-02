@@ -12,6 +12,7 @@ use App\Models\CategoryModel;
 use App\Models\ProductModel;
 use App\Cart;
 use App\Models\Book_list_view;
+use App\Models\BookThumbnailModel;
 use App\Models\PublisherModel;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
@@ -112,27 +113,17 @@ class HomeController extends Controller
     public function get_items(Request $request)
     {
         $id = $request->id;
-        $cat_id = $request->cat_id;
-        $mainModel = new ProductModel();
-        $total = new CategoryModel();
-        //Truy xuat dieu kien trong Model()
-        //$items=$mainModel->all_list_items("book_id",['task'=>"special-list-items"],"=",$id);
-        $total = $total::select('total')->where('cat_id', $cat_id)->first();
-        // Truy xuat theo relationship
-        $items = $mainModel::where("book_id", $id)->get();
-        $items_relate = $mainModel::where("cat_id", $items)->paginate(3);
-
-        $items_thumb = $mainModel::select('thumb')->where("book_id", $id)->first();
-        $items_thumb->toArray();
-        $result = explode(";", $items_thumb->thumb);
-        //$items=  
-        //$total_items= \App\Models\CategoryModel::with('book')->where("cat_id","=",$cat_id);
-
+        $cat_id = $request->cat_id;  
+        $result=Book_list_view::where('book_id',$id)->first();
+        $arr_thumb=array();
+        $i=1;
+        while($i<8){
+            $arr_thumb[]=$result["thumb$i"]==null?null:$result["thumb$i"];
+            $i++;
+        }
         return view($this->pathViewController . $this->subpatchViewController . '.single-product', [
-            "get_singel_product" => $items,
-            "total_items" => $total->total,
-            "items_relate" => $items_relate,
-            "item_thumb" => $result
+            "get_singel_product" => $result,
+            "thumb" => $arr_thumb,
         ]);
     }
     public function product_view()
@@ -207,8 +198,17 @@ class HomeController extends Controller
     }
     public function book_edit_view(Request $request)
     {
+        $cat=CategoryModel::all();
+        $pub=PublisherModel::all();
         $result=ProductModel::find($request->book_id);
-        return view('admin.layout.edit.admin-edit-book',['book'=>$result]);
+        $thumb=BookThumbnailModel::find($request->book_id);
+        $i=1;
+        $old_thumb=[];
+        while($i<8){
+            $old_thumb[]=$thumb["thumbnail_$i"]==null?null:$thumb["thumbnail_$i"];
+            $i++;
+        }
+        return view('admin.layout.edit.admin-edit-book',['book'=>$result,'cat'=>$cat,'pub'=>$pub,'old_thumb'=>$old_thumb]);
     }
     //Publisher 
     public function publisher_view(){

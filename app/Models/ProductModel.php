@@ -29,7 +29,6 @@ class ProductModel extends Model
         'promotion_price',
         'created',
         'modiffed',
-        'thumb',
     ];
     /**
      * The attributes that should be cast to native types.

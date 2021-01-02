@@ -175,6 +175,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             
             });
             $controllerName = 'my-account';
+             //====================================== - ACCOUNT PROFILE ========================================================//
             Route::group(['prefix' => $controllerName], function () {
                 $controller = UserController::class;
                 Route::POST('/img_change/{user_name}', [$controller, 'update_img'])->name("update_img");
@@ -222,13 +223,13 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Book add view
             Route::get('/book-add-view',[HomeController::class,'book_list_add_view'])->name('admin.add_book_view');
             //Book add
-            Route::get('/book-add',[ProductModel::class,'book_add'])->name('admin.add_book');
+            Route::post('/book-add',[ProductController::class,'book_add'])->name('admin.add_book');
             //Book edit view
             Route::get('/book-edit-view/{book_id}',[HomeController::class,'book_edit_view'])->name('admin.edit_book_view');
             //Book edit
-            Route::get('/book-edit/{book_id}',[ProductModel::class,'book_edit'])->name('admin.edit_book');
+            Route::post('/book-edit',[ProductController::class,'book_edit'])->name('admin.edit_book');
             //Book delete 
-            Route::get('/book-delete/{book_id}',[ProductModel::class,'book_delete'])->name('admin.book_category');
+            Route::get('/book-delete/{book_id}',[ProductController::class,'book_delete'])->name('admin.book_category');
 
             //==========================================Publisher=============================================================
             Route::get('/publisher',[HomeController::class,'publisher_view'])->name('admin.publisher_view');

@@ -10,39 +10,50 @@
                   <div class="iq-header-title">
                      <h4 class="card-title">Add New Book</h4>
                   </div>
+                  
                </div>
+               @include('post.create')
                <div class="iq-card-body">
-                  <form action="https://iqonic.design/themes/booksto/html/admin-books.html">
+                  <form action="{{route('admin.add_book')}}" method="post"  enctype="multipart/form-data">
+                     @csrf 
                      <div class="form-group">
                         <label>Book ID:</label>
-                        <input  name="book_id" type="text" class="form-control">
+                        <input  name="book_id" type="text" class="form-control" value="{{ old('book_id') }}">
                      </div>
                      <div class="form-group">
                         <label>Book Name:</label>
-                        <input name="book_name" type="text" class="form-control">
+                        <input name="book_name" type="text" class="form-control" value="{{ old('book_name') }}">
                      </div>
                      <div class="form-group">
                         <label>Book Category:</label>
-                        <select class="form-control" id="exampleFormControlSelect1">
+                        <select name="cat_id"class="form-control" id="exampleFormControlSelect1">
                            <option selected="" disabled="">Book Category</option>
                            @foreach($cat as $data=>$item)
-                           <option value="{{$item->cat_id}}">{{$item->cat_name}}</option>
+                              @if(old('cat_id')==$item->cat_id)
+                                 <option value="{{$item->cat_id}}" selected>{{$item->cat_name}}</option>
+                              @else
+                                 <option value="{{$item->cat_id}}">{{$item->cat_name}}</option>
+                              @endif
                            @endforeach
                         </select>
                      </div>
                      <div class="form-group">
                         <label>Book Publisher:</label>
-                        <select class="form-control" id="exampleFormControlSelect2">
+                        <select name="pub_id"class="form-control" id="exampleFormControlSelect2">
                            <option selected="" disabled="">Book Publisher</option>
                            @foreach($pub as $data =>$item)
-                           <option value="{{$item->pub_id}}">{{$item->pub_name}}</option>
+                              @if(old('pub_id')==$item->pub_id)
+                                 <option value="{{$item->pub_id}}" selected>{{$item->pub_name}}</option>
+                              @else
+                                 <option value="{{$item->pub_id}}">{{$item->pub_name}}</option>
+                              @endif
                            @endforeach
                         </select>
                      </div>
                      <div class="form-group">
                         <label>Book Image:</label>
                         <div class="custom-file">
-                           <input id="picture" type="file" class="custom-file-input" onchange="javascript:showname_file()" accept="image/png, image/jpeg">
+                           <input id="picture" name="img" type="file" class="custom-file-input" onchange="javascript:showname_file()" accept="image/png, image/jpeg">
                            <label class="custom-file-label">Choose file</label>
                         </div>
                         <div id="file_name" class="btn-outline-danger"></div>
@@ -56,16 +67,16 @@
                         <div id="fileList" class="btn-outline-danger"></div>
                      </div>
                      <div class="form-group">
-                        <label>Promotion Price:</label>
-                        <input name="promotion" type="text" class="form-control">
+                        <label>Price:</label>
+                        <input name="price" type="text" class="form-control" value="{{ old('price') }}">
                      </div>
                      <div class="form-group">
                         <label>Promotion Price:</label>
-                        <input name="price" type="text" class="form-control">
+                        <input name="promotion" type="text" class="form-control" value="{{ old('promotion') }}">
                      </div>
                      <div class="form-group">
                         <label>Book Description:</label>
-                        <textarea class="form-control" rows="4" name="content" id="editor"></textarea>
+                        <textarea class="form-control" rows="4" name="content" id="editor">{{ old('content') }}</textarea>
                      </div>
                      <button type="submit" class="btn btn-primary">Submit</button>
                      <button type="reset" class="btn btn-danger"onclick="document.getElementById('edit_form').reset(); return false;">Reset</button>

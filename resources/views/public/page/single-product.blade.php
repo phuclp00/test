@@ -6,39 +6,37 @@
 <div class="maincontent bg--white pt--80 pb--55">
 	<div class="container">
 		<div class="row">
-
 			<div class="col-lg-9 col-12">
-				@foreach($get_singel_product as $key => $item)
 				<div class="wn__single__product">
 					<div class="row">
 						<div class="col-lg-6 col-12">
 							<div class="wn__fotorama__wrapper">
 								<div class="fotorama wn__fotorama__action" data-nav="thumbs">
-									@foreach($item_thumb as $key)
-									@if($item_thumb ==0)
-									<a href="1.jpg"><img src="{{asset('images/product/Hello_World.PNG')}}" alt=""></a>
-									@break
-									@else
-									<a href="1.jpg"><img src="{{asset('images/product/'.$key)}}"
-											alt="Book-{{$item->book_name}}"></a>
-									@endif
+									dd($arr)
+									@foreach($arr_thumb->$key as $value)			
+										@if($get_singel_product ==null)
+											<a href="1.jpg"><img src="{{asset('images/product/Hello_World.PNG')}}" alt=""></a>
+											@break
+										@else
+											<a href="{{$value}}"><img src="{{asset('images/books/thumb/'.$get_singel_product->book_name.'/'.$value)}}"
+											alt="Book-{{$value->book_name}}"></a>
+										@endif
 									@endforeach
 								</div>
 							</div>
 						</div>
 						<div class="col-lg-6 col-12">
 							<div class="product__info__main">
-								<h1 id="single_book_name">{{$item->book_name}} </h1>
+								<h1 id="single_book_name">{{$get_singel_product->book_name}} </h1>
 								<div class="product-info-stock-sku d-flex">
 									<p>Availability:<span>
-											@if($total_items >0)
-											<b> IN STOCK ({{$total_items}})</b>
-
+											@if($get_singel_product->book_total >0 && $get_singel_product->book_total != null)
+												<b> IN STOCK ({{$total_items}})</b>
 											@else
-											<b class="warning">OUT STOCK!!</b>
+												<b class="warning">OUT STOCK!!</b>
 											@endif
 										</span></p>
-									<p>Serial code:<span id="single_book_id"> {{$item->book_id}}</span></p>
+									<p>Serial code:<span id="single_book_id"> {{$get_singel_product->book_id}}</span></p>
 								</div>
 								<div class="product-reviews-summary d-flex">
 									<ul class="rating-summary d-flex">
@@ -54,7 +52,7 @@
 									</div>
 								</div>
 								<div class="price-box">
-									<span>{{$item->price."$"}}</span>
+									<span>{{$get_singel_product->price."$"}}</span>
 								</div>
 								<div class="product-color-label">
 									<span>Color</span>
@@ -83,7 +81,7 @@
 									<a class="email" href="#"></a>
 								</div>
 								<div id="product__overview" class="product__overview">
-									{{Str::limit($item->description, $limit = 500, $end = '...')}}
+									{{Str::limit($get_singel_product->description, $limit = 500, $end = '...')}}
 								</div>
 							</div>
 
@@ -101,7 +99,7 @@
 						<!-- Start Single Tab Content -->
 						<div class="pro__tab_label tab-pane fade show active" id="nav-details" role="tabpanel">
 							<div class="description__attribute">
-								{{$item->description}}
+								{{$get_singel_product->description}}
 							</div>
 						</div>
 						<!-- End Single Tab Content -->
@@ -211,7 +209,7 @@
 						<!-- End Single Tab Content -->
 					</div>
 				</div>
-				@endforeach
+				
 				<div class="wn__related__product pt--80 pb--50">
 					<div class="section__title text-center">
 						<h2 class="title__be--2">Related Products</h2>
