@@ -190,12 +190,22 @@ class ProductController extends Controller
                     }
                 }
             }
-            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Upload thành công </div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Uploaded Successfully</div>');
             return \redirect()->back();
         } catch (QueryException $e) {
             $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
                   ' . $e->getMessage() . '</div>');
             return \redirect()->back();
         }
+    }
+    public function book_delete(Request $request)
+    {
+        try {
+            $result = ProductModel::destroy($request->book_id);
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Deleted Successfully</div>');
+        } catch (\Throwable $th) {
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">Deleted Failed </div>');
+        }
+        return redirect()->back();
     }
 }

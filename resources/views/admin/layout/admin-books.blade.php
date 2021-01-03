@@ -1,5 +1,13 @@
 @extends('admin.index')
 @section('admin_section')
+@if(session()->has('info_warning'))
+   <script>
+      $.dialog({
+         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         content: '{!!session()->get('info_warning')!!}',
+      });
+   </script>
+@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -34,27 +42,31 @@
                         <tbody>
                            @foreach($book as $data => $item)
                            <tr>
-                              <td>{{$item->book_id}}</td>
+                              <td id="book_id">{{$item->book_id}}</td>
                               @if($item->img!=null)
-                              <td><img class="img-fluid rounded" style="width: 200px;height: 250px;" src="{{asset('images/books/'.$item->img)}}" alt=""></td>
+                              <td><img class="img-fluid rounded" style="width: 170px;  height: 170px;"
+                                    src="{{asset('images/books/'.$item->book_id.'/'.$item->img)}}" alt=""></td>
                               @else
-                              <td><img class="img-fluid rounded" style="width: 250px;height: 250px;" src="{{asset('images/books/8k.jpg')}}" alt=""></td>
+                              <td><img class="img-fluid rounded" style="width: 250px;height: 250px;"
+                                    src="{{asset('images/books/8k.jpg')}}" alt=""></td>
                               @endif
                               <td>{{$item->book_name}}</td>
                               <td>{{$item->cat_name}}</td>
                               <td>{{$item ->pub_name}}</td>
                               <td style="color:red">{{number_format($item->promotion_price,2)."$"}}</td>
-                              <td >{{number_format($item->price,2)."$"}}</td>
+                              <td>{{number_format($item->price,2)."$"}}</td>
                               <td>{{$item->total}}</td>
                               <td>{{$item->total_sell}}</td>
-
                               <td>
                                  <div class="flex align-items-center list-user-action">
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Edit" href="{{route('admin.edit_book_view',$item->book_id)}}"><i
+                                    <a class="bg-primary option" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Edit" data-value="{{$item->book_id}}"
+                                       href="{{route('admin.edit_book_view',$item->book_id)}}"><i
                                           class="ri-pencil-line"></i></a>
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                    <a class="bg-primary option" data-toggle="tooltip"
+                                    data-text="{{$item->book_id}}"
+                                     data-placement="top" title="" data-original-title="Delete" href="{{route('admin.book_delete',['book_id'=>$item->book_id])}}"><i
+                                       class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -64,8 +76,10 @@
                   </div>
                </div>
             </div>
+            {{ $book->links('admin.pagination.simple'),["paginator"=>$book]}}
          </div>
       </div>
    </div>
 </div>
+
 @endsection

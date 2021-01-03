@@ -73,8 +73,8 @@ Index Of Script
                     break;
             }
         }
-        
-        
+
+
 
 
         /*---------------------------------------------------------------------
@@ -144,15 +144,15 @@ Index Of Script
             }).addClass("rippleEffect");
         });
 
-       /*---------------------------------------------------------------------
-        Sidebar Widget
-        -----------------------------------------------------------------------*/
-       
+        /*---------------------------------------------------------------------
+         Sidebar Widget
+         -----------------------------------------------------------------------*/
+
         jQuery(document).on("click", '.iq-menu > li > a', function() {
             jQuery('.iq-menu > li > a').parent().removeClass('active');
             jQuery(this).parent().addClass('active');
         });
-        
+
 
 
         /*---------------------------------------------------------------------
@@ -166,18 +166,18 @@ Index Of Script
                 jQuery(this).toggleClass('accordion-active').children('div.accordion-details ').slideDown('slow');
             }
         });
-        
+
         /*---------------------------------------------------------------------
         Page Loader
         -----------------------------------------------------------------------*/
         jQuery("#load").fadeOut();
         jQuery("#loading").delay().fadeOut("");
 
-        
 
-       /*---------------------------------------------------------------------
-       Owl Carousel
-       -----------------------------------------------------------------------*/
+
+        /*---------------------------------------------------------------------
+        Owl Carousel
+        -----------------------------------------------------------------------*/
         jQuery('.owl-carousel').each(function() {
             let jQuerycarousel = jQuery(this);
             jQuerycarousel.owlCarousel({
@@ -310,215 +310,211 @@ Index Of Script
         });
 
         $('#newrealease-slider').slick({
-          dots: false,
-          arrows: false,
-          infinite: true,
-          speed: 300,
-          centerMode: true,
-          centerPadding: false,
-          variableWidth: true ,
-          infinite: true,
-          focusOnSelect: true,
-          autoplay: false,
-          slidesToShow: 7,
-          slidesToScroll: 1,
-          
-          
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            centerMode: true,
+            centerPadding: false,
+            variableWidth: true,
+            infinite: true,
+            focusOnSelect: true,
+            autoplay: false,
+            slidesToShow: 7,
+            slidesToScroll: 1,
+
+
         });
 
-       $("#newrealease-slider .slick-active.slick-center").prev('.slick-active').addClass('temp');
+        $("#newrealease-slider .slick-active.slick-center").prev('.slick-active').addClass('temp');
         $("#newrealease-slider .slick-active.temp").prev().addClass('temp-1');
         $("#newrealease-slider .slick-active.temp-1").prev().addClass('temp-2');
 
-         $("#newrealease-slider .slick-active.slick-center").next('.slick-active').addClass('temp-next');
+        $("#newrealease-slider .slick-active.slick-center").next('.slick-active').addClass('temp-next');
         $("#newrealease-slider .slick-active.temp-next").next().addClass('temp-next-1');
         $("#newrealease-slider .slick-active.temp-next-1").next().addClass('temp-next-2');
 
-         $("#newrealease-slider").on("afterChange", function (){
-          var slick_index = $(".slick-active.slick-center").data('slick-index');
-          
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-1)+'"]').addClass('temp');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-2)+'"]').addClass('temp-1');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-3)+'"]').addClass('temp-2');
+        $("#newrealease-slider").on("afterChange", function() {
+            var slick_index = $(".slick-active.slick-center").data('slick-index');
 
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+1))+'"]').addClass('temp-next');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+2))+'"]').addClass('temp-next-1');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+3))+'"]').addClass('temp-next-2');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 1) + '"]').addClass('temp');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 2) + '"]').addClass('temp-1');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 3) + '"]').addClass('temp-2');
+
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 1)) + '"]').addClass('temp-next');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 2)) + '"]').addClass('temp-next-1');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 3)) + '"]').addClass('temp-next-2');
 
 
         });
 
-        $("#newrealease-slider").on("beforeChange", function (){
-          var slick_index = $(".slick-active.slick-center").data('slick-index');
-          
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-1)+'"]').removeClass('temp');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-2)+'"]').removeClass('temp-1');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(slick_index-3)+'"]').removeClass('temp-2');
+        $("#newrealease-slider").on("beforeChange", function() {
+            var slick_index = $(".slick-active.slick-center").data('slick-index');
 
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+1))+'"]').removeClass('temp-next');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+2))+'"]').removeClass('temp-next-1');
-          $('#newrealease-slider .slick-active[data-slick-index="'+(parseInt(slick_index+3))+'"]').removeClass('temp-next-2');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 1) + '"]').removeClass('temp');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 2) + '"]').removeClass('temp-1');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (slick_index - 3) + '"]').removeClass('temp-2');
+
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 1)) + '"]').removeClass('temp-next');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 2)) + '"]').removeClass('temp-next-1');
+            $('#newrealease-slider .slick-active[data-slick-index="' + (parseInt(slick_index + 3)) + '"]').removeClass('temp-next-2');
 
         });
 
         $('#favorites-slider').slick({
-          dots: false,
-          arrows: false,
-          infinite: true,
-          speed: 300,
-          centerMode: false,
-          autoplay: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-              }
-            },
-            {
-              breakpoint: 992,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 767,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            centerMode: false,
+            autoplay: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                    }
+                },
+                {
+                    breakpoint: 992,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 767,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
         $('#similar-slider').slick({
-          dots: false,
-          arrows: false,
-          infinite: true,
-          speed: 300,
-          centerMode: false,
-          autoplay: true,
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            centerMode: false,
+            autoplay: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
         $('#single-similar-slider').slick({
-          dots: false,
-          arrows: false,
-          infinite: true,
-          speed: 300,
-          centerMode: false,
-          autoplay: true,
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            centerMode: false,
+            autoplay: true,
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
         $('#trendy-slider').slick({
-          dots: false,
-          arrows: false,
-          infinite: true,
-          speed: 300,
-          centerMode: false,
-          autoplay: true,
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          responsive: [
-            {
-              breakpoint: 1024,
-              settings: {
-                slidesToShow: 3,
-                slidesToScroll: 1,
-                infinite: true,
-              }
-            },
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-              }
-            },
-            {
-              breakpoint: 576,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-              }
-            }
-          ]
+            dots: false,
+            arrows: false,
+            infinite: true,
+            speed: 300,
+            centerMode: false,
+            autoplay: true,
+            slidesToShow: 4,
+            slidesToScroll: 1,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 576,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
 
         $('#description-slider').slick({
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          arrows: false,
-          fade: true,
-          asNavFor: '#description-slider-nav'
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false,
+            fade: true,
+            asNavFor: '#description-slider-nav'
         });
 
         $('#description-slider-nav').slick({
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          asNavFor: '#description-slider',
-          dots: false,
-          arrows: false,
-          infinite: true,
-          vertical: true,
-          centerMode: false,
-          focusOnSelect: true
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            asNavFor: '#description-slider',
+            dots: false,
+            arrows: false,
+            infinite: true,
+            vertical: true,
+            centerMode: false,
+            focusOnSelect: true
         });
 
 
@@ -550,7 +546,7 @@ Index Of Script
         jQuery(document).on('click', ".wrapper-menu", function() {
             jQuery("body").toggleClass("sidebar-main");
         });
-        
+
 
 
         /*---------------------------------------------------------------------
@@ -566,7 +562,7 @@ Index Of Script
         wow.init();
 
 
-        
+
         /*---------------------------------------------------------------------
         Form Validation
         -----------------------------------------------------------------------*/
@@ -600,11 +596,11 @@ Index Of Script
                     jQuery(this).find('input:checkbox[name=todo-check]').attr("checked", true);
                     jQuery(this).addClass('active-task');
                 }
-               
+
             });
         });
 
-       
+
 
         /*------------------------------------------------------------------
         Flatpicker
@@ -614,7 +610,7 @@ Index Of Script
                 inline: true
             });
         }
-        
+
         /*---------------------------------------------------------------------
            Scroll up menu
         -----------------------------------------------------------------------*/
@@ -622,17 +618,15 @@ Index Of Script
         $(window).scroll(function() {
             var scroll = $(window).scrollTop();
             //  console.log(scroll);
-            
-            if(scroll < position) {
-                 $('.tab-menu-horizontal').addClass('menu-up');
-                 $('.tab-menu-horizontal').removeClass('menu-down');
-            } 
-            else {
+
+            if (scroll < position) {
+                $('.tab-menu-horizontal').addClass('menu-up');
+                $('.tab-menu-horizontal').removeClass('menu-down');
+            } else {
                 $('.tab-menu-horizontal').addClass('menu-down');
                 $('.tab-menu-horizontal').removeClass('menu-up');
             }
-            if(scroll == 0)
-            {
+            if (scroll == 0) {
                 $('.tab-menu-horizontal').removeClass('menu-up');
                 $('.tab-menu-horizontal').removeClass('menu-down');
             }
@@ -644,54 +638,46 @@ Index Of Script
            checkout
         -----------------------------------------------------------------------*/
 
-        jQuery(document).ready(function(){
-            jQuery('#place-order').click(function(){
+        jQuery(document).ready(function() {
+            jQuery('#place-order').click(function() {
                 jQuery('#cart').removeClass('show');
                 jQuery('#address').addClass('show');
             });
-            jQuery('#deliver-address').click(function(){
+            jQuery('#deliver-address').click(function() {
                 jQuery('#address').removeClass('show');
                 jQuery('#payment').addClass('show');
             });
         });
 
-         /*---------------------------------------------------------------------
+        /*---------------------------------------------------------------------
            Datatables
         -----------------------------------------------------------------------*/
-        if(jQuery('.data-tables').length)
-        {
-          $('.data-tables').DataTable();
+        if (jQuery('.data-tables').length) {
+            $('.data-tables').DataTable();
         }
 
         /*---------------------------------------------------------------------
         Button 
         -----------------------------------------------------------------------*/
 
-        jQuery('.qty-btn').on('click',function(){
-          var id = jQuery(this).attr('id');
+        jQuery('.qty-btn').on('click', function() {
+            var id = jQuery(this).attr('id');
 
-          var val = parseInt(jQuery('#quantity').val());
+            var val = parseInt(jQuery('#quantity').val());
 
-          if(id == 'btn-minus')
-          {
-            if(val != 0)
-            {
-              jQuery('#quantity').val(val-1);
+            if (id == 'btn-minus') {
+                if (val != 0) {
+                    jQuery('#quantity').val(val - 1);
+                } else {
+                    jQuery('#quantity').val(0);
+                }
+
+            } else {
+                jQuery('#quantity').val(val + 1);
             }
-            else
-            {
-              jQuery('#quantity').val(0);
-            }
-
-          }
-          else
-          {
-            jQuery('#quantity').val(val+1);
-          }
         });
 
-
-        
     });
+
 
 })(jQuery);

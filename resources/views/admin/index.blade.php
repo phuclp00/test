@@ -8,6 +8,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Booksto - Responsive Bootstrap 4 Admin Dashboard Template</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{asset('asset/dist/jquery-confirm.min.js')}}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{asset('asset/dist/jquery-confirm.min.css')}}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('asset/images/favicon.ico')}}" />
     <!-- Bootstrap CSS -->
@@ -18,8 +21,7 @@
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
-    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js"></script>
-
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -87,6 +89,7 @@
     <!-- color-customizer END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('asset/js/admin_ajax.js')}}"></script>
     <script>
         ClassicEditor
             .create( document.querySelector( '#editor' ) )
@@ -162,6 +165,7 @@
     <script src="{{asset('asset/js/chart-custom.js')}}"></script>
     <!-- Custom JavaScript -->
     <script src="{{asset('asset/js/custom.js')}}"></script>
+
 </body>
 
 <!-- Mirrored from iqonic.design/themes/booksto/html/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 01 Aug 2020 14:10:36 GMT -->

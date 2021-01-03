@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 
 use Request;
 use Session;
@@ -49,6 +50,6 @@ class AppServiceProvider extends ServiceProvider
         date_default_timezone_set('Asia/Ho_Chi_Minh');   
  
         Schema::defaultStringLength(255);
-
+        Paginator::useBootstrap();
     }
 }

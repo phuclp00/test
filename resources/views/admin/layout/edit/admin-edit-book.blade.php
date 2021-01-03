@@ -10,6 +10,7 @@
                      @if($book->img==null)
                         <img src="{{asset('images/books/8k.jpg')}}" alt="Book Image" style="width: 350px;height: 300px;padding: 20px;">
                      @else
+                     
                         <img src="{{asset('images/books/'.$book->book_id.'/'.$book->img)}}" alt="Book Image" style="width: 350px;height: 300px;padding: 20px;">
                      @endif
                   </div>

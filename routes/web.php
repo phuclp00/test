@@ -229,7 +229,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Book edit
             Route::post('/book-edit',[ProductController::class,'book_edit'])->name('admin.edit_book');
             //Book delete 
-            Route::get('/book-delete/{book_id}',[ProductController::class,'book_delete'])->name('admin.book_category');
+            Route::post('/book-delete/book_id={book_id}',[ProductController::class,'book_delete'])->name('admin.book_delete');
 
             //==========================================Publisher=============================================================
             Route::get('/publisher',[HomeController::class,'publisher_view'])->name('admin.publisher_view');

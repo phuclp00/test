@@ -1,5 +1,13 @@
 @extends('admin.index')
 @section('admin_section')
+@if(session()->has('info_warning'))
+   <script>
+      $.dialog({
+         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         content: '{!!session()->get('info_warning')!!}',
+      });
+   </script>
+@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -36,11 +44,13 @@
                               <td> {{$value->pub_name}}</td>
                               @if($value->pub_img==null)
                               <td>
-                                 <img src="{{asset('asset/images/user/01.jpg')}}" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                 <img src="{{asset('asset/images/user/01.jpg')}}" class="img-fluid avatar-50 rounded"
+                                    alt="author-profile">
                               </td>
                               @else
                               <td>
-                                 <img src="{{asset('images/publisher/'.$value->pub_img)}}" class="img-fluid avatar-50 rounded" alt="author-profile">
+                                 <img src="{{asset('images/publisher/'.$value->pub_img)}}"
+                                    class="img-fluid avatar-50 rounded" alt="author-profile">
                               </td>
                               @endif
                               <td>
@@ -56,10 +66,12 @@
                               <td>
                                  <div class="flex align-items-center list-user-action">
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Edit" href="{{route('admin.edit_publisher_view',[$value->pub_id])}}"><i
+                                       data-original-title="Edit"
+                                       href="{{route('admin.edit_publisher_view',[$value->pub_id])}}"><i
                                           class="ri-pencil-line"></i></a>
                                     <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Delete" href="route('admin.delete_publisher')"><i class="ri-delete-bin-line"></i></a>
+                                       data-original-title="Delete" href="route('admin.delete_publisher')"><i
+                                          class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -69,6 +81,7 @@
                   </div>
                </div>
             </div>
+            {{ $pub_list->links('admin.pagination.simple'),["paginator"=>$pub_list]}}
          </div>
       </div>
    </div>

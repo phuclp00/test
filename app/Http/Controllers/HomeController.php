@@ -44,10 +44,11 @@ class HomeController extends Controller
         $pagi_list_product = (new ShopController)->paginate_list_view();
 
         //$list_get_category=(new CategoryController)->get_category();
-       
+
     }
     // FRONT-END
-    public function view_Admin(){
+    public function view_Admin()
+    {
         $this->middleware('auth');
     }
     public function view()
@@ -56,7 +57,7 @@ class HomeController extends Controller
     }
     public function index()
     {
-        return view($this->pathViewController .'index');
+        return view($this->pathViewController . 'index');
     }
     public function about_view()
     {
@@ -113,12 +114,12 @@ class HomeController extends Controller
     public function get_items(Request $request)
     {
         $id = $request->id;
-        $cat_id = $request->cat_id;  
-        $result=Book_list_view::where('book_id',$id)->first();
-        $arr_thumb=array();
-        $i=1;
-        while($i<8){
-            $arr_thumb[]=$result["thumb$i"]==null?null:$result["thumb$i"];
+        $cat_id = $request->cat_id;
+        $result = Book_list_view::where('book_id', $id)->first();
+        $arr_thumb = array();
+        $i = 1;
+        while ($i < 8) {
+            $arr_thumb[] = $result["thumb$i"] == null ? null : $result["thumb$i"];
             $i++;
         }
         return view($this->pathViewController . $this->subpatchViewController . '.single-product', [
@@ -148,10 +149,9 @@ class HomeController extends Controller
     }
     public function checkout_view()
     {
-        if(session()->has('user_info')){
-           return view($this->pathViewController . $this->subpatchViewController  . '.checkout');
-        }
-        else{
+        if (session()->has('user_info')) {
+            return view($this->pathViewController . $this->subpatchViewController  . '.checkout');
+        } else {
             return view('public.page.my-account');
         }
     }
@@ -166,61 +166,73 @@ class HomeController extends Controller
     }
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // BACK-END
-    
-    public function admin_login(){
+
+    public function admin_login()
+    {
         return view('admin.index');
     }
-    public function dash_view(){
+    public function dash_view()
+    {
         return view('admin.layout.admin-dashboard');
     }
     //Category
-    public function category_view(){
-        $result=CategoryModel::all();
-        return view('admin.layout.admin-category',['cat_list'=>$result]);
+    public function category_view()
+    {
+        $result = CategoryModel::paginate(6);
+        return view('admin.layout.admin-category', ['cat_list' => $result]);
     }
-    public function category_add_view(Request $request){
+    public function category_add_view(Request $request)
+    {
         return view('admin.layout.add.admin-add-category');
     }
-     public function category_edit_view(Request $request){
-        $result=CategoryModel::find($request->cat_id);
-        
-        return view('admin.layout.edit.admin-edit-category',['category'=>$result]);
+    public function category_edit_view(Request $request)
+    {
+        $result = CategoryModel::find($request->cat_id);
+
+        return view('admin.layout.edit.admin-edit-category', ['category' => $result]);
     }
     //Book
-    public function book_list_view(){
-        $result=Book_list_view::all();
-        return view('admin.layout.admin-books',['book'=>$result]);
+    public function book_list_view()
+    {
+        $result = Book_list_view::paginate(5);
+        return view('admin.layout.admin-books', ['book' => $result]);
     }
-    public function book_list_add_view(Request $request){
-        $cat=CategoryModel::all();
-        $pub=PublisherModel::all();
-        return view('admin.layout.add.admin-add-book',['cat'=>$cat,'pub'=>$pub]);
+    public function book_list_add_view(Request $request)
+    {
+        $cat = CategoryModel::all();
+        $pub = PublisherModel::all();
+        return view('admin.layout.add.admin-add-book', ['cat' => $cat, 'pub' => $pub]);
     }
     public function book_edit_view(Request $request)
     {
-        $cat=CategoryModel::all();
-        $pub=PublisherModel::all();
-        $result=ProductModel::find($request->book_id);
-        $thumb=BookThumbnailModel::find($request->book_id);
-        $i=1;
-        $old_thumb=[];
-        while($i<8){
-            $old_thumb[]=$thumb["thumbnail_$i"]==null?null:$thumb["thumbnail_$i"];
-            $i++;
+        $cat = CategoryModel::all();
+        $pub = PublisherModel::all();
+        $result = ProductModel::find($request->book_id);
+        $thumb = BookThumbnailModel::find($request->book_id);
+        $old_thumb = null;
+        if ($thumb != null) {
+            $i = 1;
+            while ($i <= 7) {
+                $old_thumb[] = $thumb["thumbnail_$i"] == null ? null : $thumb["thumbnail_$i"];
+                $i++;
+            }
         }
-        return view('admin.layout.edit.admin-edit-book',['book'=>$result,'cat'=>$cat,'pub'=>$pub,'old_thumb'=>$old_thumb]);
+        return view('admin.layout.edit.admin-edit-book', ['book' => $result, 'cat' => $cat, 'pub' => $pub, 'old_thumb' => $old_thumb]);
     }
     //Publisher 
-    public function publisher_view(){
-        $result=PublisherModel::all();
-        return view('admin.layout.admin-publisher',['pub_list'=>$result]);
+    public function publisher_view()
+    {
+        $result = PublisherModel::paginate(6);
+        return view('admin.layout.admin-publisher', ['pub_list' => $result]);
     }
-    public function add_publisher_view(){
+    public function add_publisher_view()
+    {
         return view('admin.layout.add.admin-add-publisher');
     }
-    public function edit_publisher_view(Request $request){
-        $result=PublisherModel::find($request->pub_id);
-        return view('admin.layout.edit.admin-edit-publisher',['publisher'=>$result]);
+    public function edit_publisher_view(Request $request)
+    {
+        $result = PublisherModel::find($request->pub_id);
+        return view('admin.layout.edit.admin-edit-publisher', ['publisher' => $result]);
     }
     //User
     public function user_list_view()
@@ -232,4 +244,3 @@ class HomeController extends Controller
         return view('admin.layout.add.add-user');
     }
 }
-

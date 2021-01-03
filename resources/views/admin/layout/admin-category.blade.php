@@ -1,5 +1,13 @@
 @extends('admin.index')
 @section('admin_section')
+@if(session()->has('info_warning'))
+   <script>
+      $.dialog({
+         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         content: '{!!session()->get('info_warning')!!}',
+      });
+   </script>
+@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -63,6 +71,7 @@
                   </div>
                </div>
             </div>
+            {{ $cat_list->links('admin.pagination.simple'),["paginator"=>$cat_list]}}
          </div>
       </div>
    </div>
