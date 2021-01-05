@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\URL;
 
 use Request;
 use Session;
@@ -51,5 +52,6 @@ class AppServiceProvider extends ServiceProvider
  
         Schema::defaultStringLength(255);
         Paginator::useBootstrap();
+
     }
 }

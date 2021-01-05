@@ -57,7 +57,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
                     $controllerName = 'login';
                     Route::group(['prefix' => $controllerName], function () {
                         $controller = LoginController::class;
-                        Route::get('/login-view', [$controller , 'show_login'])->name("show_login");
+                        Route::get('/', [$controller , 'show_login'])->name("show_login");
                         Route::get('/sign-in', [$controller , 'Login'])->name("login_signin");
                         Route::get('/sign-up', [$controller , 'Register'])->name("login_signup");
                         Route::get('/log-out', [$controller , 'log_out'])->name("log_out");
@@ -196,11 +196,16 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 
           
 //===================================ADMIN ===========================================================================//
-        Route::group(['prefix' => 'admin'], function () {
+        Route::group(['middleware'=>'admin','prefix' => 'admin'], function () {
+            
+             //================================ ADMIN AUTH ================================================================//
 
-            Route::get('/', function () {
-                return view('admin.index');
-            })->name('index');
+            Route::get('/', [LoginController::class,'admin_auth'])->name('admin.author');
+
+             //================================ LOGIN ADMIN================================================================//
+
+            Route::POST('/login',[LoginController::class,'admin_login'])->name('admin_login');
+            Route::POST('/register',[LoginController::class,'admin_register'])->name('admin_register');
 
             //Dash board
             Route::get('/dashboard',[HomeController::class,'dash_view'])->name('admin.dash_view');
@@ -216,7 +221,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Category edit 
             Route::get('/category-edit/{cat_id}',[CategoryController::class,'category_edit'])->name('admin.edit_category');
             //Category delete 
-            Route::get('/category-delete{cat_id}',[CategoryController::class,'category_delete'])->name('admin.delete_category');
+            Route::get('/category-delete/{cat_id}',[CategoryController::class,'category_delete'])->name('admin.delete_category');
 
             //==========================================Book list==============================================================
             Route::get('/book-list',[HomeController::class,'book_list_view'])->name('admin.book_list_view');
@@ -229,7 +234,7 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             //Book edit
             Route::post('/book-edit',[ProductController::class,'book_edit'])->name('admin.edit_book');
             //Book delete 
-            Route::post('/book-delete/book_id={book_id}',[ProductController::class,'book_delete'])->name('admin.book_delete');
+            Route::get('/book-delete/book_id={book_id}',[ProductController::class,'book_delete'])->name('admin.book_delete');
 
             //==========================================Publisher=============================================================
             Route::get('/publisher',[HomeController::class,'publisher_view'])->name('admin.publisher_view');
@@ -246,22 +251,17 @@ $prefixAdmin = Config::get('01.url.prefix_admin', 'error');
             
 
             //================================ MANAGER USER================================================================//
+            // User list view
             Route::get('user-list',[HomeController::class,'user_list_view'])->name('admin.user_list_view');
+            // User add view
             Route::get('add-user',[HomeController::class,'add_user'])->name('admin.add_user');
-              //================================ MANAGER CATEEGORY================================================================//
-            
-            Route::get('cat-delete/{cat_id}',[CategoryController::class,'cat_delete'])->name('cat_delete');
-            //================================ LOGIN ADMIN================================================================//
-   
-            Route::POST('/admin',[HomeController::class,'admin_login'])->name('admin_login');
+
+           
              //================================ SLIDER ====================================================================//
     
 });
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
     //================================ UPLOAD_ FILE ========================================================//
         Route::post('fileupload', [FileuploadController::class,'store'])->name('fileupload.store');
     //================================ AJAX - POST REQUEST =================================================//

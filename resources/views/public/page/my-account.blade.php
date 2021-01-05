@@ -47,15 +47,15 @@
 						<div class="account__form">
 							<div class="input__box">
 								<label>User Name <span>*</span></label>
-								<input type="text" name="username_register" value="">
+								<input type="text" name="username_register" value="{{old('username_register')}}">
 							</div>
 							<div class="input__box">
 								<label>Email address <span>*</span></label>
-								<input type="email" name="email_register" value="">
+								<input type="email" name="email_register" value="{{old('email_register')}}">
 							</div>
 							<div class="input__box">
 								<label>Password<span>*</span></label>
-								<input type="password" name="password_register" value="">
+								<input type="password" name="password_register" value="{{old('password_register')}}">
 							</div>						
 							<div class="form__btn">
 								<button type="submit">Register</button>

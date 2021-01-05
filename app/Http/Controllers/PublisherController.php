@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PublisherRequest;
 use Illuminate\Http\Request;
 use App\Models\PublisherModel as MainModel;
 use App\Models\ProductModel;
@@ -30,46 +31,68 @@ class PublisherController extends Controller
 
         view()->share('top_list_category', $top_items);
     }
-    
-    public function edit_publisher(Request $request){
-        return view('');
 
+    public function edit_publisher(PublisherRequest $request)
+    {
+        try {
+            $data = PublisherModel::find($request->pub_id);
+            $file = new FileuploadController();
+
+            $data->pub_name = $request->pub_name;
+            $temp_file = $request->img == null ? null : $request->img;
+            if ($temp_file != null) {
+
+                //Delete old image
+                if ($data->pub_img != null) {
+                    $file->destroy(null, null, "publisher/$data->pub_img");
+                }
+                //update new image
+                $data->pub_img =  $data->pub_id . "_" . $data->pub_name . "." . $temp_file->clientExtension();
+            }
+            $data->description = $request->content;
+            $result = $data->save();
+            //Store image after update
+            if ($result == true && $temp_file != null) {
+                $file->store($request->img, "publisher", $data->pub_id . "_" . $data->pub_name);
+            }
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Add ' . $request->pub_name . ' Successfully !! </div>');
+            return \redirect()->route('admin.publisher_view');
+        } catch (\Throwable $th) {
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Add ' . $request->pub_name . 'Fail,Try Again !! </div>');
+            return \redirect()->back();
+        }
+    }
+    public function add_publisher(PublisherRequest $request)
+    {
+
+        try {
+            $data = new PublisherModel();
+            $data_file = new FileuploadController();
+            $data->pub_id = $request->pub_id;
+            $data->pub_name = $request->pub_name;
+            $temp_file = $request->img;
+            $data->pub_img = $temp_file->getClientOriginalName();
+            $data->description = $request->content;
+            $data_file->store($request->img, 'publisher');
+            $data->save();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->pub_name . ' Successfully !! </div>');
+
+            return \redirect()->route('admin.publisher_view');
+        } catch (\Throwable $th) {
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->pub_name . 'Fail,Try Again !! </div>');
+
+            return \redirect()->back();
+        }
     }
     public function delete_publisher(Request $request)
     {
-        # code...
-    }
-    public function add_publisher(Request $request)
-    {
-
         try {
-            $data= new PublisherModel();
-            $data_file = new FileuploadController();
-            $data->pub_id=$request->pub_id;
-            $data->pub_name=$request->pub_name;
-            $temp_file=$request->img;
-            $data->pub_img=$temp_file->getClientOriginalName();
-            $data->description=$request->content;
-            $data_file->store($request->img,'publisher');
-            $data->save();
-            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">
-                  Thanh cong </div>');
-             return \redirect()->back();
-        } catch (\Throwable $th) {
-            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
-                  Cập nhật ảnh thất bại </div>');
-             return \redirect()->back();
-        }
-    }
-    public function admin_pub_delete(Request $request)
-    {
-        try {
-            MainModel::destroy($request->cat_id);
-
-            $request->session()->flash('cat_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá danh mục' . $request->cat_id . ' thành công </div>');
+            MainModel::destroy($request->pub_id);
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Delete ' . $request->pub_name . ' Successfully !! </div>');
         } catch (Exception $e) {
-            $request->session()->flash('cat_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá danh mục ' . $request->cat_id . 'thất bại, vui lòng thử lại </div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Delete ' . $request->pub_name . 'Failed, Cannot Be Deleted If It Has Been Used By A Book !! </div>');
+        } finally {
+            return \redirect()->route("admin.publisher_view");
         }
-        return \redirect()->back();
     }
 }

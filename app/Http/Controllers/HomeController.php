@@ -14,6 +14,7 @@ use App\Cart;
 use App\Models\Book_list_view;
 use App\Models\BookThumbnailModel;
 use App\Models\PublisherModel;
+use App\Models\Show_info_user;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
 
@@ -237,10 +238,12 @@ class HomeController extends Controller
     //User
     public function user_list_view()
     {
-        return view('admin.layout.admin-user-list');
+        $result= Show_info_user::paginate(6);
+        return view('admin.layout.admin-user-list',['result'=>$result]);
     }
     public function add_user()
     {
+        
         return view('admin.layout.add.add-user');
     }
 }

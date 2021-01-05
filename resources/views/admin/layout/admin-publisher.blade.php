@@ -1,13 +1,5 @@
 @extends('admin.index')
 @section('admin_section')
-@if(session()->has('info_warning'))
-   <script>
-      $.dialog({
-         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
-         content: '{!!session()->get('info_warning')!!}',
-      });
-   </script>
-@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -65,12 +57,12 @@
                               @endif
                               <td>
                                  <div class="flex align-items-center list-user-action">
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                    <a class="bg-primary option" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Edit"
                                        href="{{route('admin.edit_publisher_view',[$value->pub_id])}}"><i
                                           class="ri-pencil-line"></i></a>
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Delete" href="route('admin.delete_publisher')"><i
+                                    <a class="bg-primary option" data-toggle="tooltip" data-placement="top" title=""
+                                       data-original-title="Delete" href="{{route('admin.delete_publisher',[$value->pub_id])}}"><i
                                           class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>

@@ -1,13 +1,5 @@
 @extends('admin.index')
 @section('admin_section')
-@if(session()->has('info_warning'))
-   <script>
-      $.dialog({
-         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
-         content: '{!!session()->get('info_warning')!!}',
-      });
-   </script>
-@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -17,9 +9,6 @@
                <div class="iq-card-header d-flex justify-content-between">
                   <div class="iq-header-title">
                      <h4 class="card-title">Category Lists</h4>
-                     @if(session()->has('info_warning'))
-                           {!!session()->get('info_warning')!!}
-                     @endif
                   </div>
                   <div class="iq-card-header-toolbar d-flex align-items-center">
                      <a href="{{route('admin.add-category_view')}}" class="btn btn-primary">Add New Category</a>
@@ -56,10 +45,10 @@
                            @endif
                               <td>
                                  <div class="flex align-items-center list-user-action">
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                    <a class="bg-primary option" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Edit" href="{{route('admin.edit_category_view',$value->cat_id)}}"><i
                                           class="ri-pencil-line"></i></a>
-                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title=""
+                                    <a class="bg-primary option" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Delete" href="{{route('admin.delete_category',$value->cat_id)}}"><i class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>

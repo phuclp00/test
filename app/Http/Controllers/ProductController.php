@@ -94,6 +94,7 @@ class ProductController extends Controller
             $file_name = $request->img;
             $data->img = $file_name != null ? $data->book_id . "_" . $data->book_name . "." . $file_name->clientExtension() : null;
             //Thumb insert
+            $thumb->book_id = $request->book_id;
             $ext_thumb = $request->thumb;
             if ($ext_thumb != null) {
                 $i = 0;
@@ -103,7 +104,6 @@ class ProductController extends Controller
                     $i++;
                 }
             }
-
             //Insert on DB
             $check = $data->save();
             $check = $thumb->save();
@@ -122,11 +122,10 @@ class ProductController extends Controller
                     }
                 }
             }
-            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Upload thành công </div>');
-            return \redirect()->back();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Add ' . $request->book_name . ' Successfully !! </div>');
         } catch (QueryException $e) {
-            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
-                  ' . $e->getMessage() . '</div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Add ' . $request->book_name . 'Fail,Try Again !! </div>');
+        } finally {
             return \redirect()->back();
         }
     }
@@ -143,6 +142,7 @@ class ProductController extends Controller
             $data->price = $request->price;
             $data->promotion_price = $request->promotion;
             $file_name = $request->img != null ? $request->img : null;
+            //Thumb check request
             $ext_thumb = $request->thumb != null ? $request->thumb : null;
 
             if ($file_name != null && $ext_thumb != null) {
@@ -173,8 +173,7 @@ class ProductController extends Controller
                 }
             }
             $check = $data->save();
-            $check = $thumb->save();
-
+            $check = $ext_thumb == null ? true : $thumb->save();
             //Upload images
             if ($check == true) {
                 //Book image update
@@ -190,11 +189,10 @@ class ProductController extends Controller
                     }
                 }
             }
-            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Uploaded Successfully</div>');
-            return \redirect()->back();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->book_name . ' Successfully !! </div>');
+            return \redirect()->route('admin.book_list_view');
         } catch (QueryException $e) {
-            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">
-                  ' . $e->getMessage() . '</div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->book_name . 'Fail,Try Again !! </div>');
             return \redirect()->back();
         }
     }
@@ -202,10 +200,11 @@ class ProductController extends Controller
     {
         try {
             $result = ProductModel::destroy($request->book_id);
-            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"">Deleted Successfully</div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->book_name . ' Successfully !! </div>');
         } catch (\Throwable $th) {
-            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"">Deleted Failed </div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Edit ' . $request->book_name . 'Fail,Try Again !! </div>');
+        } finally {
+            return redirect()->back();
         }
-        return redirect()->back();
     }
 }

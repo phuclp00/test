@@ -25,18 +25,27 @@
 </head>
 
 <body>
+    @if(session()->has('info_warning'))
+    <script>
+        $.dialog({
+         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         content: '{!!session()->get('info_warning')!!}',
+      });
+    </script>
+    @endif
     <!-- loader Start -->
     <div id="loading">
         <div id="loading-center">
         </div>
     </div>
-    <!-- loader END -->
+    <div class="wrapper">
+        <!-- loader END -->
         @include('admin.menu.menu')
         <!-- Page Content  -->
         @yield('admin_section')
+        <!-- Wrapper END -->
+        <!-- Footer -->
     </div>
-    <!-- Wrapper END -->
-    <!-- Footer -->
     <footer class="iq-footer">
         <div class="container-fluid">
             <div class="row">
@@ -52,6 +61,7 @@
             </div>
         </div>
     </footer>
+
     <!-- Footer END -->
     <!-- color-customizer -->
     <div class="iq-colorbox color-fix">
@@ -59,7 +69,8 @@
         <div id="right-sidebar-scrollbar" class="iq-colorbox-inner">
             <div class="clearfix color-picker">
                 <h3 class="iq-font-black">Booksto Awesome Color</h3>
-                <p>This color combo available inside whole template. You can change on your wish, Even you can create your own with limitless possibilities! </p>
+                <p>This color combo available inside whole template. You can change on your wish, Even you can create
+                    your own with limitless possibilities! </p>
                 <ul class="iq-colorselect clearfix">
                     <li class="color-1 iq-colormark" data-style="color-1"></li>
                     <li class="color-2" data-style="iq-color-2"></li>
@@ -89,30 +100,8 @@
     <!-- color-customizer END -->
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{{asset('asset/js/ls.js')}}" type="text/javascript"></script>
     <script src="{{asset('asset/js/admin_ajax.js')}}"></script>
-    <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .catch( error => {
-                console.error( error );
-            } );
-        showlist_thumb = function() {
-            var input = document.getElementById('thump');
-            var output = document.getElementById('fileList');
-            output.innerHTML = '<ul>';
-            for (var i = 0; i < input.files.length; ++i) {
-            output.innerHTML += '<li>' + input.files.item(i).name + '</li>';
-            }
-            output.innerHTML += '</ul>';
-         }
-         showname_file = function() {
-            var la = document.getElementById('picture');
-            var ot = document.getElementById('file_name');
-            ot.innerHTML = '<ul>';
-                ot.innerHTML += '<li>' + la.files.item(0).name + '</li>';
-            ot.innerHTML += '</ul>';
-         }
-    </script>
     <script src="{{asset('asset/js/jquery.min.js')}}"></script>
     <script src="{{asset('asset/js/popper.min.js')}}"></script>
     <script src="{{asset('asset/js/bootstrap.min.js')}}"></script>

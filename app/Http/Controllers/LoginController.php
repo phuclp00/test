@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -73,6 +74,11 @@ class LoginController extends Controller
         } catch (Exception $e) {
             $request->session()->flash('logout_status', '<div class="alert alert-danger">"Tạo tài khoản thát bại, vui lòng thử lại" </div>');
             return \redirect()->back();
+        }
+    }
+    public function admin_auth(Request $request){
+        if (Auth::check()) {
+            
         }
     }
 }

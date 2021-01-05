@@ -1,13 +1,5 @@
 @extends('admin.index')
 @section('admin_section')
-@if(session()->has('info_warning'))
-   <script>
-      $.dialog({
-         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
-         content: '{!!session()->get('info_warning')!!}',
-      });
-   </script>
-@endif
 <!-- Page Content  -->
 <div id="content-page" class="content-page">
    <div class="container-fluid">
@@ -63,10 +55,10 @@
                                        data-original-title="Edit" data-value="{{$item->book_id}}"
                                        href="{{route('admin.edit_book_view',$item->book_id)}}"><i
                                           class="ri-pencil-line"></i></a>
-                                    <a class="bg-primary option" data-toggle="tooltip"
-                                    data-text="{{$item->book_id}}"
-                                     data-placement="top" title="" data-original-title="Delete" href="{{route('admin.book_delete',['book_id'=>$item->book_id])}}"><i
-                                       class="ri-delete-bin-line"></i></a>
+                                    <a class="bg-primary option" data-toggle="tooltip" data-text="{{$item->book_id}}"
+                                       data-placement="top" title="" data-original-title="Delete"
+                                       href="{{route('admin.book_delete',['book_id'=>$item->book_id])}}"><i
+                                          class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -81,5 +73,7 @@
       </div>
    </div>
 </div>
-
 @endsection
+@push('script')
+
+@endpush
