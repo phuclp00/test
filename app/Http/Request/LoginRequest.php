@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Request;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,8 +24,8 @@ class LoginRequest extends FormRequest
     public function rules()
     {
         return [
-            'txtEmail' => 'required',
-            'txtPassword' => 'required'
+            'email' => 'required',
+            'password' => 'required'
         ];
     }
 
@@ -36,8 +36,8 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            'txtEmail.required' => 'Vui lòng nhập email',
-            'txtPassword.required' => 'Vui lòng nhập password'
+            'email.required' => 'Vui lòng nhập email',
+            'password.required' => 'Vui lòng nhập password'
         ];
     }
 }

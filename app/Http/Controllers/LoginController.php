@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Request\LoginRequest;
 use App\Models\Show_info_user;
 use App\Models\UserModel;
 use App\Models\UserDetail;
@@ -77,15 +78,35 @@ class LoginController extends Controller
         }
     }
     public function admin_auth(Request $request){
-       if(Auth::check()){
-
+       if(Auth::check("admin")){
+            return \redirect()->route("admin.dash_view");
        }
        else
-       \redirect()->route('admin_login');
+       return \redirect()->route('admin_login_view');
     }
     public function admin_register(Request $request)
     {
         $user = new UserModel();
-        dd($request);
+        
     }
+    public function admin_login(Request $loginRequest )
+    {
+        $result=$loginRequest->only('email','password');
+        if(Auth::attempt($result)){
+            $loginRequest->session()->regenerate();
+            return redirect()->route('admin.dash_view');
+        }
+        else
+           return \redirect()->route("admin_login_view");
+    }
+    public function admin_logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect()->route("admin_login_view");
+    }                 
 }

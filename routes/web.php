@@ -199,16 +199,17 @@ Route::group(['prefix' => 'admin'], function () {
     //================================ ADMIN AUTH ================================================================//
 
     Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');
-
+    Route::get('/', [HomeController::class, 'dash_view'])->name('index');
+    
     //================================ LOGIN ADMIN================================================================//
 
     Route::get('login',[HomeController::class,'login_view'])->name('admin_login_view');
     Route::get('register',[HomeController::class,'register_view'])->name('admin_register_view');
 
-    Route::POST('/login-admin', [LoginController::class, 'admin_login'])->name('admin_login');
-    Route::POST('/register-admin', [LoginController::class, 'admin_register'])->name('admin_register');
+    Route::get('logout',[LoginController::class,'admin_logout'])->name('admin_logout');
+    Route::post('/login-admin', [LoginController::class, 'admin_login'])->name('admin_login');
+    Route::post('/register-admin', [LoginController::class, 'admin_register'])->name('admin_register');
 
-    Route::group(['middleware' => ['admin']], function () {
 
         //Dash board
         Route::get('/dashboard', [HomeController::class, 'dash_view'])->name('admin.dash_view');
@@ -261,7 +262,6 @@ Route::group(['prefix' => 'admin'], function () {
 
 
         //================================ SLIDER ====================================================================//
-    });
 });
 
 

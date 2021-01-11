@@ -11,22 +11,22 @@
                             <h3 class="mb-0 text-center text-white">Sign in</h3>
                             <p class="text-center text-white">Enter your email address or username and password to
                                 access admin panel.</p>
-                            <form action="{{route('admin_login')}}" class="mt-4 form-text" method="post">
+                            <form action="{{route('admin_login')}}" class="mt-4 form-text" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
-                                    <input type="email" name="username" class="form-control mb-0"
-                                        id="exampleInputEmail1" placeholder="Enter username" value="{{old('username')}}">
+                                    <input type="email" name="email" class="form-control mb-0"
+                                        id="email" placeholder="Enter username" value="{{old('email')}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputPassword1">Password</label>
                                     <a href="#" class="float-right text-dark">Forgot password?</a>
                                     <input type="password" name="password" class="form-control mb-0"
-                                        id="exampleInputPassword1" placeholder="Password" value="{{old('password')}}">
+                                        id="password" placeholder="Password" value="{{old('password')}}">
                                 </div>
                                 <div class="d-inline-block w-100">
                                     <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <input type="checkbox" class="custom-control-input" id="remember" name="remember">
                                         <label class="custom-control-label" for="customCheck1">Remember Me</label>
                                     </div>
                                 </div>

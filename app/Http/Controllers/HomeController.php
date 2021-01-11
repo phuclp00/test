@@ -176,10 +176,6 @@ class HomeController extends Controller
     {
         return view('admin.login.sign-up');
     }
-    public function admin_login()
-    {
-        return view('admin.index');
-    }
     public function dash_view()
     {
         return view('admin.layout.admin-dashboard');
