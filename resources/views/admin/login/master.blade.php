@@ -25,10 +25,11 @@
         <div id="loading-center">
         </div>
     </div>
+    <div class="     bg-form-login">
     <!-- loader END -->
 
     @yield('login')
-
+    </div>
     <!-- color-customizer -->
     <div class="iq-colorbox color-fix">
         <div class="buy-button"> <a class="color-full" href="#"><i class="fa fa-spinner fa-spin"></i></a> </div>

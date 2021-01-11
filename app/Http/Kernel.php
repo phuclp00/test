@@ -22,7 +22,7 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
          // appending custom middleware 
-         'admin' => \App\Http\Middleware\Admin::class,
+         
 
     ];
 
@@ -46,6 +46,7 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        
     ];
 
     /**

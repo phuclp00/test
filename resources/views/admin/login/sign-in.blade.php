@@ -1,7 +1,6 @@
 @extends('admin.login.master')
 <!-- Sign in Start -->
 @section('login')
-
 <section class="sign-in-page">
     <div class="container p-0">
         <div class="row no-gutters height-self-center">
@@ -12,7 +11,7 @@
                             <h3 class="mb-0 text-center text-white">Sign in</h3>
                             <p class="text-center text-white">Enter your email address or username and password to
                                 access admin panel.</p>
-                            <form class="mt-4 form-text" method="post">
+                            <form action="{{route('admin_login')}}" class="mt-4 form-text" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Email address</label>
@@ -34,7 +33,7 @@
                                 <div class="sign-info text-center">
                                     <button type="submit" class="btn btn-white d-block w-100 mb-2">Sign in</button>
                                     <span class="text-dark dark-color d-inline-block line-height-2">Don't have an
-                                        account? <a href="{{route('admin_register')}}" class="text-white">Sign
+                                        account? <a href="{{route('admin_register_view')}}" class="text-white">Sign
                                             up</a></span>
                                 </div>
                             </form>

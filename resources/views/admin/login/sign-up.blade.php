@@ -1,5 +1,5 @@
-@extends('login.master')
-@section('name')
+@extends('admin.login.master')
+@section('login')
 <!-- Sign up Start -->
 <section class="sign-in-page">
     <div class="container p-0">
@@ -11,26 +11,36 @@
                             <h3 class="mb-0 text-center text-white">Sign Up</h3>
                             <p class="text-center text-white">Enter your email address and password to access admin
                                 panel.</p>
-                            <form class="mt-4 form-text">
+                            <form action="{{route('admin_register')}}" class="mt-4 form-text" method="POST">
+                                @csrf
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1"> User Name</label>
-                                    <input type="text" name="username" class="form-control mb-0" id="exampleInputEmail1"
+                                    <label for="username"> User Name</label>
+                                    <input type="text" name="username" class="form-control mb-0" id="username"
                                         placeholder="Your Full Name" value="{{old('username')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail2">Email address</label>
-                                    <input type="email" name="email" class="form-control mb-0" id="exampleInputEmail2"
+                                    <label for="level"> Level </label>
+                                    <select  class="form-control mb-0" name="level" id="level">
+                                        <option value="admin">Admin</option>
+                                        <option value="user">Guest</option>
+                                        <option value="seller">Seller</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email address</label>
+                                    <input type="email" name="email" class="form-control mb-0" id="email"
                                         placeholder="Enter email" value="{{old('email')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="password" class="form-control mb-0" id="exampleInputPassword1"
-                                        placeholder="Password" value="{{old('password')}}">
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control mb-0"
+                                        id="password" placeholder="Password" value="{{old('password')}}">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputPassword1">Password</label>
-                                    <input type="password" name="repassword" class="form-control mb-0" id="exampleInputPassword1"
-                                        placeholder="Re-Password" value="{{old('repassword')}}">
+                                    <label for="repassword">Password</label>
+                                    <input type="password" name="repassword" class="form-control mb-0"
+                                        id="repassword" placeholder="Re-Password"
+                                        value="{{old('repassword')}}">
                                 </div>
                                 <div class="d-inline-block w-100">
                                     <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
@@ -42,7 +52,7 @@
                                 <div class="sign-info text-center">
                                     <button type="submit" class="btn btn-white d-block w-100 mb-2">Sign Up</button>
                                     <span class="text-dark d-inline-block line-height-2">Already Have Account ? <a
-                                            href="{{route('admin_login')}}" class="text-white">Log In</a></span>
+                                            href="{{route('admin_login_view')}}" class="text-white">Log In</a></span>
                                 </div>
                             </form>
                         </div>

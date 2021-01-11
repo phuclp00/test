@@ -77,8 +77,15 @@ class LoginController extends Controller
         }
     }
     public function admin_auth(Request $request){
-        if (Auth::check()) {
-            
-        }
+       if(Auth::check()){
+
+       }
+       else
+       \redirect()->route('admin_login');
+    }
+    public function admin_register(Request $request)
+    {
+        $user = new UserModel();
+        dd($request);
     }
 }

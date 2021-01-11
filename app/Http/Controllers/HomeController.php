@@ -168,6 +168,14 @@ class HomeController extends Controller
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // BACK-END
 
+    public function login_view()
+    {
+        return view('admin.login.sign-in');
+    }
+    public function register_view()
+    {
+        return view('admin.login.sign-up');
+    }
     public function admin_login()
     {
         return view('admin.index');
