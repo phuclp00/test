@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Illuminate\Support\Facades\Auth;
 
 class Admin 
 {
@@ -17,7 +18,8 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->level == "admin"){
+        dd(auth());
+        if(Auth::user()->){
             return $next($request);
           }
         else

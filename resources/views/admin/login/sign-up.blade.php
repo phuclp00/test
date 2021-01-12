@@ -11,6 +11,8 @@
                             <h3 class="mb-0 text-center text-white">Sign Up</h3>
                             <p class="text-center text-white">Enter your email address and password to access admin
                                 panel.</p>
+                                @include('post.create')
+
                             <form action="{{route('admin_register')}}" class="mt-4 form-text" method="POST">
                                 @csrf
                                 <div class="form-group">
@@ -44,8 +46,8 @@
                                 </div>
                                 <div class="d-inline-block w-100">
                                     <div class="custom-control custom-checkbox d-inline-block mt-2 pt-1">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">I accept <a href="#"
+                                        <input type="checkbox" class="custom-control-input" name="checkTC" id="checkTC" >
+                                        <label class="custom-control-label" for="checkTC">I accept <a href="#"
                                                 class="text-light">Terms and Conditions</a></label>
                                     </div>
                                 </div>

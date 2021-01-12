@@ -1,7 +1,7 @@
 <!-- Sidebar  -->
 <div class="iq-sidebar">
    <div class="iq-sidebar-logo d-flex justify-content-between">
-      <a href="{{route('index')}}" class="header-logo">
+      <a href="{{route('admin.dash_view')}}" class="header-logo">
          <img src="{{asset('asset/images/logo.png')}}" class="img-fluid rounded-normal" alt="">
          <div class="logo-title">
             <span class="text-primary text-uppercase">Bookstore</span>
@@ -23,7 +23,7 @@
                      class="ripple rippleEffect"></span><i class="las la-home iq-arrow-left"></i><span>Shop</span><i
                      class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                <ul id="dashboard" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle">
-                  <li><a href="{{route('index')}}"><i class="las la-house-damage"></i>Home Page</a></li>
+                  <li><a href="{{route('admin.dash_view')}}"><i class="las la-house-damage"></i>Home Page</a></li>
                   <li><a href="#"><i class="ri-function-line"></i>Shop Page</a></li>
                   <li><a href="#"><i class="ri-book-line"></i>Blog Page</a></li>
                </ul>
@@ -215,10 +215,10 @@
                <div class="main-circle"><i class="las la-bars"></i></div>
             </div>
             <div class="iq-navbar-logo d-flex justify-content-between">
-               <a href="index-2.html" class="header-logo">
+               <a href="{{route('admin.dash_view')}}" class="header-logo">
                   <img src="{{asset('asset/images/logo.png')}}" class="img-fluid rounded-normal" alt="">
                   <div class="logo-title">
-                     <span class="text-primary text-uppercase">Booksto</span>
+                     <span class="text-primary text-uppercase">Bookstore</span>
                   </div>
                </a>
             </div>
@@ -387,14 +387,14 @@
                   <a href="#" class="search-toggle iq-waves-effect d-flex align-items-center">
                      <img src="{{asset('asset/images/user/1.jpg')}}" class="img-fluid rounded-circle mr-3" alt="user">
                      <div class="caption">
-                        <h6 class="mb-1 line-height">Barry Tech</h6>
+                        <h6 class="mb-1 line-height">{{Auth::user()->user_name}}</h6>
                      </div>
                   </a>
                   <div class="iq-sub-dropdown iq-user-dropdown">
                      <div class="iq-card shadow-none m-0">
                         <div class="iq-card-body p-0 ">
                            <div class="bg-primary p-3">
-                              <h5 class="mb-0 text-white line-height">Hello Barry Tech</h5>
+                              <h5 class="mb-0 text-white line-height">Hello {{Auth::user()->user_name}} </h5>
                               <span class="text-white font-size-12">Available</span>
                            </div>
                            <a href="profile.html" class="iq-sub-card iq-bg-primary-hover">

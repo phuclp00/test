@@ -7,6 +7,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Booksto - Responsive Bootstrap 4 Admin Dashboard Template</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{asset('asset/dist/jquery-confirm.min.js')}}" type="text/javascript"></script>
+    <link rel="stylesheet" href="{{asset('asset/dist/jquery-confirm.min.css')}}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('asset/images/favicon.ico')}}" />
     <!-- Bootstrap CSS -->
@@ -16,10 +19,19 @@
     <!-- Style CSS -->
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <!-- Responsive CSS -->
-<link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
+    <link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
+    <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js" type="text/javascript"></script>
 </head>
 
 <body>
+    @if(session()->has('info_warning'))
+    <script>
+        $.dialog({
+         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         content: '{!!session()->get('info_warning')!!}',
+      });
+    </script>
+    @endif
     <!-- loader Start -->
     <div id="loading">
         <div id="loading-center">
@@ -66,38 +78,61 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="{{asset('asset/js/jquery.min.js')}}"></script>
-<script src="{{asset('asset/js/popper.min.js')}}"></script>
-<script src="{{asset('asset/js/bootstrap.min.js')}}"></script>
+    <script src="{{asset('asset/js/ls.js')}}" type="text/javascript"></script>
+    <script src="{{asset('asset/js/admin_ajax.js')}}"></script>
+    <script src="{{asset('asset/js/jquery.min.js')}}"></script>
+    <script src="{{asset('asset/js/popper.min.js')}}"></script>
+    <script src="{{asset('asset/js/bootstrap.min.js')}}"></script>
     <!-- Appear JavaScript -->
-<script src="{{asset('asset/js/jquery.appear.js')}}"></script>
+    <script src="{{asset('asset/js/jquery.appear.js')}}"></script>
     <!-- Countdown JavaScript -->
-<script src="{{asset('asset/js/countdown.min.js')}}"></script>
+    <script src="{{asset('asset/js/countdown.min.js')}}"></script>
     <!-- Counterup JavaScript -->
-<script src="{{asset('asset/js/waypoints.min.js')}}"></script>
-<script src="{{asset('asset/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('asset/js/waypoints.min.js')}}"></script>
+    <script src="{{asset('asset/js/jquery.counterup.min.js')}}"></script>
     <!-- Wow JavaScript -->
-<script src="{{asset('asset/js/wow.min.js')}}"></script>
+    <script src="{{asset('asset/js/wow.min.js')}}"></script>
     <!-- Apexcharts JavaScript -->
-<script src="{{asset('asset/js/apexcharts.js')}}"></script>
-    <!-- lottie JavaScript -->
-<script src="{{asset('asset/js/lottie.js')}}"></script>
+    <script src="{{asset('asset/js/apexcharts.js')}}"></script>
     <!-- Slick JavaScript -->
-<script src="{{asset('asset/js/slick.min.js')}}"></script>
+    <script src="{{asset('asset/js/slick.min.js')}}"></script>
     <!-- Select2 JavaScript -->
-<script src="{{asset('asset/js/select2.min.js')}}"></script>
+    <script src="{{asset('asset/js/select2.min.js')}}"></script>
     <!-- Owl Carousel JavaScript -->
-<script src="{{asset('asset/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('asset/js/owl.carousel.min.js')}}"></script>
     <!-- Magnific Popup JavaScript -->
-<script src="{{asset('asset/js/jquery.magnific-popup.min.js')}}"></script>
+    <script src="{{asset('asset/js/jquery.magnific-popup.min.js')}}"></script>
     <!-- Smooth Scrollbar JavaScript -->
-<script src="{{asset('asset/js/smooth-scrollbar.js')}}"></script>
+    <script src="{{asset('asset/js/smooth-scrollbar.js')}}"></script>
+    <!-- lottie JavaScript -->
+    <script src="{{asset('asset/js/lottie.js')}}"></script>
+    <!-- am core JavaScript -->
+    <script src="{{asset('asset/js/core.js')}}"></script>
+    <!-- am charts JavaScript -->
+    <script src="{{asset('asset/js/charts.js')}}"></script>
+    <!-- am animated JavaScript -->
+    <script src="{{asset('asset/js/animated.js')}}"></script>
+    <!-- am kelly JavaScript -->
+    <script src="{{asset('asset/js/kelly.js')}}"></script>
+    <!-- am maps JavaScript -->
+    <script src="{{asset('asset/js/maps.js')}}"></script>
+    <!-- am worldLow JavaScript -->
+    <script src="{{asset('asset/js/worldLow.js')}}"></script>
+    <!-- Raphael-min JavaScript -->
+    <script src="{{asset('asset/js/raphael-min.js')}}"></script>
+    <!-- Morris JavaScript -->
+    <script src="{{asset('asset/js/morris.js')}}"></script>
+    <!-- Morris min JavaScript -->
+    <script src="{{asset('asset/js/morris.min.js')}}"></script>
+    <!-- Flatpicker Js -->
+    <script src="{{asset('asset/js/flatpickr.js')}}"></script>
     <!-- Style Customizer -->
-<script src="{{asset('asset/js/style-customizer.js')}}"></script>
+    <script src="{{asset('asset/js/style-customizer.js')}}"></script>
     <!-- Chart Custom JavaScript -->
-<script src="{{asset('asset/js/chart-custom.js')}}"></script>
+    <script src="{{asset('asset/js/chart-custom.js')}}"></script>
     <!-- Custom JavaScript -->
-<script src="{{asset('asset/js/custom.js')}}"></script>
+    <script src="{{asset('asset/js/custom.js')}}"></script>
+
 </body>
 
 </html>

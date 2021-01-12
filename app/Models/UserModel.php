@@ -85,6 +85,14 @@ class UserModel extends Authenticatable
     {
         $this->attributes['password'] = Hash::make($value);
     }
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+    public function hasRole($roles)
+    {
+        return null !== $this->level;
+    }
     public function listItems($params, $options, $stament = null, $number_stament = null)
     {
         //Tat debugbar

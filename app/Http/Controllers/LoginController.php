@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Request\LoginRequest;
+use App\Http\Requests\SignupRequest;
 use App\Models\Show_info_user;
 use App\Models\UserModel;
 use App\Models\UserDetail;
@@ -18,6 +19,7 @@ class LoginController extends Controller
 {
     use  HasFactory;
     private $pathViewController = 'public.page.my-account';
+
 
     public function show_login()
     {
@@ -60,9 +62,7 @@ class LoginController extends Controller
     {
         $data = new UserModel();
         $data_detail = new UserDetail();
-        date_default_timezone_set('Asia/Ho_Chi_Minh');
         try {
-
             $data->user_name = $request->username_register;
             $data->password = $request->password_register;
             $data->email = $request->email_register;
@@ -77,36 +77,55 @@ class LoginController extends Controller
             return \redirect()->back();
         }
     }
-    public function admin_auth(Request $request){
-       if(Auth::check("admin")){
+    public function admin_auth(Request $request)
+    {
+        if (Auth::check("admin")) {
             return \redirect()->route("admin.dash_view");
-       }
-       else
-       return \redirect()->route('admin_login_view');
+        } else
+            return \redirect()->route('admin_login_view');
     }
-    public function admin_register(Request $request)
+    public function admin_register(SignupRequest $request)
     {
-        $user = new UserModel();
-        
+        try {
+            $user = new UserModel();
+            $user->user_name = $request->username;
+            $user->password = $request->password;
+            $user->email = $request->email;
+            $user->level = $request->level;
+            $user->status = "active";
+            $user->save();
+            $user->refresh();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Create account ' . $request->username . ' Successfully !! </div>');
+            return \redirect()->route("admin_login_view");
+        } catch (\Throwable $th) {
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;">  Create account ' . $request->username . 'Fail,Try Again !! </div>');
+            return \redirect()->back();
+        }
     }
-    public function admin_login(Request $loginRequest )
+    public function admin_login(Request $loginRequest)
     {
-        $result=$loginRequest->only('email','password');
-        if(Auth::attempt($result)){
+        $result = $loginRequest->only('email', 'password');
+        if (Auth::attempt([
+            'email' => $result['email'],
+            'password' => $result['password'],
+            'level' => "admin"
+            ])) 
+        {
             $loginRequest->session()->regenerate();
             return redirect()->route('admin.dash_view');
-        }
+
+        } 
         else
-           return \redirect()->route("admin_login_view");
+            return \redirect()->route("admin_login_view");
     }
     public function admin_logout(Request $request)
     {
         Auth::logout();
 
         $request->session()->invalidate();
-    
+
         $request->session()->regenerateToken();
-    
+
         return redirect()->route("admin_login_view");
-    }                 
+    }
 }
