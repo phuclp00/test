@@ -18,12 +18,12 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        dd(auth());
-        if(Auth::user()->){
+        
+        if(Auth::user()->getLevel()=="admin"){
             return $next($request);
           }
         else
-            \redirect(\route('admin_login'));
+            return response()->view('errors.custom', [], 404);
     }
 
 }

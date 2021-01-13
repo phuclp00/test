@@ -89,9 +89,9 @@ class UserModel extends Authenticatable
     {
         return $this->password;
     }
-    public function hasRole($roles)
+    public function getLevel()
     {
-        return null !== $this->level;
+        return $this->level;
     }
     public function listItems($params, $options, $stament = null, $number_stament = null)
     {

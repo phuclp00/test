@@ -198,22 +198,19 @@ Route::group(['prefix' => 'admin'], function () {
 
     //================================ ADMIN AUTH ================================================================//
 
-    Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');    
+    //Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');
     //================================ LOGIN ADMIN================================================================//
 
-    Route::get('login',[HomeController::class,'login_view'])->name('admin_login_view');
-    Route::get('register',[HomeController::class,'register_view'])->name('admin_register_view');
+    Route::get('/login', [HomeController::class, 'login_view'])->name('admin_login_view');
+    Route::get('/register', [HomeController::class, 'register_view'])->name('admin_register_view');
 
-    Route::get('logout',[LoginController::class,'admin_logout'])->name('admin_logout');
+    Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin_logout');
     Route::post('/login-admin', [LoginController::class, 'admin_login'])->name('admin_login');
     Route::post('/register-admin', [LoginController::class, 'admin_register'])->name('admin_register');
 
-        Route::group(['middleware' => ['admin']], function () {
-            
-        
+    Route::group(['middleware' => ['admin']], function () {
         //Dash board
         Route::get('/dashboard', [HomeController::class, 'dash_view'])->name('admin.dash_view');
-
         //==========================================Category==============================================================
         Route::get('/category', [HomeController::class, 'category_view'])->name('admin.category_view');
         //Category add view 
@@ -259,9 +256,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('user-list', [HomeController::class, 'user_list_view'])->name('admin.user_list_view');
         // User add view
         Route::get('add-user', [HomeController::class, 'add_user'])->name('admin.add_user');
-
     });
-        //================================ SLIDER ====================================================================//
+    //================================ SLIDER ====================================================================//
 });
 
 
