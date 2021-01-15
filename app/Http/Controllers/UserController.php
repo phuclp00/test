@@ -15,6 +15,8 @@ use Illuminate\Auth\Events\Validated;
 use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Validator;
 use League\Flysystem\Cached\Storage\Memcached;
+use DB;
+use Illuminate\Support\Facades\DB as FacadesDB;
 
 class UserController extends Controller
 {
@@ -39,14 +41,14 @@ class UserController extends Controller
     public function update_img(Request $request)
     {
         $request->validate([
-            'upload_file'=>'required',
+            'upload_file' => 'required',
         ]);
         try {
-            $file=$request->upload_file;
+            $file = $request->upload_file;
             $data = UserDetail::find($request->user_name);
             $data->img = $file->getClientOriginalName();
             $data->save();
-            $path = $file->storeAs('user_profile',$file->getClientOriginalName(),'images');
+            $path = $file->storeAs('user_profile', $file->getClientOriginalName(), 'images');
             //Update lai thong tin nguoi dung 
             \session()->forget('user_info');
             $show_info = Show_info_user::where('user_name', $data->user_name)->first();
@@ -88,7 +90,7 @@ class UserController extends Controller
             $data_account->district = $request->district;
             $data_account->city = $request->city;
             $data_account->save();
-            
+
             $request->session()->flash('update_info', '<div class="alert alert-success">"Cập nhật khoản thành công , tiếp tục mua sắm nào !!"</div>');
             return \redirect()->route('account_view', [$data_account->user_name]);
         } catch (Exception $e) {
@@ -100,20 +102,84 @@ class UserController extends Controller
     public function delete_user(Request $request)
     {
         try {
-            UserModel::destroy($request->user_id);
-
-            $request->session()->flash('account_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng' . $request->user_id . ' thành công </div>');
+            UserModel::where('user_name', $request->user_name)->delete();
+            $request->session()->flash('info_warning', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Delete' . $request->user_id . ' Successfully !! </div>');
         } catch (Exception $e) {
-            $request->session()->flash('account_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng ' . $request->user_id . 'thất bại, vui lòng thử lại </div>');
+            $request->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Delete ' . $request->user_id . ' Fail,Try Again !!</div>');
         }
         return \redirect()->back();
+    }
+    public function search_user(Request $request)
+    {
+        $output = "";
+        $key_find = $request->search_user;
+        if ($key_find != " ") {
+            try {
+                $list_search = Show_info_user::where('level', '=',$key_find)
+                    ->orwhere('user_name', 'like', '%' . $key_find . '%')
+                    ->orWhere('full_name', 'like', '%' . $key_find . '%')
+                    ->orwhere('status', '=', $key_find)
+                    ->get();
+                if ($list_search != "") {
+                    foreach ($list_search as $data => $user) {
+                        $output .= "<tr id='show_user_list'>
+                       <td class='text-center'><img class='rounded img-fluid avatar-40'
+                             src='../images/users/$user->user_id/$user->img' alt='profile'></td>
+                       <td>$user->user_name</td>
+                       <td>$user->full_name</td>
+                       <td><a href='https://iqonic.design/cdn-cgi/l/email-protection' class='__cf_email__'
+                             data-cfemail='$user->email'>[email&#160;protected]</a>
+                       </td>
+                       <td>$user->street-$user->district-$user->city</td>
+                       <td>$user->phone</td>";
+                       if($user->level=='admin')
+                         $output.= "<td><span class='badge iq-bg-warning'>$user->level</span></td>";
+                       else
+                          $output.="<td><span class='badge iq-bg-info'>$user->level</span></td>";
+                       if($user->status=='ban')
+                          $output.="<td><span class='badge iq-bg-danger'>$user->status</span></td>";
+                       else
+                         $output.="<td><span class='badge iq-bg-primary'>$user->status</span></td>";
+                       $output.="
+                       <td>$user->created</td>
+                       <td>
+                          <div class='flex align-items-center list-user-action'>
+                             <a class='iq-bg-primary' data-toggle='tooltip' data-placement='top' title=''
+                                data-original-title='Add' href='#'><i class='ri-user-add-line'></i></a>
+                             <a class='iq-bg-primary' data-toggle='tooltip' data-placement='top' title=''
+                                data-original-title='Edit' href='#'><i class='ri-pencil-line'></i></a>
+                             <a class='iq-bg-primary' data-toggle='tooltip' data-placement='top' title=''
+                                data-original-title='Delete' href='".route('admin_delete_user',[$user->user_name])."'><i class='ri-delete-bin-line'></i></a>
+                          </div>
+                       </td>
+                    </tr>";
+                    }
+                } else {
+                    $output = '
+                        <tr>
+                            <td align="center" colspan="5">No Data Found</td>
+                        </tr>
+                        ';
+                }
+                $data=array(
+                    'result'=>$output
+                );
+                 return \json_encode($data);
+            } catch (Exception $e) {
+                \report($e);
+            }
+        } 
+        else{
+            $data=null;
+            return $data;
+        }
     }
     public function set_status(Request $request)
     {
         try {
-            
-            $result= UserModel::where('status',$request->user_id)->update('status',$request->select_change_attr);
-           
+
+            $result = UserModel::where('status', $request->user_id)->update('status', $request->select_change_attr);
+
             $request->session()->flash('account_status', '<div class="alert alert-success" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng' . $request->user_id . ' thành công </div>');
         } catch (Exception $e) {
             $request->session()->flash('account_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng ' . $request->user_id . 'thất bại, vui lòng thử lại </div>');

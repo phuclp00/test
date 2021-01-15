@@ -188,7 +188,7 @@ Route::group(['prefix' => $controllerName], function () {
     Route::get('/', [HomeController::class, 'shop_view'])->name("shop_view", ["get_cat_items" => $get_cat_items = null]);
     //LAY ID CATEGORY KHI DUOC TRUYEN GIA TRI VAO TRA VE LIST THEO ID CATEGORY
     Route::get('/cat_id={cat_id}', [HomeController::class, 'get_category'])->name("category_view");
-    Route::get('/search_product}', [CategoryController::class, 'find_product'])->name("find_product");
+    Route::get('/search_product}', [ProductController::class, 'find_product'])->name("find_product");
 });
 //====================================== - ACCOUNT ========================================================//
 
@@ -198,18 +198,19 @@ Route::group(['prefix' => 'admin'], function () {
 
     //================================ ADMIN AUTH ================================================================//
 
-    //Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');
+    Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');
     //================================ LOGIN ADMIN================================================================//
 
     Route::get('/login', [HomeController::class, 'login_view'])->name('admin_login_view');
-    Route::get('/register', [HomeController::class, 'register_view'])->name('admin_register_view');
 
     Route::get('/logout', [LoginController::class, 'admin_logout'])->name('admin_logout');
     Route::post('/login-admin', [LoginController::class, 'admin_login'])->name('admin_login');
     Route::post('/register-admin', [LoginController::class, 'admin_register'])->name('admin_register');
 
     Route::group(['middleware' => ['admin']], function () {
+       
         //Dash board
+
         Route::get('/dashboard', [HomeController::class, 'dash_view'])->name('admin.dash_view');
         //==========================================Category==============================================================
         Route::get('/category', [HomeController::class, 'category_view'])->name('admin.category_view');
@@ -256,6 +257,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('user-list', [HomeController::class, 'user_list_view'])->name('admin.user_list_view');
         // User add view
         Route::get('add-user', [HomeController::class, 'add_user'])->name('admin.add_user');
+        //Register user
+        Route::get('/register', [HomeController::class, 'register_view'])->name('admin_register_view');
+        //Delete user 
+        Route::get('/delete-user-{user_name}',[UserController::class,'delete_user'])->name('admin_delete_user');
+        //User search 
+        Route::get('/user_search',[UserController::class,'search_user'])->name('admin_search_user');
     });
     //================================ SLIDER ====================================================================//
 });

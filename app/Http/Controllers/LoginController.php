@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Request\LoginRequest;
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\SignupRequest;
 use App\Models\Show_info_user;
 use App\Models\UserModel;
@@ -14,6 +14,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
+use Laravel\Fortify\Http\Requests\LoginRequest as RequestsLoginRequest;
 
 class LoginController extends Controller
 {
@@ -77,6 +78,8 @@ class LoginController extends Controller
             return \redirect()->back();
         }
     }
+    //Admin Account Controller 
+
     public function admin_auth(Request $request)
     {
         if (Auth::check("admin")) {
@@ -102,21 +105,22 @@ class LoginController extends Controller
             return \redirect()->back();
         }
     }
-    public function admin_login(Request $loginRequest)
+    public function admin_login(LoginRequest $loginRequest)
     {
         $result = $loginRequest->only('email', 'password');
+        $option =$loginRequest->remember=="on"?true:false; 
         if (Auth::attempt([
             'email' => $result['email'],
             'password' => $result['password'],
             'level' => "admin"
-            ])) 
+        ],$remember=$option))
         {
             $loginRequest->session()->regenerate();
             return redirect()->route('admin.dash_view');
-
         } 
         else
-            return \redirect()->route("admin_login_view");
+            $loginRequest->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;">  Login Fail,Try Again !! </div>');
+            return \redirect()->back();
     }
     public function admin_logout(Request $request)
     {

@@ -41,7 +41,7 @@
                <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
                   <li><a href="{{route('admin.user_list_view')}}"><i class="las la-th-list"></i>User List</a></li>
-                  <li><a href="{{route('admin.add_user')}}"><i class="las la-plus-circle"></i>User Add</a></li>
+                  <li><a href="{{route('admin_register_view')}}"><i class="las la-plus-circle"></i>User Add</a></li>
 
                </ul>
             </li>

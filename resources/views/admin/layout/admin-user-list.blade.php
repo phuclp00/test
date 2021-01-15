@@ -11,6 +11,7 @@
                      <h4 class="card-title">User List</h4>
                   </div>
                </div>
+               @include('post.create')
                <div class="iq-card-body">
                   <div class="table-responsive">
                      <div class="row justify-content-between">
@@ -18,7 +19,7 @@
                            <div id="user_list_datatable_info" class="dataTables_filter">
                               <form class="mr-3 position-relative">
                                  <div class="form-group mb-0">
-                                    <input type="search" class="form-control" id="exampleInputSearch"
+                                    <input type="search" class="form-control " name="search_user" id="search_user"
                                        placeholder="Search" aria-controls="user-list-table">
                                  </div>
                               </form>
@@ -41,7 +42,7 @@
                      <table id="user-list-table" class="table table-striped table-bordered mt-4" role="grid"
                         aria-describedby="user-list-page-info">
                         <thead>
-                           <tr>
+                           <tr id="user_list_header">
                               <th>Profile</th>
                               <th>User Name</th>
                               <th>Full Name</th>
@@ -57,7 +58,7 @@
                         <tbody>
 
                            @foreach($result as $data =>$user)
-                           <tr>
+                           <tr id="show_user_list">
                               <td class="text-center"><img class="rounded img-fluid avatar-40"
                                     src="../images/users/{{$user->user_id}}/{{$user->img}}" alt="profile"></td>
                               <td>{{$user->user_name}}</td>
@@ -86,7 +87,7 @@
                                     <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
                                        data-original-title="Edit" href="#"><i class="ri-pencil-line"></i></a>
                                     <a class="iq-bg-primary" data-toggle="tooltip" data-placement="top" title=""
-                                       data-original-title="Delete" href="#"><i class="ri-delete-bin-line"></i></a>
+                                       data-original-title="Delete" href="{{route('admin_delete_user',[$user->user_name])}}"><i class="ri-delete-bin-line"></i></a>
                                  </div>
                               </td>
                            </tr>
@@ -94,26 +95,7 @@
                         </tbody>
                      </table>
                   </div>
-                  <div class="row justify-content-between mt-3">
-                     <div id="user-list-page-info" class="col-md-6">
-                        <span>Showing 1 to 5 of 5 entries</span>
-                     </div>
-                     <div class="col-md-6">
-                        <nav aria-label="Page navigation example">
-                           <ul class="pagination justify-content-end mb-0">
-                              <li class="page-item disabled">
-                                 <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                              </li>
-                              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                              <li class="page-item"><a class="page-link" href="#">2</a></li>
-                              <li class="page-item"><a class="page-link" href="#">3</a></li>
-                              <li class="page-item">
-                                 <a class="page-link" href="#">Next</a>
-                              </li>
-                           </ul>
-                        </nav>
-                     </div>
-                  </div>
+                  {{ $result->links('admin.pagination.simple'),["paginator"=>$result]}}
                </div>
             </div>
          </div>

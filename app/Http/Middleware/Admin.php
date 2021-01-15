@@ -18,12 +18,14 @@ class Admin
      */
     public function handle(Request $request, Closure $next)
     {
-        
-        if(Auth::user()->getLevel()=="admin"){
+        if(Auth::user()==null){
+            return response()->view('errors.404', [], 404);
+        }
+        elseif(Auth::user()->getLevel()=="admin"){
             return $next($request);
           }
         else
-            return response()->view('errors.custom', [], 404);
+            return response()->view('errors.404', [], 404);
     }
 
 }

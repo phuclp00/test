@@ -31,24 +31,7 @@ class CategoryController extends Controller
 
         view()->share('top_list_category', $top_items);
     }
-    public function find_product(Request $request)
-    {
-        $key_find = $request->key_word;
-        $list_search = ProductModel::Where('book_id', '=', $key_find)
-            ->orwhere('book_name', 'like', '%' . $key_find . '%')
-            ->orWhere('description', 'like', '%' . $key_find . '%')
-            ->paginate(6);
-
-        if ($list_search != "") {
-            return view($this->pathViewController . $this->subpatchViewController . '.shop', [
-                "list_search" => $list_search,
-                "get_cat_items" => $get_cat_items = null,
-                "pagi_list_items" => $pagi_list_items = null
-            ]);
-        } else {
-            return view('errors.error404');
-        }
-    }
+    
     public function add_category(CategoryRequest $request){
         try {
             $data= new CategoryModel();

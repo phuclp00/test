@@ -5501,7 +5501,8 @@ Custom
     
     .bg-form-login {
         position: relative;
-        background-image: url("https://images.wallpaperscraft.com/image/book_roses_bouquet_reading_112235_3840x2400.jpg");
+        width: 100%;
+        background-image: url("../images/login/book_rose.jpg");
         background-repeat: no-repeat;
         background-position: center;
         background-size: cover;

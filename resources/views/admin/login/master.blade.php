@@ -27,7 +27,7 @@
     @if(session()->has('info_warning'))
     <script>
         $.dialog({
-         title: '<text style="color:red;margin:0px auto">Info Warning!</text>',
+         title: '<div style="color:red;margin:0px auto"><p>Info Warning!</div>',
          content: '{!!session()->get('info_warning')!!}',
       });
     </script>

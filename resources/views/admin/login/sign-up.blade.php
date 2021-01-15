@@ -11,8 +11,7 @@
                             <h3 class="mb-0 text-center text-white">Sign Up</h3>
                             <p class="text-center text-white">Enter your email address and password to access admin
                                 panel.</p>
-                                @include('post.create')
-
+                            @include('post.create')
                             <form action="{{route('admin_register')}}" class="mt-4 form-text" method="POST">
                                 @csrf
                                 <div class="form-group">
