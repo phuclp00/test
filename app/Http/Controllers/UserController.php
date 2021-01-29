@@ -38,11 +38,15 @@ class UserController extends Controller
             return \redirect('/');
         }
     }
+    public function notifications()
+    {
+        return auth()->user()->unreadNotifications->limit(5)->get()->toArray();
+    }
     public function update_img(Request $request)
     {
         $request->validate([
             'upload_file' => 'required',
-        ]);
+        ]); 
         try {
             $file = $request->upload_file;
             $data = UserDetail::find($request->user_name);

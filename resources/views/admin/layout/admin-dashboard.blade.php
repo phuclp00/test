@@ -1,7 +1,6 @@
 @extends('admin.index')
 @section('admin_section')
 <!-- Page Content  -->
-
    <div id="content-page" class="content-page">
       <div class="container-fluid">
          <div class="row">

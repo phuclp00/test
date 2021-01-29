@@ -29,7 +29,9 @@
                </ul>
             </li>
             <li>
-               <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="ri-admin-line"></i><span>Admin</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+               <a href="#admin" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
+                     class="ripple rippleEffect"></span><i class="ri-admin-line"></i><span>Admin</span><i
+                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                <ul id="admin" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle">
                   <li><a href="{{route('admin.dash_view')}}"><i class="ri-dashboard-line"></i>Dashboard</a></li>
                   <li><a href="{{route('admin.category_view')}}"><i class="ri-list-check-2"></i>Category Lists</a></li>
@@ -38,7 +40,9 @@
                </ul>
             </li>
             <li>
-               <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+               <a href="#userinfo" class="iq-waves-effect" data-toggle="collapse" aria-expanded="false"><span
+                     class="ripple rippleEffect"></span><i class="las la-user-tie iq-arrow-left"></i><span>User</span><i
+                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                <ul id="userinfo" class="iq-submenu collapse" data-parent="#iq-sidebar-toggle" style="">
                   <li><a href="{{route('admin.user_list_view')}}"><i class="las la-th-list"></i>User List</a></li>
                   <li><a href="{{route('admin_register_view')}}"><i class="las la-plus-circle"></i>User Add</a></li>
@@ -46,10 +50,14 @@
                </ul>
             </li>
             <li>
-               <a href="#ui-elements" class="iq-waves-effect " data-toggle="collapse" aria-expanded="false"><i class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+               <a href="#ui-elements" class="iq-waves-effect " data-toggle="collapse" aria-expanded="false"><i
+                     class="lab la-elementor iq-arrow-left"></i><span>UI Elements</span><i
+                     class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                <ul id="ui-elements" class="iq-submenu collapse " data-parent="#iq-sidebar-toggle">
                   <li class="elements">
-                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse" aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i class="ri-arrow-right-s-line iq-arrow-right"></i></a>
+                     <a href="#sub-menu" class="iq-waves-effect collapsed" data-toggle="collapse"
+                        aria-expanded="false"><i class="ri-play-circle-line"></i><span>UI Kit</span><i
+                           class="ri-arrow-right-s-line iq-arrow-right"></i></a>
                      <ul id="sub-menu" class="iq-submenu collapse" data-parent="#ui-elements">
                         <li><a href="ui-colors.html"><i class="las la-palette"></i>colors</a></li>
                         <li><a href="ui-typography.html"><i class="las la-keyboard"></i>Typography</a></li>
@@ -236,7 +244,7 @@
             aria-controls="navbarSupportedContent" aria-label="Toggle navigation">
             <i class="ri-menu-3-line"></i>
          </button>
-         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+         <div class="collapse navbar-collapse" id="NotificationContent">
             <ul class="navbar-nav ml-auto navbar-list">
                <li class="nav-item nav-icon search-content">
                   <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
@@ -247,70 +255,8 @@
                      <a class="search-link" href="#"><i class="ri-search-line"></i></a>
                   </form>
                </li>
-               <li class="nav-item nav-icon">
-                  <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
-                     <i class="ri-notification-2-line"></i>
-                     <span class="bg-primary dots"></span>
-                  </a>
-                  <div class="iq-sub-dropdown">
-                     <div class="iq-card shadow-none m-0">
-                        <div class="iq-card-body p-0">
-                           <div class="bg-primary p-3">
-                              <h5 class="mb-0 text-white">All Notifications<small
-                                    class="badge  badge-light float-right pt-1">4</small></h5>
-                           </div>
-                           <a href="#" class="iq-sub-card">
-                              <div class="media align-items-center">
-                                 <div class="">
-                                    <img class="avatar-40 rounded" src="{{asset('asset/images/user/01.jpg')}}" alt="">
-                                 </div>
-                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Emma Watson Barry</h6>
-                                    <small class="float-right font-size-12">Just Now</small>
-                                    <p class="mb-0">95 MB</p>
-                                 </div>
-                              </div>
-                           </a>
-                           <a href="#" class="iq-sub-card">
-                              <div class="media align-items-center">
-                                 <div class="">
-                                    <img class="avatar-40 rounded" src="{{asset('asset/images/user/02.jpg')}}" alt="">
-                                 </div>
-                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">New customer is join</h6>
-                                    <small class="float-right font-size-12">5 days ago</small>
-                                    <p class="mb-0">Cyst Barry</p>
-                                 </div>
-                              </div>
-                           </a>
-                           <a href="#" class="iq-sub-card">
-                              <div class="media align-items-center">
-                                 <div class="">
-                                    <img class="avatar-40 rounded" src="{{asset('asset/images/user/03.jpg')}}" alt="">
-                                 </div>
-                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">Two customer is left</h6>
-                                    <small class="float-right font-size-12">2 days ago</small>
-                                    <p class="mb-0">Cyst Barry</p>
-                                 </div>
-                              </div>
-                           </a>
-                           <a href="#" class="iq-sub-card">
-                              <div class="media align-items-center">
-                                 <div class="">
-                                    <img class="avatar-40 rounded" src="{{asset('asset/images/user/04.jpg')}}" alt="">
-                                 </div>
-                                 <div class="media-body ml-3">
-                                    <h6 class="mb-0 ">New Mail from Fenny</h6>
-                                    <small class="float-right font-size-12">3 days ago</small>
-                                    <p class="mb-0">Cyst Barry</p>
-                                 </div>
-                              </div>
-                           </a>
-                        </div>
-                     </div>
-                  </div>
-               </li>
+               {{-- Notification --}}
+               <notification-userregister></notification-userregister>
                <li class="nav-item nav-icon dropdown">
                   <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                      <i class="ri-mail-line"></i>
@@ -431,8 +377,8 @@
                               </div>
                            </a>
                            <div class="d-inline-block w-100 text-center p-3">
-                              <a class="bg-primary iq-sign-btn" href="{{route('admin_logout')}}" role="button">Sign out<i
-                                    class="ri-login-box-line ml-2"></i></a>
+                              <a class="bg-primary iq-sign-btn" href="{{route('admin_logout')}}" role="button">Sign
+                                 out<i class="ri-login-box-line ml-2"></i></a>
                            </div>
                         </div>
                      </div>

@@ -14,11 +14,16 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
+use App\Notifications\UserRegisted;
+use App\Events\NotificationEvent;
+use App\Events\UserRegistedEvent;
+use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\Http\Requests\LoginRequest as RequestsLoginRequest;
 
 class LoginController extends Controller
 {
     use  HasFactory;
+    use Notifiable;
     private $pathViewController = 'public.page.my-account';
 
 
@@ -69,12 +74,17 @@ class LoginController extends Controller
             $data->email = $request->email_register;
             $data->level = "user";
             $data->status = "active";
+            $data->created_by=$data->user_name;
             $data->save();
-            $data->refresh();
+            //Send notify to database 
+            $data->notify( new UserRegisted($data));
+            //Send notify to admin 
+            event( new UserRegistedEvent($data));
+            
             $request->session()->flash('logout_status', '<div class="alert alert-success">"Tạo tài khoản thành công , tiếp tục mua sắm nào !!"</div>');
             return \redirect()->back();
         } catch (Exception $e) {
-            $request->session()->flash('logout_status', '<div class="alert alert-danger">"Tạo tài khoản thát bại, vui lòng thử lại" </div>');
+            $request->session()->flash('logout_status', '<div class="alert alert-danger">Tạo tài khoản thát bại'.$e->getMessage().' vui lòng thử lại</div>');
             return \redirect()->back();
         }
     }

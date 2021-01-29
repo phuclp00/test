@@ -26,6 +26,9 @@ use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Events\NotificationEvent;
+use App\Events\UserRegistedEvent;
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,7 +43,7 @@ use Illuminate\Support\Facades\Route;
 
 
 
-$prefixAdmin = Config::get('01.url.prefix_admin', 'error');
+//$prefixAdmin = Config::get('01.url.prefix_admin', 'error');
 //Route::get('/', [HomeController::class, 'view'])->name('home_view');
 //===================================SLIDER========================================================================//
 //===================================SLIDER-HOMEPAGE =========================================================//
@@ -52,7 +55,18 @@ Route::group(['prefix' => $controllerName], function () {
     // SHOW THONG TIN TAI TRANG CHU 
 
 });
-Route::get('#productmodal', [HomeController::class, 'get_info'])->name('get_info_home');
+Route::get('/cache', function() {
+    Artisan::call('cache:clear');
+    return "Cache is cleared";
+});
+
+Route::get('/test', function () {
+    $data= UserModel::where('user_id',50)->first();
+   // event(new UserRegistedEvent($data));
+    event(new NotificationEvent($data));
+
+    return "test";
+});
 //===================================LOG-IN ========================================================================//
 $controllerName = 'login';
 Route::group(['prefix' => $controllerName], function () {
@@ -259,6 +273,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('add-user', [HomeController::class, 'add_user'])->name('admin.add_user');
         //Register user
         Route::get('/register', [HomeController::class, 'register_view'])->name('admin_register_view');
+
         //Delete user 
         Route::get('/delete-user-{user_name}',[UserController::class,'delete_user'])->name('admin_delete_user');
         //User search 

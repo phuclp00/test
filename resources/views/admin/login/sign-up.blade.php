@@ -52,8 +52,8 @@
                                 </div>
                                 <div class="sign-info text-center">
                                     <button type="submit" class="btn btn-white d-block w-100 mb-2">Sign Up</button>
-                                    <span class="text-dark d-inline-block line-height-2">Already Have Account ? <a
-                                            href="{{route('admin_login_view')}}" class="text-white">Log In</a></span>
+                                    <span class="text-dark d-inline-block line-height-2">Already Done ? <a
+                                            href="{{route('admin.dash_view')}}" class="text-white">Go Back </a></span>
                                 </div>
                             </form>
                         </div>

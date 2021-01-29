@@ -17,6 +17,7 @@ use App\Models\PublisherModel;
 use App\Models\Show_info_user;
 use Illuminate\Support\Facades\Session as FacadesSession;
 use Session;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -45,7 +46,6 @@ class HomeController extends Controller
         $pagi_list_product = (new ShopController)->paginate_list_view();
 
         //$list_get_category=(new CategoryController)->get_category();
-
     }
     // FRONT-END
     public function view_Admin()
@@ -54,6 +54,7 @@ class HomeController extends Controller
     }
     public function view()
     {
+        
         return view('public.index');
     }
     public function index()
@@ -170,7 +171,13 @@ class HomeController extends Controller
 
     public function login_view()
     {
-        return view('admin.login.sign-in');
+        if(Auth::check()==true){
+            return \redirect()->back();
+        }
+        else{
+            return view('admin.login.sign-in');
+
+        }
     }
     public function register_view()
     {

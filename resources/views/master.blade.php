@@ -20,6 +20,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
 
 
+
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="source_project/css/bootstrap.min.css">
 	<link rel="stylesheet" href="source_project/css/plugins.css">
@@ -35,6 +36,9 @@
 
 	<!-- Modernizer js -->
 	<script src="source_project/js/vendor/modernizr-3.5.0.min.js"></script>
+
+	<link rel="stylesheet" href="{{asset('/css/app.css')}}" />
+
 	
 </head>
 
@@ -46,8 +50,8 @@
 	
 
 	<!-- Main wrapper -->
-	<div class="wrapper" id="wrapper">
 
+	<div id="wrapper" class="wrapper" >
 		@yield('content')
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
@@ -65,33 +69,7 @@
 					<h3 class="title__be--1">Click any where to close this pop-up</h3>
 				</div>
 			</div>
-			<script>
-				var modal = document.getElementById("myModal");
-		
-				// Get the button that opens the modal
-				var btn = document.getElementById("myBtn");
-		
-				// Get the <span> element that closes the modal
-				var span = document.getElementsByClassName("close")[0];
-		
-				// When the user clicks the button, open the modal 
-				
-		
-				// When the user clicks on <span> (x), close the modal
-					
-				span.onclick = function() {
-					modal.style.display = "none";
-					location.reload();
-				}
-		
-				// When the user clicks anywhere outside of the modal, close it
-				window.onclick = function(event) {
-				if (event.target == modal) {
-					modal.style.display = "none";
-					location.reload();
-					}
-				}
-			</script>
+			
 		</div>
 		<!-- Footer Area -->
 		<footer id="wn__footer" class="footer__area bg__cat--8 brown--color">
@@ -155,7 +133,34 @@
 	<!-- //Main wrapper -->
 
 	<!-- JS Files -->
+	<script>
+		var modal = document.getElementById("myModal");
 
+		// Get the button that opens the modal
+		var btn = document.getElementById("myBtn");
+
+		// Get the <span> element that closes the modal
+		var span = document.getElementsByClassName("close")[0];
+
+		// When the user clicks the button, open the modal 
+		
+
+		// When the user clicks on <span> (x), close the modal
+			
+		span.onclick = function() {
+			modal.style.display = "none";
+			location.reload();
+		}
+
+		// When the user clicks anywhere outside of the modal, close it
+		window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+			location.reload();
+			}
+		}
+	</script>
+    <script src="{{asset('/js/app.js')}}"></script>
 	<script src="{{asset('js/custom.js')}}"></script>
 	<script src="{{asset('source_project/js/vendor/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{asset('source_project/js/popper.min.js')}}"></script>

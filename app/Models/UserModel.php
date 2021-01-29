@@ -26,7 +26,6 @@ class UserModel extends Authenticatable
     protected $keyType="int";
     const CREATED_AT = 'created';
     const UPDATED_AT = 'modiffed';
-    public $timestamps = false;
     /**
      * The attributes that are mass assignable.
      *
@@ -43,8 +42,8 @@ class UserModel extends Authenticatable
         'level',
         'created',
         'created_by	',
-        'modiffer',
-        'modiffer_by',
+        'modiffed',
+        'modiffed_by',
         'status',
     ];
 
@@ -67,8 +66,9 @@ class UserModel extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'modiffed' => 'datetime',
+        'created'  => 'datetime',
     ];
-
     /**
      * The accessors to append to the model's array form.
      *
@@ -93,6 +93,8 @@ class UserModel extends Authenticatable
     {
         return $this->level;
     }
+    
+
     public function listItems($params, $options, $stament = null, $number_stament = null)
     {
         //Tat debugbar
@@ -105,5 +107,19 @@ class UserModel extends Authenticatable
             $result          = UserModel::all();
         }
         return $result;
+    }
+    public function follow($userID)
+    {
+        $this->follows()->attack($userID);
+        return $this;
+    }
+    public function unfollow($userID)
+    {
+        $this->follows()->detach($userID);
+        return $this;
+    }
+    public function isFollowing($userId) 
+    {
+        return (boolean) $this->follows()->where('follows_id', $userId)->first(['id']);
     }
 }
