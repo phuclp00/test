@@ -149,9 +149,9 @@
                                     @foreach (session()->get("user_info") as $user)
                                    
                                     @if($user->img !=null)
-                                        <img src="{{asset('images/user_profile/'.$user->img)}}" class="avatar"style="vertical-align: middle; width: 100px;height: 100px;border-radius:50%;" alt="avatar">
+                                        <img src="{{asset('images/user_profile/'.$user->img)}}" class="avatar"style="margin:0px auto;vertical-align: middle; width: 100px;height: 100px;border-radius:50%;" alt="avatar">
                                     @else
-					                    <img src="{{asset('images/users/user_default.svg')}}" class="avatar"style="vertical-align: middle; width: 50px;height: 50px;border-radius:50%;" alt="avatar">
+					                    <img src="{{asset('images/users/user_default.svg')}}" class="avatar"style="margin:0px auto;vertical-align: middle; width: 50px;height: 50px;border-radius:50%;" alt="avatar">
                                     @endif
                                     <h3 class="account__title">Xin chào</h3>
                                     <h5>{{$user->user_name==null?$user->email:$user->user_name}}</h5>

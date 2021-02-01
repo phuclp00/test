@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
 use App\Notifications\UserRegisted;
 use App\Events\NotificationEvent;
-use App\Events\UserRegistedEvent;
+use App\Events\UserTracker;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\Http\Requests\LoginRequest as RequestsLoginRequest;
 
@@ -36,15 +37,13 @@ class LoginController extends Controller
     }
     public function Login(Request $request)
     {
-        $username = $request->username;
-        $password = $request->userpassword;
         if (session()->has('user_info')) {
             return view('public.index');
         }
+        $request_data = $request->only('username','password');
         try {
-
-            $check_user = UserModel::where('user_name', $username)->first();
-            if (Hash::check($password, $check_user->password)) {
+            $check_user = UserModel::where('user_name', $request_data['username'])->first();
+            if (Hash::check($request_data['password'], $check_user->password)) {
                 $show_info = Show_info_user::where('user_name', $check_user->user_name)->first();
                 $request->session()->push('user_info', $show_info);
                 return \redirect('/');
@@ -67,7 +66,7 @@ class LoginController extends Controller
     public function Register(Request $request)
     {
         $data = new UserModel();
-        $data_detail = new UserDetail();
+        $data_request=$request->only('username_register','password_register','email_register');
         try {
             $data->user_name = $request->username_register;
             $data->password = $request->password_register;
@@ -79,7 +78,7 @@ class LoginController extends Controller
             //Send notify to database 
             $data->notify( new UserRegisted($data));
             //Send notify to admin 
-            event( new UserRegistedEvent($data));
+            event( new UserTracker($data));
             
             $request->session()->flash('logout_status', '<div class="alert alert-success">"Tạo tài khoản thành công , tiếp tục mua sắm nào !!"</div>');
             return \redirect()->back();

@@ -9,7 +9,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class UserRegisted extends Notification implements ShouldQueue
+class UserBan extends Notification implements ShouldQueue
 {
     use Queueable;
     protected  $user;
@@ -31,7 +31,7 @@ class UserRegisted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database',];
+        return ['database','broadcast'];
     }
 
     /**
@@ -42,9 +42,7 @@ class UserRegisted extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        //$url =url('/user/'.$this->user->user_id);
         return (new MailMessage)
-            ->greeting('Hello !')
             ->line('The introduction to the notification.')
             ->action('Notification Action', url('/'))
             ->line('Thank you for using our application!');

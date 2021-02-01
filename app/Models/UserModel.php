@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\UserRegisted;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -76,6 +77,12 @@ class UserModel extends Authenticatable
      */
     protected $appends = [
         'profile_photo_url',
+    ];
+
+    protected $dispatchesEvents = [
+        'register' => UserRegisted::class,
+        'delete' => UserDeleted::class,
+        'ban'=>UserBan::class,
     ];
     public function user_detail()
     {

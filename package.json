@@ -27,13 +27,15 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@popperjs/core": "^2.6.0",
         "@tailwindcss/ui": "^0.7.2",
-        "bootstrap": "^4.6.0",
+        "bootstrap": "^5.0.0-beta1",
         "date-fns": "^2.16.1",
         "laravel-echo": "^1.5.3",
         "popper.js": "^1.16.1",
         "pusher-js": "^4.2.1",
         "request": "^2.88.2",
+        "vue-strap": "github:wffranco/vue-strap",
         "vue-timeago": "^5.1.3"
     }
 }

@@ -18,8 +18,13 @@ window.Vue = require('vue').default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+Vue.component('notification-user', require('./components/user/AdminNotifications.vue').default);
+Vue.component('alert-success', require('./components/alert/Success.vue').default);
+Vue.component('alert-warning', require('./components/alert/Warning.vue').default);
+Vue.component('alert-danger', require('./components/alert/Danger.vue').default);
+Vue.component('alert-info', require('./components/alert/Info.vue').default);
 
-Vue.component('notification-userregister', require('./components/UserRegistedNotifications.vue').default);
+
 
 
 /**
@@ -31,9 +36,6 @@ Vue.component('notification-userregister', require('./components/UserRegistedNot
 const app = new Vue({
     el: '#wrapper',
     mounted() {
-        Echo.channel('local-chanel')
-            .listen('NotificationEvent', (e) => {
-                console.log('Hello World Good jobs !')
-            });
+
     }
 });

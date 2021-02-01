@@ -29,7 +29,7 @@ class EventServiceProvider extends ServiceProvider
             //UserRegisted::class,
             SendPodcastNotification::class,
         ],
-        UserRegistedEvent::class =>[
+        UserTracker::class =>[
             SendUserRegistedNotification::class,
         ],
     ];
@@ -41,7 +41,13 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {        
-        parent::boot();
-        //
+        Event::listen(
+            NotificationEvent::class,
+            [SendPodcastNotification::class, 'handle']
+        );
+    
+        Event::listen(function (NotificationEvent $event) {
+            //
+        });
     }
 }

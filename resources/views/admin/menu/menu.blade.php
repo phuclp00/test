@@ -256,7 +256,8 @@
                   </form>
                </li>
                {{-- Notification --}}
-               <notification-userregister></notification-userregister>
+               <notification-user></notification-user>
+               <alert-info></alert-info>
                <li class="nav-item nav-icon dropdown">
                   <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                      <i class="ri-mail-line"></i>

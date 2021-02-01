@@ -30,8 +30,6 @@
     <!-- Start BEst Seller Area -->
   
     <section class="wn__product__area brown--color pt--80  pb--30">
-        
-
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

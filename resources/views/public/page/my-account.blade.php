@@ -11,16 +11,16 @@
 			<div class="col-lg-6 col-12">
 				<div class="my__account__wrapper">
 					<h3 class="account__title">Login</h3>
-					<form action="{{route('login_signin')}}" method="GET">
+					<form action="{{route('login_signin')}}" method="post" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<div class="account__form">
 							<div class="input__box">
 								<label>Username or email address <span>*</span></label>
-								<input type="text" name="username" value="">
+								<input type="text" name="username">
 							</div>
 							<div class="input__box">
 								<label>Password<span>*</span></label>
-								<input type="password" name="userpassword" value="">
+								<input type="password" name="password"autocomplete="on">
 							</div>
 							<div class="form__btn">
 								<button>Login</button>
@@ -42,7 +42,7 @@
 			<div class="col-lg-6 col-12">
 				<div class="my__account__wrapper">
 					<h3 class="account__title">Register</h3>
-					<form action="{{route('login_signup')}}" method="GET">
+					<form action="{{route('login_signup')}}" method="post" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						<div class="account__form">
 							<div class="input__box">
@@ -55,7 +55,7 @@
 							</div>
 							<div class="input__box">
 								<label>Password<span>*</span></label>
-								<input type="password" name="password_register" value="{{old('password_register')}}">
+								<input type="password" name="password_register" value="{{old('password_register')}}" autocomplete="on">
 							</div>						
 							<div class="form__btn">
 								<button type="submit">Register</button>

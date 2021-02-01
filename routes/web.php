@@ -27,7 +27,7 @@ use Encore\Admin\Facades\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Events\NotificationEvent;
-use App\Events\UserRegistedEvent;
+use App\Events\UserRegisted;
 use Illuminate\Support\Facades\Artisan;
 
 /*
@@ -62,9 +62,9 @@ Route::get('/cache', function() {
 
 Route::get('/test', function () {
     $data= UserModel::where('user_id',50)->first();
-   // event(new UserRegistedEvent($data));
-    event(new NotificationEvent($data));
-
+   event(new UserRegisted($data));
+   // event(new UserTracker($data));
+    //event(new NotificationEvent($data->user_id));
     return "test";
 });
 //===================================LOG-IN ========================================================================//
@@ -72,8 +72,8 @@ $controllerName = 'login';
 Route::group(['prefix' => $controllerName], function () {
     $controller = LoginController::class;
     Route::get('/', [$controller, 'show_login'])->name("show_login");
-    Route::get('/sign-in', [$controller, 'Login'])->name("login_signin");
-    Route::get('/sign-up', [$controller, 'Register'])->name("login_signup");
+    Route::post('/sign-in', [$controller, 'Login'])->name("login_signin");
+    Route::post('/sign-up', [$controller, 'Register'])->name("login_signup");
     Route::get('/log-out', [$controller, 'log_out'])->name("log_out");
 });
 //===================================HOME - PAGE ====================================================================//

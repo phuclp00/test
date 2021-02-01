@@ -2,7 +2,7 @@
 
 namespace App\Listeners;
 
-use App\Events\UserRegistedEvent;
+use App\Events\UserTracker;
 use App\Models\UserModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
@@ -26,11 +26,11 @@ class SendUserRegistedNotification implements ShouldQueue
      * @param  SendUserRegistedNotification  $event
      * @return void
      */
-    public function handle(UserRegistedEvent $event)
+    public function handle(UserTracker $event)
     {
        
     }
-    public function failed(UserRegistedEvent $event, $exception)
+    public function failed(UserTracker $event, $exception)
     {
         //
     }
