@@ -12,6 +12,7 @@ let mix = require('laravel-mix');
  |
  */
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 
 
@@ -33,6 +34,7 @@ mix.webpackConfig(webpack => {
                 jQuery: 'jquery',
                 'window.jQuery': 'jquery',
             }),
+            new VueLoaderPlugin()
         ]
     };
 });

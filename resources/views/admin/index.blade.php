@@ -7,14 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Booksto - Responsive Bootstrap 4 Admin Dashboard Template</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
-    <script src="{{asset('asset/dist/jquery-confirm.min.js')}}" type="text/javascript"></script>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
-    <link rel="stylesheet" href="{{asset('asset/dist/jquery-confirm.min.css')}}">
-
-
+    <link rel="stylesheet" href="{{asset('/css/jquery-confirm.min.css')}}">
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{asset('asset/images/favicon.ico')}}" />
     <!-- Bootstrap CSS -->
@@ -28,6 +21,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{asset('/css/app.css')}}" />
+    <script src="{{asset('js/jquery.min.js')}}"></script>
+
 
 </head>
 
@@ -106,7 +101,8 @@
     </div>
     <!-- color-customizer END -->
     <!-- Optional JavaScript -->
-    <script src="{{asset('/js/app.js')}}"></script>
+    <script src={{asset("/js/app.js")}}></script>
+    <script type="text/javascript" src="{{ asset('/js/jquery-confirm.min.js') }}"></script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="{{asset('asset/js/ls.js')}}" type="text/javascript"></script>

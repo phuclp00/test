@@ -5,9 +5,7 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue').default;
-
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -18,7 +16,7 @@ window.Vue = require('vue').default;
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-Vue.component('notification-user', require('./components/user/AdminNotifications.vue').default);
+Vue.component('notification-user', require('./components/user/notification/UserTracker.vue').default);
 Vue.component('alert-success', require('./components/alert/Success.vue').default);
 Vue.component('alert-warning', require('./components/alert/Warning.vue').default);
 Vue.component('alert-danger', require('./components/alert/Danger.vue').default);
@@ -35,7 +33,4 @@ Vue.component('alert-info', require('./components/alert/Info.vue').default);
 
 const app = new Vue({
     el: '#wrapper',
-    mounted() {
-
-    }
 });

@@ -4,15 +4,14 @@
       <i class="ri-notification-2-line"></i>
       <span class="bg-primary dots"></span>
     </a>
+    
     <div class="iq-sub-dropdown">
       <div class="iq-card shadow-none m-0">
-        <div class="iq-card-body p-0">
+        <div class="iq-card-body p-0" >
           <div class="bg-primary p-3">
             <h5 class="mb-0 text-white">
-              All Notifications
-              <small class="badge badge-light float-right pt-1"
-                ><span>10</span></small
-              >
+               All Notifications
+              <small class="badge badge-light float-right pt-1" ><span>{{notifications.length}}</span></small>
             </h5>
           </div>
           <a :href="notification.url" class="iq-sub-card" v-for="notification in notifications">
@@ -41,8 +40,6 @@
 
 <script>
 import VueTimeago from "vue-timeago";
-
-
 Vue.use(VueTimeago, {
   name: "Timeago", // Component name, `Timeago` by default
   locale: "en", // Default locale
@@ -63,8 +60,8 @@ export default {
     Echo.channel('user-registed')
     .listen('UserRegisted',(user) =>{
       this.notifications.unshift({
-        description:'User Name :' + user.user_name+'has been created !',
-        url :'/admin/dashboard',
+        description:'User :' + user.user_name+'has been created !',
+        url :'/admin',
         time: new Date()
       })
     })    
