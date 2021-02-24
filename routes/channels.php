@@ -3,6 +3,7 @@
 use App\Http\Resources\User;
 use Illuminate\Support\Facades\Broadcast;
 use App\Models\UserModel;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -11,10 +12,12 @@ use App\Models\UserModel;
 |
 | Here you may register all of the event broadcasting channels that your
 | application supports. The given channel authorization callbacks are
-| used to check if an authenticated user can listen to the channel.
+| used to check if an authenticated user can listen to the channel.a
 |
 */
-
-// Broadcast::channel('user-registed', function ($user, $userID) { 
-//     return $user->user_id ===UserModel::findOrFail($userID)->user_id;
-// });
+Broadcast::channel('App.Models.UserModel.{userId}', function ($user, $userId) {
+   return true;
+ });
+ Broadcast::channel('user-registed', function ($user) {
+    return true;
+  });

@@ -1,20 +1,21 @@
 <template>
-  <li class="nav-item nav-icon" >
+  <li class="nav-item nav-icon">
     <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
       <i class="ri-notification-2-line"></i>
       <span class="bg-primary dots"></span>
     </a>
-    
     <div class="iq-sub-dropdown">
-      <div class="iq-card shadow-none m-0">
-        <div class="iq-card-body p-0" >
+      <div class="iq-card shadow-none m-0" >
+        <div class="iq-card-body p-0">
           <div class="bg-primary p-3">
-            <h5 class="mb-0 text-white">
-               All Notifications
-              <small class="badge badge-light float-right pt-1" ><span>{{notifications.length}}</span></small>
+            <h5 class="mb-0 text-white" :v-model="notification">
+              All Notifications 
+              <small class="badge badge-light float-right pt-1"
+                ><span>{{allNotification.length}}</span></small
+              >
             </h5>
           </div>
-          <a :href="notification.url" class="iq-sub-card" v-for="notification in notifications">
+          <a href="#" class="iq-sub-card" v-for="(item,index) in allNotification" :key="index">
             <div class="media align-items-center">
               <div class="">
                 <img
@@ -24,9 +25,13 @@
                 />
               </div>
               <div class="media-body ml-3">
-                <h6 id="notification" class="mb-0">{{notification.description}}</h6>
+                <h6 id="notification" class="mb-0">{{item.data}}
+                </h6>
                 <small class="float-right font-size-12"
-                  ><timeago :datetime="notification.time" :auto-update=60></timeago
+                  ><timeago
+                    :datetime="new Date()"
+                    :auto-update="60"
+                  ></timeago
                 ></small>
                 <p class="mb-0">95 MB</p>
               </div>
@@ -50,22 +55,33 @@ Vue.use(VueTimeago, {
   },
 });
 export default {
-  props:[],
+  props: ['user'],
   data() {
     return {
-      notifications: [],
+      notification: null,
+      allNotification:[]
     };
   },
   mounted() {
-    Echo.channel('user-registed')
-    .listen('UserRegisted',(user) =>{
+    Echo.private("user-registed").listen("UserRegisted", (user) => {
       this.notifications.unshift({
-        description:'User :' + user.user_name+'has been created !',
-        url :'/admin',
-        time: new Date()
-      })
-    })    
+        description: "User :" + user.user_name + "has been created !",
+        url: "/admin",
+        time: new Date(),
+      });
+        console.log(user.user.user_id);
+    });
   },
+  methods:{
+    fetch_Notify(){
+      axios.get('/notify').then(response =>{
+        this.allNotification = response.data;
+      })
+    }
+  },
+  created(){
+    this.fetch_Notify();
+  }
 };
 </script>
 

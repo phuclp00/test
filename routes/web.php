@@ -28,7 +28,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Events\NotificationEvent;
 use App\Events\UserRegisted;
+use App\Models\Notifications;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\UserRegistedNotification;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,21 +53,19 @@ use Illuminate\Support\Facades\Artisan;
 $controllerName = "/";
 Route::group(['prefix' => $controllerName], function () {
     $controller = HomeController::class;
-    Route::get('/', [$controller, 'view'])->name("home_view");
+    Route::GET('/', [$controller, 'index'])->name("home_view");
     //Khong dung
     // SHOW THONG TIN TAI TRANG CHU 
 
 });
 Route::get('/cache', function() {
-    Artisan::call('cache:clear');
-    return "Cache is cleared";
 });
 
 Route::get('/test', function () {
-    $data= UserModel::where('user_id',50)->first();
-   event(new UserRegisted($data));
-   // event(new UserTracker($data));
-    //event(new NotificationEvent($data->user_id));
+    $data= UserModel::where('user_id',20)->first();
+    //$event= event(new UserRegisted($data));
+    //broadcast( new UserRegisted($data))->toOthers();
+    UserRegisted::dispatch($data);
     return "test";
 });
 //===================================LOG-IN ========================================================================//
@@ -205,11 +206,11 @@ Route::group(['prefix' => $controllerName], function () {
     Route::get('/search_product}', [ProductController::class, 'find_product'])->name("find_product");
 });
 //====================================== - ACCOUNT ========================================================//
-
+Route::get('/notify', [UserController::class,'get_notify']);
 
 //===================================ADMIN ===========================================================================//
 Route::group(['prefix' => 'admin'], function () {
-
+    
     //================================ ADMIN AUTH ================================================================//
 
     Route::get('/', [LoginController::class, 'admin_auth'])->name('admin_author');

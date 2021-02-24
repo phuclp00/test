@@ -20,21 +20,20 @@ class NotificationEvent implements ShouldBroadcast
      * @return void
      */
     public $thread;
-
-    public function __construct($thread)
+    public $message;
+  
+    public function __construct($message)
     {
-        $this->thread=$thread;
+        $this->message = $message;
     }
-
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return \Illuminate\Broadcasting\Channel|array
-     */
+  
     public function broadcastOn()
     {
-        return new Channel('local-chanel',$this->thread);
-
+        return ['my-channel'];
     }
-
+  
+    public function broadcastAs()
+    {
+        return 'my-event';
+    }
 }

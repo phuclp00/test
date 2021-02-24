@@ -4948,6 +4948,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -4962,7 +4972,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
-    Echo.channel('user-registed').listen('UserRegisted', function (user) {
+    Echo.channel("user-registed").listen(".user-registed", function (data) {
       _this.showAlert = !_this.showAlert;
     });
   }
@@ -5110,6 +5120,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 Vue.use(vue_timeago__WEBPACK_IMPORTED_MODULE_0__.default, {
   name: "Timeago",
@@ -5123,22 +5138,37 @@ Vue.use(vue_timeago__WEBPACK_IMPORTED_MODULE_0__.default, {
   }
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: [],
+  props: ['user'],
   data: function data() {
     return {
-      notifications: []
+      notification: null,
+      allNotification: []
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    Echo.channel('user-registed').listen('UserRegisted', function (user) {
+    Echo["private"]("user-registed").listen("UserRegisted", function (user) {
       _this.notifications.unshift({
-        description: 'User :' + user.user_name + 'has been created !',
-        url: '/admin',
+        description: "User :" + user.user_name + "has been created !",
+        url: "/admin",
         time: new Date()
       });
+
+      console.log(user.user.user_id);
     });
+  },
+  methods: {
+    fetch_Notify: function fetch_Notify() {
+      var _this2 = this;
+
+      axios.get('/notify').then(function (response) {
+        _this2.allNotification = response.data;
+      });
+    }
+  },
+  created: function created() {
+    this.fetch_Notify();
   }
 });
 
@@ -5227,9 +5257,11 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Pusher = __webpack_require__(/*! pusher-js */ "./node_modules/pusher-js/dist/web/pusher.js");
 window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   broadcaster: 'pusher',
-  key: "687fb481c88732eac357",
+  key: "09623629634650020d40",
   cluster: "ap1",
-  forceTLS: true
+  forceTLS: true,
+  authEndpoint: '/broadcasting/auth',
+  csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 });
 
 /***/ }),
@@ -10240,7 +10272,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.alert[data-v-4ae641ac]{\n  display: flow-root;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.alert[data-v-4ae641ac] {\r\n  display: flow-root;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -53233,22 +53265,30 @@ var render = function() {
           { staticClass: "iq-card-body p-0" },
           [
             _c("div", { staticClass: "bg-primary p-3" }, [
-              _c("h5", { staticClass: "mb-0 text-white" }, [
-                _vm._v("\n             All Notifications\n            "),
-                _c(
-                  "small",
-                  { staticClass: "badge badge-light float-right pt-1" },
-                  [_c("span", [_vm._v(_vm._s(_vm.notifications.length))])]
-                )
-              ])
+              _c(
+                "h5",
+                {
+                  staticClass: "mb-0 text-white",
+                  attrs: { "v-model": _vm.notification }
+                },
+                [
+                  _vm._v("\n            All Notifications \n            "),
+                  _c(
+                    "small",
+                    { staticClass: "badge badge-light float-right pt-1" },
+                    [_c("span", [_vm._v(_vm._s(_vm.allNotification.length))])]
+                  )
+                ]
+              )
             ]),
             _vm._v(" "),
-            _vm._l(_vm.notifications, function(notification) {
+            _vm._l(_vm.allNotification, function(item, index) {
               return _c(
                 "a",
                 {
+                  key: index,
                   staticClass: "iq-sub-card",
-                  attrs: { href: notification.url }
+                  attrs: { href: "#" }
                 },
                 [
                   _c("div", { staticClass: "media align-items-center" }, [
@@ -53263,7 +53303,7 @@ var render = function() {
                       _c(
                         "h6",
                         { staticClass: "mb-0", attrs: { id: "notification" } },
-                        [_vm._v(_vm._s(notification.description))]
+                        [_vm._v(_vm._s(item.data) + "\n              ")]
                       ),
                       _vm._v(" "),
                       _c(
@@ -53271,10 +53311,7 @@ var render = function() {
                         { staticClass: "float-right font-size-12" },
                         [
                           _c("timeago", {
-                            attrs: {
-                              datetime: notification.time,
-                              "auto-update": 60
-                            }
+                            attrs: { datetime: new Date(), "auto-update": 60 }
                           })
                         ],
                         1

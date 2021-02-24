@@ -10,8 +10,8 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Favicons -->
-	<link rel="shortcut icon" href="images/favicon.ico">
-	<link rel="apple-touch-icon" href="images/icon.png">
+	<link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+	<link rel="apple-touch-icon" href="{{asset('images/icon.png')}}">
 
 	<!-- Google font (font-family: 'Roboto', sans-serif; Poppins ; Satisfy) -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -22,9 +22,9 @@
 
 
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="source_project/css/bootstrap.min.css">
-	<link rel="stylesheet" href="source_project/css/plugins.css">
-	<link rel="stylesheet" href="source_project/style.css">
+	<link rel="stylesheet" href="{{asset('source_project/css/bootstrap.min.css')}}">
+	<link rel="stylesheet" href="{{asset('source_project/css/plugins.css')}}">
+	<link rel="stylesheet" href="{{asset('source_project/style.css')}}">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 
 	<!-- AJAX -->
@@ -32,10 +32,10 @@
 		integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 	<!-- Cusom css -->
-	<link rel="stylesheet" href="source_project/css/custom.css">
+	<link rel="stylesheet" href="{{asset('source_project/css/custom.css')}}">
 
 	<!-- Modernizer js -->
-	<script src="source_project/js/vendor/modernizr-3.5.0.min.js"></script>
+	<script src="{{asset('source_project/js/vendor/modernizr-3.5.0.min.js')}}"></script>
 
 	<link rel="stylesheet" href="{{asset('/css/app.css')}}" />
 
@@ -47,17 +47,13 @@
 	<!--[if lte IE 9]>
 		<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 	<![endif]-->
-	
 
 	<!-- Main wrapper -->
-
-	<div id="wrapper" class="wrapper" >
 		@yield('content')
 		<div id="myModal" class="modal">
 			<!-- Modal content -->
 			<div class="modal-content">
 				<div class="modal-header">
-					
 					<h2 class=" close title__be--2">CLOSE</h2>
 				</div>
 				<div class="modal-body">
@@ -129,7 +125,6 @@
 		</footer>
 		<!-- //Footer Area -->
 
-	</div>
 	<!-- //Main wrapper -->
 
 	<!-- JS Files -->

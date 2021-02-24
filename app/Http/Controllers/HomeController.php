@@ -52,11 +52,6 @@ class HomeController extends Controller
     {
         $this->middleware('auth');
     }
-    public function view()
-    {
-        
-        return view('public.index');
-    }
     public function index()
     {
         return view($this->pathViewController . 'index');

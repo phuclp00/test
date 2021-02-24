@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Notifications;
 use Illuminate\Http\Request;
 use App\Models\Show_info_user as MainModel;
 use App\Models\Show_info_user;
@@ -16,6 +17,7 @@ use Illuminate\Contracts\Cache\Store;
 use Illuminate\Support\Facades\Validator;
 use League\Flysystem\Cached\Storage\Memcached;
 use DB;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\DB as FacadesDB;
 
 class UserController extends Controller
@@ -189,5 +191,13 @@ class UserController extends Controller
             $request->session()->flash('account_status', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;"> Xoá người dùng ' . $request->user_id . 'thất bại, vui lòng thử lại </div>');
         }
         return \redirect()->back();
+    }
+    public function get_notify(){
+        try {
+             return Notifications::with('user')->get();
+        }
+        catch(Exception $e){
+            \report($e);
+        }
     }
 }

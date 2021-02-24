@@ -9,10 +9,10 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\BroadcastMessage;
 
-class UserRegisted extends Notification implements ShouldQueue
+class UserRegistedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
-    protected  $user;
+    public  $user;
     /**
      * Create a new notification instance.
      *
@@ -20,7 +20,7 @@ class UserRegisted extends Notification implements ShouldQueue
      */
     public function __construct($user)
     {
-        $this->user = $user;
+        $this->user=$user;
     }
 
     /**
@@ -31,7 +31,7 @@ class UserRegisted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database',];
+        return ['database','broadcast'];
     }
 
     /**
@@ -59,15 +59,19 @@ class UserRegisted extends Notification implements ShouldQueue
     public function toDatabase($notifiable)
     {
         return [
-            'user_name' => $this->user->user_name,
-            'user_email' => $this->user->email,
+            'data'=>"User ".$this->user->user_name." has been created !"
         ];
     }
     public function toArray($notifiable)
     {
         return [
-            'user_name' => $this->user->user_name,
-            'user_email' => $this->user->email,
+            'data'=>$notifiable->user_name
         ];
     }
+    public function toBroadcast($notifiable)
+{
+    return new BroadcastMessage([
+        'data' => "User ".$this->user->user_name." has been created !"
+    ]);
+}
 }

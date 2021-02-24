@@ -23,14 +23,11 @@ Vue.component('alert-danger', require('./components/alert/Danger.vue').default);
 Vue.component('alert-info', require('./components/alert/Info.vue').default);
 
 
-
-
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 const app = new Vue({
     el: '#wrapper',
 });

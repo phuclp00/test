@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Models\UserModel;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,7 +11,7 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserRegisted implements ShouldBroadcast
+class UserRegisted  implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -20,7 +21,7 @@ class UserRegisted implements ShouldBroadcast
      * @return void
      */
     public $user;
-    public function __construct($user)
+    public function __construct(UserModel $user)
     {
         $this->user = $user;
     }
@@ -32,14 +33,19 @@ class UserRegisted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('user-registed');
+        //return new Channel('user-registed');
+        return new PrivateChannel('user-registed');
     }
-    public function broadcastWith()
-    {
-        $extra=[
-            'name'=>$this->user->user_name,
-            'email'=>$this->user->email
-        ];
-        return \array_merge($this->user->toArray(),$extra);
-    }
+    // public function broadcastWith()
+    // {
+    //     $extra=[
+    //         'name'=>$this->user->user_name,
+    //         'email'=>$this->user->email
+    //     ];
+    //     return \array_merge($this->user->toArray(),$extra);
+    // }
+    // public function broadcastAs()
+    // {
+    //     return 'user-registed';
+    // }
 }

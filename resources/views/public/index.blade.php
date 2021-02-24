@@ -120,7 +120,8 @@
                     </div>
                     <div class="newsletter__block text-center">
                         <p>Subscribe to our newsletters now and stay up-to-date with new collections, the latest lookbooks and exclusive offers.</p>
-                        <form action="#">
+                        <form action="#" method="POST">
+                            {{ csrf_field() }}
                             <div class="newsletter__box">
                                 <input type="email" placeholder="Enter your e-mail">
                                 <button>Subscribe</button>

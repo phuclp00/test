@@ -256,7 +256,7 @@
                   </form>
                </li>
                {{-- Notification --}}
-               <notification-user></notification-user>
+               <notification-user :user="{{ Auth::user()->user_id}}"></notification-user>
                <alert-info></alert-info>
                <li class="nav-item nav-icon dropdown">
                   <a href="#" class="search-toggle iq-waves-effect text-gray rounded">

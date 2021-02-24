@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Notifications\UserRegisted;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use App\Events\UserRegisted;
 
 
 class UserModel extends Authenticatable
@@ -25,27 +25,16 @@ class UserModel extends Authenticatable
     protected $table = "user_account";
     protected $primaryKey = "user_id";
     protected $keyType="int";
-    const CREATED_AT = 'created';
-    const UPDATED_AT = 'modiffed';
+    const UPDATED_AT = 'modiffed_at';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'user_id',
         'user_name',
         'email',
         'password',
-        'password',
-        'remember_token',
-        'email_verified_at',
-        'level',
-        'created',
-        'created_by	',
-        'modiffed',
-        'modiffed_by',
-        'status',
     ];
 
     /**
@@ -67,8 +56,8 @@ class UserModel extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'modiffed' => 'datetime',
-        'created'  => 'datetime',
+        'modiffed_by' => 'datetime',
+        'created_at'  => 'datetime',
     ];
     /**
      * The accessors to append to the model's array form.
@@ -78,15 +67,27 @@ class UserModel extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+    protected $guarded = [
+        
+    ];
 
     protected $dispatchesEvents = [
-        'register' => UserRegisted::class,
+        'created' => UserRegisted::class,
         'delete' => UserDeleted::class,
         'ban'=>UserBan::class,
     ];
     public function user_detail()
     {
         return $this->hasOne('App\Models\UserDetail','user_name','user_id');
+    }
+    /**
+     * Get all of the comments for the UserModel
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function get_notify()
+    {
+        return $this->hasMany(Notifications::class,'notifiable_id','user_id');
     }
     public function setPasswordAttribute($value)
     {

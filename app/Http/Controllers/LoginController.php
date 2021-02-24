@@ -14,7 +14,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Auth;
-use App\Notifications\UserRegisted;
+use App\Events\UserRegisted;
 use App\Events\NotificationEvent;
 use App\Events\UserTracker;
 use Illuminate\Auth\Events\Login;
@@ -27,7 +27,9 @@ class LoginController extends Controller
     use Notifiable;
     private $pathViewController = 'public.page.my-account';
 
-
+    public function __construct(){
+        $this->middleware('auth');
+    }
     public function show_login()
     {
         if (\session()->has('user_info')) {
@@ -40,7 +42,7 @@ class LoginController extends Controller
         if (session()->has('user_info')) {
             return view('public.index');
         }
-        $request_data = $request->only('username','password');
+        $request_data = $request->only('username', 'password');
         try {
             $check_user = UserModel::where('user_name', $request_data['username'])->first();
             if (Hash::check($request_data['password'], $check_user->password)) {
@@ -66,24 +68,30 @@ class LoginController extends Controller
     public function Register(Request $request)
     {
         $data = new UserModel();
-        $data_request=$request->only('username_register','password_register','email_register');
+        $data_request = $request->only('username_register', 'password_register', 'email_register');
         try {
-            $data->user_name = $request->username_register;
-            $data->password = $request->password_register;
-            $data->email = $request->email_register;
-            $data->level = "user";
-            $data->status = "active";
-            $data->created_by=$data->user_name;
-            $data->save();
+            // $data->user_name = $request->username_register;
+            // $data->password = $request->password_register;
+            // $data->email = $request->email_register;
+            // $data->level = "user";
+            // $data->status = "active";
+            // $data->created_by=$data->user_name;
+            // $data->save();
+            // $user->save();
             //Send notify to database 
-            $data->notify( new UserRegisted($data));
+            // $data->notify( new UserRegisted($data));
             //Send notify to admin 
-            event( new UserTracker($data));
-            
+            // event( new UserTracker($data));
+            $user = UserModel::create([
+                'user_name' => $data_request['username_register'],
+                'password' => $data_request['password_register'],
+                'email' => $data_request['email_register'],
+                'created_by' => $data_request['username_register']
+            ])->created();
             $request->session()->flash('logout_status', '<div class="alert alert-success">"Tạo tài khoản thành công , tiếp tục mua sắm nào !!"</div>');
             return \redirect()->back();
         } catch (Exception $e) {
-            $request->session()->flash('logout_status', '<div class="alert alert-danger">Tạo tài khoản thát bại'.$e->getMessage().' vui lòng thử lại</div>');
+            $request->session()->flash('logout_status', '<div class="alert alert-danger">Tạo tài khoản thát bại' . $e->getMessage() . ' vui lòng thử lại</div>');
             return \redirect()->back();
         }
     }
@@ -117,19 +125,17 @@ class LoginController extends Controller
     public function admin_login(LoginRequest $loginRequest)
     {
         $result = $loginRequest->only('email', 'password');
-        $option =$loginRequest->remember=="on"?true:false; 
+        $option = $loginRequest->remember == "on" ? true : false;
         if (Auth::attempt([
             'email' => $result['email'],
             'password' => $result['password'],
             'level' => "admin"
-        ],$remember=$option))
-        {
+        ], $remember = $option)) {
             $loginRequest->session()->regenerate();
             return redirect()->route('admin.dash_view');
-        } 
-        else
+        } else
             $loginRequest->session()->flash('info_warning', '<div class="alert alert-danger" style="text-align: center;font-size: x-large;font-family: fangsong;">  Login Fail,Try Again !! </div>');
-            return \redirect()->back();
+        return \redirect()->back();
     }
     public function admin_logout(Request $request)
     {
