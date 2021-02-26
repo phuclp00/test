@@ -14,6 +14,7 @@ class Notifications extends Model
     protected $table = "notifications";
     protected $primaryKey = "id";
     protected $keyType="string";
+    public $incrementing=false;
 
     protected $fillable = [
         'id',
@@ -31,7 +32,7 @@ class Notifications extends Model
      * Get the user associated with the Notifications
      *
      */
-    public function user()
+    public function usermodel()
     {
         return $this->belongsTo(UserModel::class,'user_id','notifiable_id');
     }

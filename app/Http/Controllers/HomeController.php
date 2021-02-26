@@ -42,16 +42,11 @@ class HomeController extends Controller
         $list_items_product = (new ShopController)->all_list_view();
         $list_items_categoy = (new CategoryController)->list_category();
         $top_item_category = (new CategoryController)->top_list_category();
-
         $pagi_list_product = (new ShopController)->paginate_list_view();
-
         //$list_get_category=(new CategoryController)->get_category();
     }
     // FRONT-END
-    public function view_Admin()
-    {
-        $this->middleware('auth');
-    }
+  
     public function index()
     {
         return view($this->pathViewController . 'index');

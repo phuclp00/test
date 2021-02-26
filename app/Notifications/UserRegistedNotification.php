@@ -20,7 +20,7 @@ class UserRegistedNotification extends Notification implements ShouldQueue
      */
     public function __construct($user)
     {
-        $this->user=$user;
+        $this->user = $user;
     }
 
     /**
@@ -31,7 +31,7 @@ class UserRegistedNotification extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database','broadcast'];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -56,22 +56,20 @@ class UserRegistedNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toDatabase($notifiable)
-    {
-        return [
-            'data'=>"User ".$this->user->user_name." has been created !"
-        ];
-    }
+    // public function toDatabase($notifiable)
+    // {
+    //     return [
+    //         'data'=>'User' .$this->user->user_name.' has been created !'
+    //     ];
+    // }
     public function toArray($notifiable)
     {
-        return [
-            'data'=>$notifiable->user_name
-        ];
+        return 'User'.$this->user->user_name.' has been created !';
     }
     public function toBroadcast($notifiable)
-{
-    return new BroadcastMessage([
-        'data' => "User ".$this->user->user_name." has been created !"
-    ]);
-}
+    {
+        return new BroadcastMessage([
+            'data' => "User " . $this->user->user_name . " has been created !"
+        ]);
+    }
 }

@@ -194,7 +194,9 @@ class UserController extends Controller
     }
     public function get_notify(){
         try {
-             return Notifications::with('user')->get();
+             $data= Notifications::with('usermodel')->get();
+             return response($data);
+
         }
         catch(Exception $e){
             \report($e);

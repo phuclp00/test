@@ -59,13 +59,14 @@ Route::group(['prefix' => $controllerName], function () {
 
 });
 Route::get('/cache', function() {
+    dd(auth()->user()->notifications()->get());
 });
 
 Route::get('/test', function () {
     $data= UserModel::where('user_id',20)->first();
     //$event= event(new UserRegisted($data));
-    //broadcast( new UserRegisted($data))->toOthers();
-    UserRegisted::dispatch($data);
+    broadcast( new UserRegisted($data))->toOthers();
+    //UserRegisted::dispatch($data);
     return "test";
 });
 //===================================LOG-IN ========================================================================//

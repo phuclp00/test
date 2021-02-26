@@ -27,9 +27,7 @@ class LoginController extends Controller
     use Notifiable;
     private $pathViewController = 'public.page.my-account';
 
-    public function __construct(){
-        $this->middleware('auth');
-    }
+ 
     public function show_login()
     {
         if (\session()->has('user_info')) {

@@ -37,6 +37,6 @@ window.Echo = new Echo({
     key: process.env.MIX_PUSHER_APP_KEY,
     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
     forceTLS: true,
-    authEndpoint: '/broadcasting/auth',
+    authEndpoint: '../broadcasting/auth',
     csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 });

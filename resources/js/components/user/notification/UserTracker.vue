@@ -15,7 +15,7 @@
               >
             </h5>
           </div>
-          <a href="#" class="iq-sub-card" v-for="(item,index) in allNotification" :key="index">
+          <a href="#" class="iq-sub-card" v-for='(item,index) in allNotification' :key='index'>
             <div class="media align-items-center">
               <div class="">
                 <img
@@ -29,7 +29,7 @@
                 </h6>
                 <small class="float-right font-size-12"
                   ><timeago
-                    :datetime="new Date()"
+                    :datetime="item.updated_at"
                     :auto-update="60"
                   ></timeago
                 ></small>
@@ -64,17 +64,17 @@ export default {
   },
   mounted() {
     Echo.private("user-registed").listen("UserRegisted", (user) => {
-      this.notifications.unshift({
-        description: "User :" + user.user_name + "has been created !",
-        url: "/admin",
-        time: new Date(),
-      });
-        console.log(user.user.user_id);
+      // this.notifications.unshift({
+      //   description: "User :" + user.user_name + "has been created !",
+      //   url: "/admin",
+      //   time: new Date(),
+      // });
+      //   console.log(user.user.user_id);
     });
   },
   methods:{
     fetch_Notify(){
-      axios.get('/notify').then(response =>{
+      axios.get('../notify').then((response) =>{
         this.allNotification = response.data;
       })
     }

@@ -5146,24 +5146,20 @@ Vue.use(vue_timeago__WEBPACK_IMPORTED_MODULE_0__.default, {
     };
   },
   mounted: function mounted() {
-    var _this = this;
-
-    Echo["private"]("user-registed").listen("UserRegisted", function (user) {
-      _this.notifications.unshift({
-        description: "User :" + user.user_name + "has been created !",
-        url: "/admin",
-        time: new Date()
-      });
-
-      console.log(user.user.user_id);
+    Echo["private"]("user-registed").listen("UserRegisted", function (user) {// this.notifications.unshift({
+      //   description: "User :" + user.user_name + "has been created !",
+      //   url: "/admin",
+      //   time: new Date(),
+      // });
+      //   console.log(user.user.user_id);
     });
   },
   methods: {
     fetch_Notify: function fetch_Notify() {
-      var _this2 = this;
+      var _this = this;
 
-      axios.get('/notify').then(function (response) {
-        _this2.allNotification = response.data;
+      axios.get('../notify').then(function (response) {
+        _this.allNotification = response.data;
       });
     }
   },
@@ -5260,7 +5256,7 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__.default({
   key: "09623629634650020d40",
   cluster: "ap1",
   forceTLS: true,
-  authEndpoint: '/broadcasting/auth',
+  authEndpoint: '../broadcasting/auth',
   csrfToken: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
 });
 
@@ -53311,7 +53307,10 @@ var render = function() {
                         { staticClass: "float-right font-size-12" },
                         [
                           _c("timeago", {
-                            attrs: { datetime: new Date(), "auto-update": 60 }
+                            attrs: {
+                              datetime: item.updated_at,
+                              "auto-update": 60
+                            }
                           })
                         ],
                         1
