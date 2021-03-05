@@ -6,6 +6,8 @@
 
 require('./bootstrap');
 window.Vue = require('vue').default;
+import InfiniteLoading from 'vue-infinite-loading';
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,12 +24,21 @@ Vue.component('alert-warning', require('./components/alert/Warning.vue').default
 Vue.component('alert-danger', require('./components/alert/Danger.vue').default);
 Vue.component('alert-info', require('./components/alert/Info.vue').default);
 
+Vue.use(InfiniteLoading, {
+    /* options */
+    slots: {
+        noMore: 'No more message', // you can pass a string value
+        error: "Error", // you also can pass a Vue component as a slot
+    },
+});
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
 const app = new Vue({
     el: '#wrapper',
+
 });

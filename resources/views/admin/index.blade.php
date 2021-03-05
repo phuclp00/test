@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <!-- Responsive CSS -->
     <link rel="stylesheet" href="{{asset('asset/css/responsive.css')}}">
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://cdn.ckeditor.com/ckeditor5/24.0.0/classic/ckeditor.js" type="text/javascript"></script>
     <link rel="stylesheet" href="{{asset('/css/app.css')}}" />
     <script src="{{asset('js/jquery.min.js')}}"></script>

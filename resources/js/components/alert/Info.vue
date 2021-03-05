@@ -21,7 +21,7 @@
         /></svg
     ></span>
     <strong>Notification to Admin !</strong>
-    <p>You already have a message important from the system !</p>
+    <p>{{notification}}!</p>
   </alert>
 </template>
 
@@ -31,16 +31,24 @@ export default {
   components: {
     alert,
   },
-  props: [],
+  props: ["user"],
   data() {
     return {
       showAlert: false,
+      notification:null
     };
   },
   mounted() {
-    Echo.channel("user-registed").listen(".user-registed", (data) => {
-      this.showAlert = !this.showAlert;
-    });
+        Echo.private('App.Models.UserModel.'+this.user).notification((notification) => {
+          this.showAlert = !this.showAlert;
+          this.notification=notification.data;
+        })
+    // Echo.private("App.Models.UserModel."+this.user).listen("UserRegisted",(user)=>{
+    //     this.showAlert = !this.showAlert;
+    // });
+    // Echo.private("user-registed").listen("UserRegisted",(user)=>{
+    //     this.showAlert = !this.showAlert;
+    // })
   },
 };
 </script>

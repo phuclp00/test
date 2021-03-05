@@ -25,13 +25,13 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        NotificationEvent::class => [
-            // SendEmailVerificationNotification::class,
-            //UserModel::class,
-            //SendPodcastNotification::class,
-            //UserRegisted::class,
-            SendPodcastNotification::class,
-        ],
+        // NotificationEvent::class => [
+        //     // SendEmailVerificationNotification::class,
+        //     //UserModel::class,
+        //     //SendPodcastNotification::class,
+        //     //UserRegisted::class,
+        //     SendPodcastNotification::class,
+        // ],
         Event_UserRegisted::class => [
             UserRegisted_SendNotificationToAdmin::class,
         ],

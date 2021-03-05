@@ -256,8 +256,8 @@
                   </form>
                </li>
                {{-- Notification --}}
-               <notification-user :user="{{ Auth::user()->user_id}}"></notification-user>
-               <alert-info></alert-info>
+               <notification-user :user="{{ Auth::user()->load('notifications')}}" :unreads="{{auth()->user()->unreadNotifications}}"></notification-user>
+               <alert-info :user="{{ Auth::user()->user_id}}"></alert-info>
                <li class="nav-item nav-icon dropdown">
                   <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
                      <i class="ri-mail-line"></i>

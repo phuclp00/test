@@ -45,8 +45,6 @@ class UserModel extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
-        'two_factor_recovery_codes',
-        'two_factor_secret',
     ];
 
     /**
@@ -70,6 +68,8 @@ class UserModel extends Authenticatable
     protected $guarded = [
         
     ];
+    protected static $logAttributesToIgnore = ['remember_token'];
+    protected static $ignoreChangedAttributes = ['remember_token'];
 
     protected $dispatchesEvents = [
         'created' => UserRegisted::class,

@@ -56,20 +56,20 @@ class UserRegistedNotification extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    // public function toDatabase($notifiable)
-    // {
-    //     return [
-    //         'data'=>'User' .$this->user->user_name.' has been created !'
-    //     ];
-    // }
-    public function toArray($notifiable)
+    public function toDatabase($notifiable)
     {
-        return 'User'.$this->user->user_name.' has been created !';
+        return [
+            'thread' => $this->user->user_id,
+            'data' => 'User' . $this->user->user_name . ' has been created !'
+        ];
     }
+
     public function toBroadcast($notifiable)
     {
         return new BroadcastMessage([
-            'data' => "User " . $this->user->user_name . " has been created !"
+           // 'thread' => $this->user->user_id,
+            //'data' => 'User' . $this->user->user_name . ' has been created !'
+            'notifiable'=>$notifiable->notifications()->latest()->first()
         ]);
     }
 }

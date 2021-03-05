@@ -1,21 +1,37 @@
 <template>
   <li class="nav-item nav-icon">
-    <a href="#" class="search-toggle iq-waves-effect text-gray rounded">
+    <a
+      href="#"
+      class="search-toggle iq-waves-effect text-gray rounded"
+      @click="click"
+    >
       <i class="ri-notification-2-line"></i>
       <span class="bg-primary dots"></span>
     </a>
-    <div class="iq-sub-dropdown">
-      <div class="iq-card shadow-none m-0" >
+    <div
+      ref="dropdown"
+      class="iq-sub-dropdown scrolling-auto"
+      v-on:scroll.passive="onScroll"
+    >
+      <div class="iq-card shadow-none m-0">
         <div class="iq-card-body p-0">
-          <div class="bg-primary p-3">
-            <h5 class="mb-0 text-white" :v-model="notification">
-              All Notifications 
-              <small class="badge badge-light float-right pt-1"
-                ><span>{{allNotification.length}}</span></small
-              >
-            </h5>
+          <div class="bg-primary p-3 active">
+            <a href="#" @click="markAllRead()">
+              <h5 class="mb-0 text-white">
+                Check All Notifications
+                <small class="badge badge-light float-right pt-1"
+                  ><span>{{ unreadNotifications.length }}</span></small
+                >
+              </h5>
+            </a>
           </div>
-          <a href="#" class="iq-sub-card" v-for='(item,index) in allNotification' :key='index'>
+          <a
+            v-for="notification in allNotifications.slice(0, number)"
+            class="iq-sub-card"
+            :todo="notification.read_at"
+            :key="notification.id"
+            ref="notification"
+          >
             <div class="media align-items-center">
               <div class="">
                 <img
@@ -25,11 +41,18 @@
                 />
               </div>
               <div class="media-body ml-3">
-                <h6 id="notification" class="mb-0">{{item.data}}
+                <h6
+                  id="notification"
+                  class="mb-0"
+                  :class="{
+                    'text-success': notification.read_at == null,
+                  }"
+                >
+                  {{ notification.data.data }}
                 </h6>
                 <small class="float-right font-size-12"
                   ><timeago
-                    :datetime="item.updated_at"
+                    :datetime="notification.created_at"
                     :auto-update="60"
                   ></timeago
                 ></small>
@@ -42,9 +65,9 @@
     </div>
   </li>
 </template>
-
 <script>
 import VueTimeago from "vue-timeago";
+import Button from "../../../Jetstream/Button.vue";
 Vue.use(VueTimeago, {
   name: "Timeago", // Component name, `Timeago` by default
   locale: "en", // Default locale
@@ -55,35 +78,75 @@ Vue.use(VueTimeago, {
   },
 });
 export default {
-  props: ['user'],
+  components: { Button },
+  props: ["user", "unreads"],
   data() {
     return {
-      notification: null,
-      allNotification:[]
+      allNotifications: [],
+      unreadNotifications: [],
+      number: 5,
     };
   },
-  mounted() {
-    Echo.private("user-registed").listen("UserRegisted", (user) => {
-      // this.notifications.unshift({
-      //   description: "User :" + user.user_name + "has been created !",
-      //   url: "/admin",
-      //   time: new Date(),
-      // });
-      //   console.log(user.user.user_id);
+  mounted() {},
+  methods: {
+    markAllRead() {
+      axios.get("../mark-all-read/" + this.user.user_id).then((response) => {
+        this.unreadNotifications = [];
+        this.allNotifications = response.data.notifications;
+      });
+    },
+    onScroll(event) {
+      if (this.number == this.allNotifications.length) {
+        return;
+      }
+      return (this.number += 2);
+    },
+    click(event) {
+      this.$refs.dropdown.scrollTop = true;
+    },
+  },
+  watch: {
+    allNotifications(val) {
+      this.unreadNotifications = this.allNotifications.filter(
+        (notification) => {
+          return notification.read_at == null;
+        }
+      );
+    },
+  },
+
+  created() {
+    document.addEventListener("scroll", this.onScroll);
+    document.addEventListener("click", this.click);
+    this.allNotifications = this.user.notifications;
+
+    this.unreadNotifications = this.allNotifications.filter((notification) => {
+      return notification.read_at == null;
     });
+
+    Echo.private("App.Models.UserModel." + this.user.user_id).notification(
+      (notification) => {
+        this.allNotifications.unshift(notification.notifiable);
+      }
+    );
   },
-  methods:{
-    fetch_Notify(){
-      axios.get('../notify').then((response) =>{
-        this.allNotification = response.data;
-      })
-    }
+
+  destroyed() {
+    document.removeEventListener("scroll", this.onScroll);
+    document.removeEventListener("click", this.click);
   },
-  created(){
-    this.fetch_Notify();
-  }
 };
 </script>
-
-<style>
+<style scoped>
+.scrolling-auto {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 450px;
+}
+.active {
+  position: -webkit-sticky; /* Safari & IE */
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
 </style>

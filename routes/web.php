@@ -50,7 +50,7 @@ use App\Notifications\UserRegistedNotification;
 //Route::get('/', [HomeController::class, 'view'])->name('home_view');
 //===================================SLIDER========================================================================//
 //===================================SLIDER-HOMEPAGE =========================================================//
-$controllerName = "/";
+$controllerName = "";
 Route::group(['prefix' => $controllerName], function () {
     $controller = HomeController::class;
     Route::GET('/', [$controller, 'index'])->name("home_view");
@@ -63,10 +63,11 @@ Route::get('/cache', function() {
 });
 
 Route::get('/test', function () {
-    $data= UserModel::where('user_id',20)->first();
+    $data= UserModel::where('user_id',42)->first();
     //$event= event(new UserRegisted($data));
-    broadcast( new UserRegisted($data))->toOthers();
+    //broadcast( new UserRegisted($data))->toOthers();
     //UserRegisted::dispatch($data);
+    event(new UserRegisted($data));
     return "test";
 });
 //===================================LOG-IN ========================================================================//
@@ -207,7 +208,14 @@ Route::group(['prefix' => $controllerName], function () {
     Route::get('/search_product}', [ProductController::class, 'find_product'])->name("find_product");
 });
 //====================================== - ACCOUNT ========================================================//
-Route::get('/notify', [UserController::class,'get_notify']);
+Route::get('/notify', [UserController::class,'get_list_notify']);
+Route::get('/notify/{id}',  [UserController::class,'get_id_notify']);
+
+Route::get('/mark-all-read/{user}', function (UserModel $user) {
+    $user->unreadNotifications->markAsRead();
+    return response(['message'=>'done', 'notifications'=>$user->notifications]);
+});
+Route::get('/mark-as-read/{user}/{notifyId}', [UserController::class,'markAsRead']);
 
 //===================================ADMIN ===========================================================================//
 Route::group(['prefix' => 'admin'], function () {

@@ -48,7 +48,7 @@ class UserController extends Controller
     {
         $request->validate([
             'upload_file' => 'required',
-        ]); 
+        ]);
         try {
             $file = $request->upload_file;
             $data = UserDetail::find($request->user_name);
@@ -121,7 +121,7 @@ class UserController extends Controller
         $key_find = $request->search_user;
         if ($key_find != " ") {
             try {
-                $list_search = Show_info_user::where('level', '=',$key_find)
+                $list_search = Show_info_user::where('level', '=', $key_find)
                     ->orwhere('user_name', 'like', '%' . $key_find . '%')
                     ->orWhere('full_name', 'like', '%' . $key_find . '%')
                     ->orwhere('status', '=', $key_find)
@@ -138,15 +138,15 @@ class UserController extends Controller
                        </td>
                        <td>$user->street-$user->district-$user->city</td>
                        <td>$user->phone</td>";
-                       if($user->level=='admin')
-                         $output.= "<td><span class='badge iq-bg-warning'>$user->level</span></td>";
-                       else
-                          $output.="<td><span class='badge iq-bg-info'>$user->level</span></td>";
-                       if($user->status=='ban')
-                          $output.="<td><span class='badge iq-bg-danger'>$user->status</span></td>";
-                       else
-                         $output.="<td><span class='badge iq-bg-primary'>$user->status</span></td>";
-                       $output.="
+                        if ($user->level == 'admin')
+                            $output .= "<td><span class='badge iq-bg-warning'>$user->level</span></td>";
+                        else
+                            $output .= "<td><span class='badge iq-bg-info'>$user->level</span></td>";
+                        if ($user->status == 'ban')
+                            $output .= "<td><span class='badge iq-bg-danger'>$user->status</span></td>";
+                        else
+                            $output .= "<td><span class='badge iq-bg-primary'>$user->status</span></td>";
+                        $output .= "
                        <td>$user->created</td>
                        <td>
                           <div class='flex align-items-center list-user-action'>
@@ -155,7 +155,7 @@ class UserController extends Controller
                              <a class='iq-bg-primary' data-toggle='tooltip' data-placement='top' title=''
                                 data-original-title='Edit' href='#'><i class='ri-pencil-line'></i></a>
                              <a class='iq-bg-primary' data-toggle='tooltip' data-placement='top' title=''
-                                data-original-title='Delete' href='".route('admin_delete_user',[$user->user_name])."'><i class='ri-delete-bin-line'></i></a>
+                                data-original-title='Delete' href='" . route('admin_delete_user', [$user->user_name]) . "'><i class='ri-delete-bin-line'></i></a>
                           </div>
                        </td>
                     </tr>";
@@ -167,16 +167,15 @@ class UserController extends Controller
                         </tr>
                         ';
                 }
-                $data=array(
-                    'result'=>$output
+                $data = array(
+                    'result' => $output
                 );
-                 return \json_encode($data);
+                return \json_encode($data);
             } catch (Exception $e) {
                 \report($e);
             }
-        } 
-        else{
-            $data=null;
+        } else {
+            $data = null;
             return $data;
         }
     }
@@ -192,11 +191,33 @@ class UserController extends Controller
         }
         return \redirect()->back();
     }
-    public function get_notify(){
+    public function get_list_notify()
+    {
         try {
-             $data= Notifications::with('usermodel')->get();
-             return response($data);
-
+            $data = Notifications::with('usermodel')->get();
+            return $data;
+        } catch (Exception $e) {
+            \report($e);
+        }
+    }
+public function get_id_notify(Request $request)
+    {
+        try {
+            $id = $request->id;
+            $data = Notifications::find($id)->get();
+            return $data;
+        } catch (Exception $e) {
+            \report($e);
+        }
+    }
+    public function markAsRead(Request $request)
+    {
+        $id=$request->notifyId;
+        
+        try{
+            $user=UserModel::find($request->user);
+            Notifications::where($id)->update(['read_at' => now()]);
+            //return response(['message'=>'done', 'notifications'=>$user->notifications]);
         }
         catch(Exception $e){
             \report($e);
