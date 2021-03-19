@@ -32,7 +32,6 @@ npm install
 
 costume : .env
 
-<textarea>
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -99,9 +98,6 @@ bsqnz1LVj3C0LXqDrt5+KTU+
 NEXMO_FROM_SEND=84374407507
 
 composer update 
-
-</textarea>
-
 ## Contributing
 
 Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
