@@ -30,17 +30,9 @@ create database : dbbookstore
 composer install 
 npm install 
 
-costume : .env 
-<textfield>
-APP_NAME=Laravel
-APP_ENV=local
-APP_KEY=base64:4MJE5/ySUa2KeE/c0vP7MRr4r5JvY8qlFS3xmIbxi3E=
-APP_DEBUG=true
-APP_URL=http://localhost
+costume : .env
 
-LOG_CHANNEL=stack
-LOG_LEVEL=debug
-
+<textarea>
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -54,9 +46,6 @@ QUEUE_CONNECTION=sync
 SESSION_DRIVER=database
 SESSION_LIFETIME=120
 
-REDIS_HOST=127.0.0.1
-REDIS_PASSWORD=null
-REDIS_PORT=6379
 
 MAIL_DRIVER=smtp
 MAIL_HOST=smtp.mailtrap.io
@@ -66,11 +55,6 @@ MAIL_PASSWORD=d74bf0ff01f0a6
 MAIL_ENCRYPTION=tls
 MAIL_FROM_ADDRESS=null
 MAIL_FROM_NAME="${APP_NAME}"
-
-AWS_ACCESS_KEY_ID=
-AWS_SECRET_ACCESS_KEY=
-AWS_DEFAULT_REGION=us-east-1
-AWS_BUCKET=
 
 PUSHER_APP_ID=1150809
 PUSHER_APP_KEY=09623629634650020d40
@@ -113,9 +97,10 @@ bsqnz1LVj3C0LXqDrt5+KTU+
 -----END PRIVATE KEY-----
 "
 NEXMO_FROM_SEND=84374407507
+
 composer update 
 
-</textfield>
+</textarea>
 
 ## Contributing
 
