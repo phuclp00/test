@@ -21,28 +21,101 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+##  Laravel Install Step by Step by LocDo
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+git clone : https://github.com/phuclp00/test
+git checkout user_profile
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+create database : dbbookstore 
+composer install 
+npm install 
 
-## Laravel Sponsors
+costume : .env 
+<textfield>
+APP_NAME=Laravel
+APP_ENV=local
+APP_KEY=base64:4MJE5/ySUa2KeE/c0vP7MRr4r5JvY8qlFS3xmIbxi3E=
+APP_DEBUG=true
+APP_URL=http://localhost
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+LOG_CHANNEL=stack
+LOG_LEVEL=debug
 
-### Premium Partners
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=dbbookstore
+DB_USERNAME=root
+DB_PASSWORD=
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+BROADCAST_DRIVER=pusher
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=database
+SESSION_LIFETIME=120
+
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
+
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=1ff94ddeb91ada
+MAIL_PASSWORD=d74bf0ff01f0a6
+MAIL_ENCRYPTION=tls
+MAIL_FROM_ADDRESS=null
+MAIL_FROM_NAME="${APP_NAME}"
+
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
+
+PUSHER_APP_ID=1150809
+PUSHER_APP_KEY=09623629634650020d40
+PUSHER_APP_SECRET=eaf08cd7e41a4a691e5e
+PUSHER_APP_CLUSTER=ap1
+
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+NEXMO_KEY=7080fca2
+NEXMO_SECRET=iFFCpoelA3jBPpji
+NEXMO_APPLICATION_ID=a7abfabd-6a73-48aa-ae41-e54580b4c0f2
+NEXMO_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----
+MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDcmwOa3OjoVJAe
+T7AXg0UiZB4TX7kvczDSiaJendgGL6Tv9/0Yhdh8/R9pfvdc9KtwdVN40OXFZVfW
+NSf+XgGjBxhRdsR4YInREzyhMYIQjHiBzQfvmmmA+/Jn6x0Cs+KrgU62Wu+5p1jl
+Pf98ycbRm5wM4Pw81f8sOoxmgpTr0F7XQMGm17asyLp7S+wmvDlvrl6v4F6OQImJ
+3wlvDkwLcizM6JUW7RaveY9fP/iFhnXgXOJEeQ63Yck7z1c5ThS5E8E2h3XeOaEJ
+LUNTSATcx3I0WRF5KqP2c78loJpcSqQI7Ci1bnPZpA1C/oNfgTTFIo2kyr5g5zae
+bDLE25iBAgMBAAECggEACjm2NFCujAxVZM5JSYG4a+Rrn3bFqO0kM3IVQGD9ISZG
+tSfPx7n2g66g7N0pfpnJs4wAqz41lE2DAYcTvD7jwQiEaExCxZil8ra7TfZzQqyc
+LloQVtsXrlafURFNFjG73TrAaQP0jiyzWmbiB4j7yf32QQORtYkuy4BIPz0oxXhc
+UN5qWOwBwiH3un7QvaYhHIf6vlQ/xG3U429TVW7Ge60kKLGLjE8iIUJgMc4DJeNm
+jVuZuNzx7DZmrr9ueY9vGPCMRX22AHuTV+dsWlGYjPKqKF9YOjT/6Z/2KEvr4vrF
+4vvdaRFvE9+D+GF5RVcBF0tBZPdD7x1HCf73cVwXNQKBgQDwDf621pAYvxATvbmQ
+4ATQMFMjGmddFRkhzsC9lQk2BtwCKmMcmrmmB6DC8M1Y+McTOR36Ch4Kdvv8K3UF
+XHO1cA6pZD3l5Gfpj81fiyyL/DK3MHAMlsahHI55yHsqwGcN2KIagbMSSGiMmU2o
+LluvDvi14jygoGkdBZ/OPdI23QKBgQDrQkvnr30i1hWzR3sJAgC6SI43PSfCMLvu
+NUD+fQletRXwKdNMILUZW6SC2JJws9M3MFhJoSIhH3DUG/OoGHvYy9zFkVtICFmJ
+gUYUo7oQT93D4cIpLjeW2E4VKLjK8rKdRFiZ+W2giRI42ZrOWyeM+d5cTXcubVGH
+G4a5qGKD9QKBgQDK8xoInEgBE+9UsU8kY7DODj0LbXQ75u1zfqfG4CyEZ7IzhoB6
+m3kfHE3W4dzKPrGX1+83CLyzHjsVy+vIV4xftdg/b8dBCCSt+uynvTMxOkvqQmJI
+0mQlq83sugkfcMDvnNoXzNWHPH5fd/CGooLS8rZkl1uodVXIuouLwwppZQKBgDk7
+FIoVN+TsnbTSU8z6LsEie25Ws0BbaKxnShtewZPHi8Gz+xIO9t9nWtr14pIGPQC1
+AxVOXKYgJuuCrUCcTCyOU3PAi6s3VMjNqQXGWrIzK6jGV9x6wM0ya7RcBrBgYDE/
++ini8tdV4RfxX+aJaFK0SnK76Z1ivK2YdaremrCtAoGBAIgNtLlSURxklDH2dAu9
+R/HZ6Q+8lR3JLrG5THMiqq6MDlxtV8OCZEZU/4HAy2QUh2/2EfQd5beox2rJ4H6w
+LXWJXeb9mbwuNUBQvU68rk4biKgQWTTOpsJGYOKqT7n6/a6oSScIypOqbMJnhujN
+bsqnz1LVj3C0LXqDrt5+KTU+
+-----END PRIVATE KEY-----
+"
+NEXMO_FROM_SEND=84374407507
+composer update 
+
+</textfield>
 
 ## Contributing
 
